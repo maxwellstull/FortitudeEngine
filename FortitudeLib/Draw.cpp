@@ -1,15 +1,15 @@
 //#include "stdafx.h"
-#include "Engine.h"
+#include "include/Engine.h"
 
 void Engine::draw()
 {
     // Rub out the last frame
-    m_Window.clear(Color::White);
+    window.clear(sf::Color::White);
 
     // Draw the background
-    m_Window.draw(m_BackgroundSprite);
-    m_Window.draw(m_Bob.getSprite());
+//    window.draw(m_BackgroundSprite);
+//    window.draw(m_Bob.getSprite());
 
     // Show everything we have just drawn
-    m_Window.display();
+    window.display();
 }

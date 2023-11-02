@@ -1,21 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Bob.h";
+#include "WindowManager.h"
 
 
 class Engine
 {
 private:
-
-    // A regular RenderWindow
-    RenderWindow m_Window;
-
-    // Declare a sprite and a Texture for the background
-    Sprite m_BackgroundSprite;
-    Texture m_BackgroundTexture;
-
-    // An instance of Bob
-    Bob m_Bob;
+    WindowManager window;
 
     // Private functions for internal use only
     void input();
@@ -27,6 +18,6 @@ public:
     Engine();
 
     // start will call all the private functions
-    void start();
+    void GameLoop();
 
 };

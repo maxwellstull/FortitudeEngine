@@ -1,31 +1,34 @@
 //#include "stdafx.h"
-#include "Engine.h"
+#include "include/Engine.h"
+#include <iostream>
 
 void Engine::input()
 {
-    // Handle the player quitting
-    if (Keyboard::isKeyPressed(Keyboard::Escape))
+    sf::Event event;
+    while (window.GetWindow()->pollEvent(event))
     {
-        m_Window.close();
-    }
+        switch(event.type)
+        {
+        case sf::Event::Closed:
+            {
+                window.close();
+                break;
+            }
+        case sf::Event::Resized:
+        {
+            std::cout << event.size.width << " " << event.size.height << std::endl;
+        }
+        case sf::Event::LostFocus:
+        {
+            window.clearFocus();
+            std::cout << "Lost focus" << std::endl;
+        }
+        case sf::Event::GainedFocus:
+        {
+            window.setFocus();
+            std::cout << "Gained focus" << std::endl;
+        }
 
-    // Handle the player moving
-    if (Keyboard::isKeyPressed(Keyboard::A))
-    {
-        m_Bob.moveLeft();
+        }
     }
-    else
-    {
-        m_Bob.stopLeft();
-    }
-
-    if (Keyboard::isKeyPressed(Keyboard::D))
-    {
-        m_Bob.moveRight();
-    }
-    else
-    {
-        m_Bob.stopRight();
-    }
-
 }

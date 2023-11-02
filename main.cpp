@@ -1,11 +1,12 @@
 #include "main.h"
-#include "FortitudeLib/Engine.h"
+#include "FortitudeLib/include/Engine.h"
 #include <iostream>
 
+/*
 int main()
 {
     sf::RenderWindow window;
-//    window.create(sf::VideoMode(1920, 1080), "Window", sf::Style::Fullscreen);
+    //window.create(sf::VideoMode(1920, 1080), "Window", sf::Style::Fullscreen);
     window.create(sf::VideoMode(800, 600), "Window", sf::Style::Default);
     window.setVerticalSyncEnabled(true);
     //window.setFramerateLimit(60);
@@ -40,17 +41,17 @@ int main()
     }
 
     return 0;
-}
+}*/
 
 
-/*int main()
+int main()
 {
     // Declare an instance of Engine
     Engine engine;
 
     // Start the engine
-    engine.start();
+    engine.GameLoop();
 
     // Quit in the usual way when the engine is stopped
     return 0;
-}*/
+}
