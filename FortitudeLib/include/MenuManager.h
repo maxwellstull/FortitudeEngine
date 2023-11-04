@@ -3,17 +3,18 @@
 #include "MenuComponent.h"
 #include <vector>
 
-class Menu
+class MenuManager
 {
 private:
     std::vector<MenuComponent> components;
-    MenuComponent* highlighted;
+    std::vector<sf::Font> fonts;
 
 public:
     void SelectUp();
     void SelectDown();
     void SelectLeft();
     void SelectRight();
-
-    void Draw();
+    void init();
+    void MainMenu();
+    void Draw(sf::RenderWindow * context);
 };

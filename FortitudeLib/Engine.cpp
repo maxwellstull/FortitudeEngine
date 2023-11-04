@@ -8,6 +8,11 @@ Engine::Engine()
 //    resolution.x = sf::VideoMode::getDesktopMode().width;
 //    resolution.y = sf::VideoMode::getDesktopMode().height;
     window.init();
+    menu.init();
+    sf::CircleShape shapey(50);
+    shape = shapey;
+    shape.setFillColor(sf::Color::Blue);
+    shape.setOrigin((shape.getPosition().x / 2.0f) + shape.getRadius(), (shape.getPosition().y / 2.0f) + shape.getRadius());
     //m_Window.create(VideoMode(resolution.x, resolution.y),
     //    "Simple Game Engine",
     //    Style::Fullscreen);

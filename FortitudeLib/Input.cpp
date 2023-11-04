@@ -17,6 +17,8 @@ void Engine::input()
         case sf::Event::Resized:
         {
             std::cout << event.size.width << " " << event.size.height << std::endl;
+            //window.GetWindow()->setView(sf::View(window.GetWindow()->getView().getCenter(), sf::Vector2f(event.size.width, event.size.height)));
+
         }
         case sf::Event::LostFocus:
         {

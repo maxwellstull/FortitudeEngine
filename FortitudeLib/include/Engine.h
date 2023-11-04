@@ -1,13 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "WindowManager.h"
-
+#include "MenuManager.h"
 
 class Engine
 {
 private:
     WindowManager window;
-
+    MenuManager menu;
+    sf::CircleShape shape;
     // Private functions for internal use only
     void input();
     void update(float dtAsSeconds);
