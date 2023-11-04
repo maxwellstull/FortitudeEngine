@@ -7,6 +7,8 @@ void Engine::draw()
     // Rub out the last frame
     window.clear(sf::Color::White);
 
+    
+    window.GetWindow()->draw(sprite);
     // Draw the background
 //    window.draw(m_BackgroundSprite);
 //    window.draw(m_Bob.getSprite());

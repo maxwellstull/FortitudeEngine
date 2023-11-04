@@ -1,5 +1,6 @@
 //#include "stdafx.h"
 #include "include/Engine.h"
+#include <iostream>
 
 Engine::Engine()
 {
@@ -13,6 +14,20 @@ Engine::Engine()
     shape = shapey;
     shape.setFillColor(sf::Color::Blue);
     shape.setOrigin((shape.getPosition().x / 2.0f) + shape.getRadius(), (shape.getPosition().y / 2.0f) + shape.getRadius());
+    texture = sf::Texture();
+    texture.loadFromFile("img/background.png", sf::IntRect(0, 224, 1024, 576));
+
+    sprite = sf::Sprite();
+    sprite.setTexture(texture);
+    sprite.setScale(sf::Vector2f(1.875, 1.875));
+    
+
+//    sf::Texture texturey;
+ //   
+//    sf::Sprite spritey;
+  //  spritey.setTexture(texturey);
+
+//    window.draw(sprite);
     //m_Window.create(VideoMode(resolution.x, resolution.y),
     //    "Simple Game Engine",
     //    Style::Fullscreen);
@@ -39,8 +54,12 @@ void Engine::GameLoop()
         // Make a fraction from the delta time
         float dtAsSeconds = dt.asSeconds();
 
+        float fps = 1.f / (dtAsSeconds);
+        std::cout << fps << std::endl;
+
         input();
         update(dtAsSeconds);
         draw();
+        
     }
 }

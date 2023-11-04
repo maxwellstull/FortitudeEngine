@@ -12,4 +12,5 @@ void WindowManager::init()
 	window.setVerticalSyncEnabled(vsync);
 	sf::View view(sf::FloatRect(0, 0, defaultwindow.x, defaultwindow.y));
 	window.setView(view);
+	
 }
