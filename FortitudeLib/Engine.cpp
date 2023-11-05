@@ -56,7 +56,7 @@ void Engine::GameLoop()
         // Make a fraction from the delta time
         float dtAsSeconds = dt.asSeconds();
     //    fps.log(dtAsSeconds);
-    //    float ferps = 1.f / (dtAsSeconds);
+        float ferps = 1.f / (dtAsSeconds);
         std::cout << "Alleged: "<<ferps << std::endl;
     //    std::cout << "Calculated:"<<fps.get() << std::endl;
         input();
