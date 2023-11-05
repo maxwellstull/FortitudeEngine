@@ -2,12 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include "WindowManager.h"
 #include "MenuManager.h"
+#include "FPS.h"
 
 class Engine
 {
 private:
     WindowManager window;
     MenuManager menu;
+    FPS fps;
     sf::CircleShape shape;
     sf::Sprite sprite;
     sf::Texture texture;

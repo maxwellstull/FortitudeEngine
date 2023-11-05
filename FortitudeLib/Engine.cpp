@@ -10,6 +10,7 @@ Engine::Engine()
 //    resolution.y = sf::VideoMode::getDesktopMode().height;
     window.init();
     menu.init();
+    fps.init();
     sf::CircleShape shapey(50);
     shape = shapey;
     shape.setFillColor(sf::Color::Blue);
@@ -48,15 +49,16 @@ void Engine::GameLoop()
 
     while (window.isOpen())
     {
+        std::cout << "-= New Loop =-" << std::endl;
         // Restart the clock and save the elapsed time into dt
         sf::Time dt = clock.restart();
 
         // Make a fraction from the delta time
         float dtAsSeconds = dt.asSeconds();
-
-        float fps = 1.f / (dtAsSeconds);
-        std::cout << fps << std::endl;
-
+    //    fps.log(dtAsSeconds);
+    //    float ferps = 1.f / (dtAsSeconds);
+        std::cout << "Alleged: "<<ferps << std::endl;
+    //    std::cout << "Calculated:"<<fps.get() << std::endl;
         input();
         update(dtAsSeconds);
         draw();
