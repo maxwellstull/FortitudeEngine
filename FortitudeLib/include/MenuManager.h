@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MenuComponent.h"
 #include <vector>
+#include <memory>
 
 class Engine;
 
@@ -9,10 +10,11 @@ class MenuManager
 {
 private:
     Engine * engine = nullptr;
-    std::vector<MenuComponent> components;
+    std::vector<std::shared_ptr<MenuComponent>> components;
     std::vector<sf::Font> fonts;
-    MenuComponent* selected;
+    std::shared_ptr<MenuComponent> selected;
     bool active = true;
+
 
 public:
     void SelectUp();
@@ -20,7 +22,7 @@ public:
     void SelectLeft();
     void SelectRight();
     void init();
-    void update();
+    void update(float dtAsSeconds);
     void MainMenu();
     void Options();
     void Draw(sf::RenderWindow * context);

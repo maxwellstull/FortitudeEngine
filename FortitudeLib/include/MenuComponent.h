@@ -7,7 +7,15 @@ private:
     struct states {
         sf::Vector2f origin;
         sf::Color colour;
-        int size;
+        int size=0;
+    };
+    struct animation {
+        float start;
+        float end;
+        float duration;
+        float elapsed;
+        bool active;
+        bool increase;
     };
     sf::Text viewedText;
     int down;
@@ -16,6 +24,7 @@ private:
     int right;
     states onSel;
     states onDesel;
+    animation anim;
 
 public:
     MenuComponent(const char* label,
@@ -27,9 +36,10 @@ public:
         down = downB; 
         left = leftB; 
         right = rightB; }
-    void onSelect(sf::Color colour, int size);
+    void onSelect(sf::Color colour, int size, float duration);
     void select();
     void deselect();
+    void Update(float dtAsSeconds);
     int onDown() { return down; }
     int onUp() { return up; }
     int onLeft() { return left; }

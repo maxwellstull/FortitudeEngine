@@ -1,4 +1,5 @@
 #include "include/MenuComponent.h"
+#include <iostream>
 
 MenuComponent::MenuComponent(const char * label,
 	sf::Font *font, sf::Vector2f position, int size)
@@ -14,20 +15,42 @@ MenuComponent::MenuComponent(const char * label,
 
 }
 
+void MenuComponent::Update(float dtAsSeconds)
+{
+	if (anim.active == true)
+	{
+		float curSize = viewedText.getCharacterSize() + (((anim.elapsed + dtAsSeconds) / anim.duration) * (anim.end - anim.start));
+		if ((anim.increase == true) && (curSize > anim.end))
+		{
+			curSize = anim.end;
+			anim.active = false;
+		}
+		else if ((anim.increase == false) && (curSize < anim.end))
+		{
+			curSize = anim.end;
+			anim.active = false;
+		}
+		viewedText.setCharacterSize((int)curSize);
+		sf::FloatRect textRect = viewedText.getLocalBounds();
+		viewedText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+		anim.elapsed = anim.elapsed + dtAsSeconds;
+	}
+}
+
 void MenuComponent::Draw(sf::RenderWindow* context)
 {
 	context->draw(viewedText);
 }
 
-void MenuComponent::onSelect(sf::Color colour, int size)
+void MenuComponent::onSelect(sf::Color colour, int size, float duration)
 {
 	onDesel.colour = viewedText.getFillColor();
 	onDesel.size = viewedText.getCharacterSize();
 	onDesel.origin = viewedText.getOrigin();
-
+	
 	onSel.colour = colour;
 	onSel.size = size;
-
+	
 	viewedText.setCharacterSize(onSel.size);
 	sf::FloatRect textRect = viewedText.getLocalBounds();
 	viewedText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
@@ -41,13 +64,25 @@ void MenuComponent::onSelect(sf::Color colour, int size)
 void MenuComponent::select()
 {
 	viewedText.setFillColor(onSel.colour);
-	viewedText.setCharacterSize(onSel.size);
-	viewedText.setOrigin(onSel.origin);
+//	viewedText.setCharacterSize(onSel.size);
+//	viewedText.setOrigin(onSel.origin);
+	anim.start = onDesel.size;
+	anim.end = onSel.size;
+	anim.duration = 0.25;
+	anim.elapsed = 0.;
+	anim.active = true;
+	anim.increase = true;
 }
 
 void MenuComponent::deselect()
 {
 	viewedText.setFillColor(onDesel.colour);
-	viewedText.setCharacterSize(onDesel.size);
-	viewedText.setOrigin(onDesel.origin);
+//	viewedText.setCharacterSize(onDesel.size);
+//	viewedText.setOrigin(onDesel.origin);
+	anim.start = onSel.size;
+	anim.end = onDesel.size;
+	anim.duration = 0.25;
+	anim.elapsed = 0.;
+	anim.active = true;
+	anim.increase = false;
 }
