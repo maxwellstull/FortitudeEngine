@@ -22,6 +22,7 @@ public:
     void init();
     void update();
     void MainMenu();
+    void Options();
     void Draw(sf::RenderWindow * context);
     bool isActive() { return active; }
     void SetEngine(Engine* e) { engine = e; }

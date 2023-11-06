@@ -1,5 +1,6 @@
 #include "include/MenuManager.h"
 #include <iostream>
+
 void MenuManager::Draw(sf::RenderWindow *context)
 {
 	for (MenuComponent comp : components)
@@ -75,4 +76,9 @@ void MenuManager::MainMenu()
 
 	selected = &components[0];
 	selected->select();
+}
+
+void MenuManager::Options()
+{
+
 }

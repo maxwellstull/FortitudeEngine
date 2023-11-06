@@ -49,6 +49,10 @@ void Engine::input()
                         std::cout << "down";
                         break;
                     }
+                    case(sf::Keyboard::Enter):
+                    {
+
+                    }
                 }
             }
         }
