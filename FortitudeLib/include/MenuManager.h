@@ -6,9 +6,11 @@
 class MenuManager
 {
 private:
-   // Engine *parent;
     std::vector<MenuComponent> components;
     std::vector<sf::Font> fonts;
+//    int selected = 0;
+    MenuComponent* selected;
+    bool active = true;
 
 public:
     void SelectUp();
@@ -16,6 +18,8 @@ public:
     void SelectLeft();
     void SelectRight();
     void init();
+    void update();
     void MainMenu();
     void Draw(sf::RenderWindow * context);
+    bool isActive() { return active; }
 };

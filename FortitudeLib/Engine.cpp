@@ -49,7 +49,7 @@ void Engine::GameLoop()
 
     while (window.isOpen())
     {
-        std::cout << "-= New Loop =-" << std::endl;
+       // std::cout << "-= New Loop =-" << std::endl;
         // Restart the clock and save the elapsed time into dt
         sf::Time dt = clock.restart();
 
@@ -57,7 +57,7 @@ void Engine::GameLoop()
         float dtAsSeconds = dt.asSeconds();
     //    fps.log(dtAsSeconds);
         float ferps = 1.f / (dtAsSeconds);
-        std::cout << "Alleged: "<<ferps << std::endl;
+       // std::cout << "Alleged: "<<ferps << std::endl;
     //    std::cout << "Calculated:"<<fps.get() << std::endl;
         input();
         update(dtAsSeconds);
