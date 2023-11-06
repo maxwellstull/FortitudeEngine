@@ -20,21 +20,21 @@ void MenuManager::init()
 void MenuManager::MainMenu() 
 {
 	components.clear();
+	std::vector<const char*> labels = { "It's High Noon" };// , "Achievements", "Options", "Quit"};
 
+	MenuComponent title = MenuComponent("It's High Noon", &fonts[0], sf::Vector2f(10, 10), 64);
 
-
-	MenuComponent title;
+	components.push_back(title);
+/*	MenuComponent title;
 	sf::Text txt;
 	txt.setString("It's High Noon");
+
 	txt.setFillColor(sf::Color::Blue);
 	txt.setFont(fonts[0]);
-//	txt.setStyle(sf::Text::Bold);
 	txt.setCharacterSize(64);
 	sf::FloatRect textRect = txt.getLocalBounds();
 	txt.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	
 	title.text = txt;
 	components.push_back(title);
-
-
+	*/
 }

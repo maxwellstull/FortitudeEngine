@@ -1,9 +1,18 @@
 #include "include/MenuComponent.h"
 
-MenuComponent::MenuComponent()
+MenuComponent::MenuComponent(const char * label,
+	sf::Font *font, sf::Vector2f position, int size)
 {
-	fonty = sf::Font();
-	fonty.loadFromFile("img/cowboy.ttf");
+	texty = sf::Text();
+	texty.setString(label);
+	texty.setFont(*font);
+	texty.setPosition(position);
+	texty.setCharacterSize(size);
+
+	sf::FloatRect textRect = texty.getLocalBounds();
+	texty.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+
+
 
 	//	MenuComponent title;
 	//sf::Text txt;
@@ -29,7 +38,7 @@ void MenuComponent::Draw(sf::RenderWindow* context)
 	txt.setPosition(100, 100);
 	text = txt;
 	*/
-	text.setPosition(sf::Vector2f(context->getView().getSize().x / 2, context->getView().getSize().y / 4));
-	text.setFont(fonty);
-	context->draw(text);
+	//text.setPosition(sf::Vector2f(context->getView().getSize().x / 2, context->getView().getSize().y / 4));
+//	texty.setFont(fonty);
+	context->draw(texty);
 }
