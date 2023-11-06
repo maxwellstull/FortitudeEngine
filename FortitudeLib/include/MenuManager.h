@@ -6,6 +6,7 @@
 class MenuManager
 {
 private:
+   // Engine *parent;
     std::vector<MenuComponent> components;
     std::vector<sf::Font> fonts;
 

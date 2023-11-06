@@ -10,7 +10,7 @@ private:
     bool fullscreen = false;
     bool infocus = false;
     sf::Vector2i desktopsize;
-    sf::Vector2i defaultwindow = sf::Vector2i(1920,1000);
+    sf::Vector2i defaultwindow = sf::Vector2i(1920,1080);
 public:
     WindowManager();
     sf::RenderWindow* GetWindow() { return &window; }

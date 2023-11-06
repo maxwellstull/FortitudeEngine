@@ -10,6 +10,7 @@ void MenuManager::Draw(sf::RenderWindow *context)
 
 void MenuManager::init()
 {
+
 	sf::Font font;
 	font.loadFromFile("img/cowboy.ttf");
 	fonts.push_back(font);
@@ -20,21 +21,15 @@ void MenuManager::init()
 void MenuManager::MainMenu() 
 {
 	components.clear();
-	std::vector<const char*> labels = { "It's High Noon" };// , "Achievements", "Options", "Quit"};
 
-	MenuComponent title = MenuComponent("It's High Noon", &fonts[0], sf::Vector2f(10, 10), 64);
+	MenuComponent title = MenuComponent("It's High Noon", &fonts[0], sf::Vector2f(960, 200), 100);
+	MenuComponent achievements = MenuComponent("Achievements", &fonts[0], sf::Vector2f(960, 370), 64);
+	MenuComponent options = MenuComponent("Options", &fonts[0], sf::Vector2f(960, 440), 64);
+	MenuComponent quit = MenuComponent("Quit", &fonts[0], sf::Vector2f(960, 510), 64);
 
 	components.push_back(title);
-/*	MenuComponent title;
-	sf::Text txt;
-	txt.setString("It's High Noon");
+	components.push_back(achievements);
+	components.push_back(options);
+	components.push_back(quit);
 
-	txt.setFillColor(sf::Color::Blue);
-	txt.setFont(fonts[0]);
-	txt.setCharacterSize(64);
-	sf::FloatRect textRect = txt.getLocalBounds();
-	txt.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	title.text = txt;
-	components.push_back(title);
-	*/
 }
