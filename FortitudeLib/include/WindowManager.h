@@ -1,9 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+class Engine;
 
 class WindowManager {
 private:
+    Engine* engine = nullptr;
     sf::RenderWindow window;
     int framerate = 60;
     bool vsync = true;
@@ -21,4 +23,5 @@ public:
     void display() { window.display(); }
     void setFocus() { infocus = true; }
     void clearFocus() { infocus = false; }
+    void SetEngine(Engine* e) { engine = e; }
 };

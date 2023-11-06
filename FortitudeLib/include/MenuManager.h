@@ -3,12 +3,14 @@
 #include "MenuComponent.h"
 #include <vector>
 
+class Engine;
+
 class MenuManager
 {
 private:
+    Engine * engine = nullptr;
     std::vector<MenuComponent> components;
     std::vector<sf::Font> fonts;
-//    int selected = 0;
     MenuComponent* selected;
     bool active = true;
 
@@ -22,4 +24,5 @@ public:
     void MainMenu();
     void Draw(sf::RenderWindow * context);
     bool isActive() { return active; }
+    void SetEngine(Engine* e) { engine = e; }
 };

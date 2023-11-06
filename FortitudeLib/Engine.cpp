@@ -9,7 +9,9 @@ Engine::Engine()
 //    resolution.x = sf::VideoMode::getDesktopMode().width;
 //    resolution.y = sf::VideoMode::getDesktopMode().height;
     window.init();
+    window.SetEngine(this);
     menu.init();
+    menu.SetEngine(this);
     fps.init();
     sf::CircleShape shapey(50);
     shape = shapey;
