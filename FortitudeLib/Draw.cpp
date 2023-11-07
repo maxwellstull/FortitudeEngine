@@ -13,6 +13,7 @@ void Engine::draw()
 //    window.draw(m_BackgroundSprite);
 //    window.draw(m_Bob.getSprite());
     menu.Draw(window.GetWindow());
+    fps.Draw(window.GetWindow());
 //    sf::Font font;
 //    if (!font.loadFromFile("img/cowboy.ttf"))
 //    {
