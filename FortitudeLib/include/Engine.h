@@ -25,4 +25,5 @@ public:
     // start will call all the private functions
     void GameLoop();
 
+    void close() { window.close(); }
 };

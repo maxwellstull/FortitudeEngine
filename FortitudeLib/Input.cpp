@@ -51,7 +51,7 @@ void Engine::input()
                     }
                     case(sf::Keyboard::Enter):
                     {
-
+                        menu.Enter();
                     }
                 }
             }

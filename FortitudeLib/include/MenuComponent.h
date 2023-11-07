@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <functional>
 
 class MenuComponent
 {
@@ -25,6 +26,7 @@ private:
     states onSel;
     states onDesel;
     animation anim;
+    std::function<void()> funky;
 
 public:
     MenuComponent(const char* label,
@@ -44,4 +46,6 @@ public:
     int onUp() { return up; }
     int onLeft() { return left; }
     int onRight() { return right; }
+    void onEnter(std::function<void()> func);
+    void enter();
 };

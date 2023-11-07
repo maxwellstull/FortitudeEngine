@@ -1,5 +1,8 @@
 #include "include/MenuManager.h"
 #include <iostream>
+#include "include/Engine.h"
+
+class Engine;
 
 void MenuManager::Draw(sf::RenderWindow *context)
 {
@@ -45,6 +48,10 @@ void MenuManager::SelectRight()
 	selected->select();
 
 }
+void MenuManager::Enter()
+{
+	selected->enter();
+}
 void MenuManager::init()
 {
 
@@ -54,6 +61,7 @@ void MenuManager::init()
 
 	MainMenu();
 }
+
 
 void MenuManager::MainMenu() 
 {
@@ -68,9 +76,11 @@ void MenuManager::MainMenu()
 	std::shared_ptr<MenuComponent> options = std::make_shared<MenuComponent>("Options", &fonts[0], sf::Vector2f(960, 440), 64);
 	options->setControlBind(1, 3, 2, 2);
 	options->onSelect(sf::Color::Blue, 96, 0.25);
+	options->onEnter([this]() {this->Options(); });
 	std::shared_ptr<MenuComponent> quit = std::make_shared<MenuComponent>("Quit", &fonts[0], sf::Vector2f(960, 510), 64);
 	quit->setControlBind(2, 0, 3, 3);
 	quit->onSelect(sf::Color::Blue, 96, 0.25);
+	quit->onEnter([this]() {this->GetEngine()->close(); });
 
 	components.push_back(title);
 	components.push_back(achievements);
@@ -83,5 +93,19 @@ void MenuManager::MainMenu()
 
 void MenuManager::Options()
 {
+	components.clear();
 
+	std::shared_ptr<MenuComponent> title = std::make_shared<MenuComponent>("Options", &fonts[0], sf::Vector2f(200, 200), 64);
+	title->setControlBind(1, 1, 0, 0);
+	title->onSelect(sf::Color::Blue, 96, 0.25);
+	std::shared_ptr<MenuComponent> back = std::make_shared<MenuComponent>("Back", &fonts[0], sf::Vector2f(200, 300), 64);
+	back->setControlBind(0, 2, 1, 1);
+	back->onSelect(sf::Color::Blue, 96, 0.25);
+	back->onEnter([this]() {this->MainMenu(); });
+
+	components.push_back(title);
+	components.push_back(back);
+
+	selected = components[0];
+	selected->select();
 }

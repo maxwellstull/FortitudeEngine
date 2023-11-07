@@ -23,7 +23,8 @@ Engine::Engine()
     sprite = sf::Sprite();
     sprite.setTexture(texture);
     sprite.setScale(sf::Vector2f(1.875, 1.875));
-    
+//    sprite.setScale(sf::Vector2f(1,1));
+
 
 //    sf::Texture texturey;
  //   

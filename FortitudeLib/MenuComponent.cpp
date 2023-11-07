@@ -86,3 +86,13 @@ void MenuComponent::deselect()
 	anim.active = true;
 	anim.increase = false;
 }
+
+void MenuComponent::onEnter(std::function<void()> func)
+{
+	funky = func;
+}
+
+void MenuComponent::enter()
+{
+	funky();
+}

@@ -28,4 +28,7 @@ public:
     void Draw(sf::RenderWindow * context);
     bool isActive() { return active; }
     void SetEngine(Engine* e) { engine = e; }
+    Engine* GetEngine() { return engine; }
+    void Enter();
+
 };
