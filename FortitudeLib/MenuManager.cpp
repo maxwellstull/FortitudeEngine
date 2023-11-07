@@ -105,6 +105,7 @@ void MenuManager::Options()
 	std::shared_ptr<MenuComponent> fullscreen = std::make_shared<MenuComponent>("Fullscreen", &fonts[0], sf::Vector2f(200, 400), 64);
 	fullscreen->setControlBind(1, 3, 2, 4);
 	fullscreen->onSelect(sf::Color::Blue, 96, 0.25);
+	fullscreen->onEnter([this]() {});
 	std::shared_ptr<MenuOption> fsOn = std::make_shared<MenuOption>("On", &fonts[0], sf::Vector2f(400, 400), 64, sf::Color::Red);
 	fsOn->setControlBind(1, 3, 2, 5);
 	fsOn->onSelect(sf::Color::Blue, 96, 0.25);
@@ -118,16 +119,30 @@ void MenuManager::Options()
 	fsOn->onEnter([this, fsOff, fsOn]() {this->GetEngine()->GetWindowManager()->enableFullscreen(); fsOn->enable(); fsOff->disable(); });
 	
 	std::shared_ptr<MenuComponent> vsync = std::make_shared<MenuComponent>("Vsync", &fonts[0], sf::Vector2f(200, 500), 64);
-	vsync->setControlBind(2, 0, 3, 3);
+	vsync->setControlBind(2, 1, 3,6);
 	vsync->onSelect(sf::Color::Blue, 96, 0.25);
 
+	std::shared_ptr<MenuOption> vsOn = std::make_shared<MenuOption>("On", &fonts[0], sf::Vector2f(400, 500), 64, sf::Color::Red);
+	vsOn->setControlBind(2, 1, 3, 7);
+	vsOn->onSelect(sf::Color::Blue, 96, 0.25);
+	vsOn->init(GetEngine()->GetWindowManager()->isVsync());
+	std::shared_ptr<MenuOption> vsOff = std::make_shared<MenuOption>("Off", &fonts[0], sf::Vector2f(500, 500), 64, sf::Color::Red);
+	vsOff->setControlBind(2, 1, 6, 7);
+	vsOff->onSelect(sf::Color::Blue, 96, 0.25);
+	vsOff->init(!GetEngine()->GetWindowManager()->isVsync());
+
+
+	vsOff->onEnter([this, vsOff, vsOn]() {this->GetEngine()->GetWindowManager()->disableVsync(); vsOff->enable(); vsOn->disable(); });
+	vsOn->onEnter([this, vsOff, vsOn]() {this->GetEngine()->GetWindowManager()->enableVsync(); vsOff->disable(); vsOn->enable(); });
 
 	components.push_back(title);		//0
 	components.push_back(back);			//1
 	components.push_back(fullscreen);	//2
-	components.push_back(vsync);
+	components.push_back(vsync);		//3
 	components.push_back(fsOn);			//4
 	components.push_back(fsOff);		//5
+	components.push_back(vsOn);			//6
+	components.push_back(vsOff);		//7
 
 
 	selected = components[1];

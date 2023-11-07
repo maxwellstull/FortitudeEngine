@@ -25,6 +25,9 @@ public:
     void clearFocus() { infocus = false; }
     void SetEngine(Engine* e) { engine = e; }
     bool isFullscreen() { return fullscreen; }
+    bool isVsync() { return vsync; }
     void enableFullscreen() { window.create(sf::VideoMode(defaultwindow.x, defaultwindow.y), "Window", sf::Style::Fullscreen); }
     void disableFullscreen() { window.create(sf::VideoMode(defaultwindow.x, defaultwindow.y), "Window", sf::Style::Default); }
+    void enableVsync() { vsync = true; window.setVerticalSyncEnabled(vsync); }
+    void disableVsync() { vsync = false; window.setVerticalSyncEnabled(vsync); }
 };
