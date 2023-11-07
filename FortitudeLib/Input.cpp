@@ -40,13 +40,21 @@ void Engine::input()
                     case(sf::Keyboard::Up):
                     {
                         menu.SelectUp();
-                        std::cout << "up";
                         break;
                     }
                     case(sf::Keyboard::Down):
                     {
                         menu.SelectDown();
-                        std::cout << "down";
+                        break;
+                    }
+                    case(sf::Keyboard::Right):
+                    {
+                        menu.SelectRight();
+                        break;
+                    }
+                    case(sf::Keyboard::Left):
+                    {
+                        menu.SelectLeft();
                         break;
                     }
                     case(sf::Keyboard::Enter):

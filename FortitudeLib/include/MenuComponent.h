@@ -31,21 +31,32 @@ private:
 public:
     MenuComponent(const char* label,
         sf::Font * font, sf::Vector2f position, int size);
-    void Draw(sf::RenderWindow* context);
+    virtual void Draw(sf::RenderWindow* context);
     void setControlBind(int upB, int downB, int leftB, int rightB) 
     {
         up = upB; 
         down = downB; 
         left = leftB; 
         right = rightB; }
+    // Tells what visual changes to do when selected
     void onSelect(sf::Color colour, int size, float duration);
+    // Tells object it is selected
     void select();
+    // Tells object is is deselected
     void deselect();
     void Update(float dtAsSeconds);
     int onDown() { return down; }
     int onUp() { return up; }
     int onLeft() { return left; }
     int onRight() { return right; }
-    void onEnter(std::function<void()> func);
+    // Tells object what to do when pressed enter
+    virtual void onEnter(std::function<void()> func);
+    // Enter has been pressed
     void enter();
+
+    void setColor(sf::Color c);
+    sf::Color getColor() { return viewedText.getFillColor(); }
+
+
+
 };

@@ -24,4 +24,7 @@ public:
     void setFocus() { infocus = true; }
     void clearFocus() { infocus = false; }
     void SetEngine(Engine* e) { engine = e; }
+    bool isFullscreen() { return fullscreen; }
+    void enableFullscreen() { window.create(sf::VideoMode(defaultwindow.x, defaultwindow.y), "Window", sf::Style::Fullscreen); }
+    void disableFullscreen() { window.create(sf::VideoMode(defaultwindow.x, defaultwindow.y), "Window", sf::Style::Default); }
 };

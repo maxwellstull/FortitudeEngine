@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "MenuComponent.h"
+#include "MenuOption.h"
 #include <vector>
 #include <memory>
 
@@ -25,6 +26,7 @@ public:
     void update(float dtAsSeconds);
     void MainMenu();
     void Options();
+//    void FullscreenContext();
     void Draw(sf::RenderWindow * context);
     bool isActive() { return active; }
     void SetEngine(Engine* e) { engine = e; }

@@ -26,4 +26,5 @@ public:
     void GameLoop();
 
     void close() { window.close(); }
+    WindowManager* GetWindowManager() { return &window; }
 };

@@ -7,11 +7,11 @@ MenuComponent::MenuComponent(const char * label,
 	viewedText = sf::Text();
 	viewedText.setString(label);
 	viewedText.setFont(*font);
-	viewedText.setPosition(position);
 	viewedText.setCharacterSize(size);
-
+	viewedText.setPosition(position);
 	sf::FloatRect textRect = viewedText.getLocalBounds();
 	viewedText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	
 
 }
 
@@ -60,7 +60,11 @@ void MenuComponent::onSelect(sf::Color colour, int size, float duration)
 	viewedText.setCharacterSize(onDesel.size);
 
 }
-
+void MenuComponent::setColor(sf::Color c)
+{
+	onDesel.colour = c;
+	viewedText.setFillColor(c);
+}
 void MenuComponent::select()
 {
 	viewedText.setFillColor(onSel.colour);
