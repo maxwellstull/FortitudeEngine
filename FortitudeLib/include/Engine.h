@@ -27,4 +27,5 @@ public:
 
     void close() { window.close(); }
     WindowManager* GetWindowManager() { return &window; }
+    FPS* getFps() { return &fps; }
 };

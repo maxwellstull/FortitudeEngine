@@ -7,7 +7,7 @@ class WindowManager {
 private:
     Engine* engine = nullptr;
     sf::RenderWindow window;
-    int framerate = 60;
+    int maxFR = 60;
     bool vsync = true;
     bool fullscreen = false;
     bool infocus = false;
@@ -30,4 +30,6 @@ public:
     void disableFullscreen() { window.create(sf::VideoMode(defaultwindow.x, defaultwindow.y), "Window", sf::Style::Default); }
     void enableVsync() { vsync = true; window.setVerticalSyncEnabled(vsync); }
     void disableVsync() { vsync = false; window.setVerticalSyncEnabled(vsync); }
+    int getMaxFramerate() { return maxFR; }
+    void setMaxFramerate(int fr) { maxFR = fr; window.setFramerateLimit(fr); }
 };

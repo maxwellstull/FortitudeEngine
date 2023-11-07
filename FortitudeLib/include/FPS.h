@@ -1,6 +1,6 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 class FPS
 {
 private:
@@ -17,5 +17,6 @@ public:
 	void log(float frametime);
 	int get();
 	void enable() { visible = true; }
-	void disable() { visible = false; }
+	void disable() { visible = false;}
+	bool isActive() { return visible; }
 };

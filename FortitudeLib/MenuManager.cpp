@@ -99,7 +99,7 @@ void MenuManager::Options()
 	title->setControlBind(0, 0, 0, 0);
 	title->onSelect(sf::Color::Blue, 96, 0.25);
 	std::shared_ptr<MenuComponent> back = std::make_shared<MenuComponent>("Back", &fonts[0], sf::Vector2f(200, 300), 64);
-	back->setControlBind(3, 2, 1, 1);
+	back->setControlBind(15, 2, 1, 1);
 	back->onSelect(sf::Color::Blue, 96, 0.25);
 	back->onEnter([this]() {this->MainMenu(); });
 	std::shared_ptr<MenuComponent> fullscreen = std::make_shared<MenuComponent>("Fullscreen", &fonts[0], sf::Vector2f(200, 400), 64);
@@ -119,21 +119,86 @@ void MenuManager::Options()
 	fsOn->onEnter([this, fsOff, fsOn]() {this->GetEngine()->GetWindowManager()->enableFullscreen(); fsOn->enable(); fsOff->disable(); });
 	
 	std::shared_ptr<MenuComponent> vsync = std::make_shared<MenuComponent>("Vsync", &fonts[0], sf::Vector2f(200, 500), 64);
-	vsync->setControlBind(2, 1, 3,6);
+	vsync->setControlBind(2, 8, 3,6);
 	vsync->onSelect(sf::Color::Blue, 96, 0.25);
-
+	vsync->onEnter([this]() {});
 	std::shared_ptr<MenuOption> vsOn = std::make_shared<MenuOption>("On", &fonts[0], sf::Vector2f(400, 500), 64, sf::Color::Red);
-	vsOn->setControlBind(2, 1, 3, 7);
+	vsOn->setControlBind(2, 8, 3, 7);
 	vsOn->onSelect(sf::Color::Blue, 96, 0.25);
 	vsOn->init(GetEngine()->GetWindowManager()->isVsync());
 	std::shared_ptr<MenuOption> vsOff = std::make_shared<MenuOption>("Off", &fonts[0], sf::Vector2f(500, 500), 64, sf::Color::Red);
-	vsOff->setControlBind(2, 1, 6, 7);
+	vsOff->setControlBind(2, 8, 6, 7);
 	vsOff->onSelect(sf::Color::Blue, 96, 0.25);
 	vsOff->init(!GetEngine()->GetWindowManager()->isVsync());
 
-
 	vsOff->onEnter([this, vsOff, vsOn]() {this->GetEngine()->GetWindowManager()->disableVsync(); vsOff->enable(); vsOn->disable(); });
 	vsOn->onEnter([this, vsOff, vsOn]() {this->GetEngine()->GetWindowManager()->enableVsync(); vsOff->disable(); vsOn->enable(); });
+
+	std::shared_ptr<MenuComponent> maxFramerate = std::make_shared<MenuComponent>("Max Framerate", &fonts[0], sf::Vector2f(200, 600), 64);
+	maxFramerate->setControlBind(3, 15, 8, 9);
+	maxFramerate->onSelect(sf::Color::Blue, 96, 0.25);
+	maxFramerate->onEnter([this]() {});
+	std::shared_ptr<MenuOption> max3 = std::make_shared<MenuOption>("3fps", &fonts[0], sf::Vector2f(500, 600), 64, sf::Color::Red);
+	max3->setControlBind(3, 15, 8, 10);
+	max3->onSelect(sf::Color::Blue, 96, 0.25);
+	max3->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 3);
+	std::shared_ptr<MenuOption> max30 = std::make_shared<MenuOption>("30fps", &fonts[0], sf::Vector2f(650, 600), 64, sf::Color::Red);
+	max30->setControlBind(3, 15, 9, 11);
+	max30->onSelect(sf::Color::Blue, 96, 0.25);
+	max30->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 30);
+	std::shared_ptr<MenuOption> max60 = std::make_shared<MenuOption>("60fps", &fonts[0], sf::Vector2f(800, 600), 64, sf::Color::Red);
+	max60->setControlBind(3, 15, 10,12);
+	max60->onSelect(sf::Color::Blue, 96, 0.25);
+	max60->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 60);
+	std::shared_ptr<MenuOption> max120 = std::make_shared<MenuOption>("120fps", &fonts[0], sf::Vector2f(950, 600), 64, sf::Color::Red);
+	max120->setControlBind(3, 15, 11,13);
+	max120->onSelect(sf::Color::Blue, 96, 0.25);
+	max120->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 120);
+	std::shared_ptr<MenuOption> max240 = std::make_shared<MenuOption>("240fps", &fonts[0], sf::Vector2f(1100, 600), 64, sf::Color::Red);
+	max240->setControlBind(3, 15, 12,14);
+	max240->onSelect(sf::Color::Blue, 96, 0.25);
+	max240->init(GetEngine()->GetWindowManager()->getMaxFramerate() ==240);
+	std::shared_ptr<MenuOption> uncap = std::make_shared<MenuOption>("UNLIMITED POWER!!1!", &fonts[0], sf::Vector2f(1500, 600), 64, sf::Color::Red);
+	uncap->setControlBind(3, 15, 13,14);
+	uncap->onSelect(sf::Color::Blue, 96, 0.25);
+	uncap->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 0);
+
+	max3->onEnter([this, max3, max30, max60, max120, max240, uncap]() {
+		this->GetEngine()->GetWindowManager()->setMaxFramerate(3);
+		max3->enable(); max30->disable(); max60->disable(); max120->disable(); max240->disable(); uncap->disable(); });
+	max30->onEnter([this, max3, max30, max60, max120, max240, uncap]() {
+		this->GetEngine()->GetWindowManager()->setMaxFramerate(30);
+		max3->disable(); max30->enable(); max60->disable(); max120->disable(); max240->disable(); uncap->disable(); });
+	max60->onEnter([this, max3, max30, max60, max120, max240, uncap]() {
+		this->GetEngine()->GetWindowManager()->setMaxFramerate(60);
+		max3->disable(); max30->disable(); max60->enable(); max120->disable(); max240->disable(); uncap->disable(); });
+	max120->onEnter([this, max3, max30, max60, max120, max240, uncap]() {
+		this->GetEngine()->GetWindowManager()->setMaxFramerate(120);
+		max3->disable(); max30->disable(); max60->disable(); max120->enable(); max240->disable(); uncap->disable(); });
+	max240->onEnter([this, max3, max30, max60, max120, max240, uncap]() {
+		this->GetEngine()->GetWindowManager()->setMaxFramerate(240);
+		max3->disable(); max30->disable(); max60->disable(); max120->disable(); max240->enable(); uncap->disable(); });
+	uncap->onEnter([this, max3, max30, max60, max120, max240, uncap]() {
+		this->GetEngine()->GetWindowManager()->setMaxFramerate(0);
+		max3->disable(); max30->disable(); max60->disable(); max120->disable(); max240->disable(); uncap->enable(); });
+
+	std::shared_ptr<MenuComponent> showFps = std::make_shared<MenuComponent>("FPS Display", &fonts[0], sf::Vector2f(200, 700), 64);
+	showFps->setControlBind(8, 1, 15, 16);
+	showFps->onSelect(sf::Color::Blue, 96, 0.25);
+	showFps->onEnter([this]() {});
+	std::shared_ptr<MenuOption> fpsOn = std::make_shared<MenuOption>("On", &fonts[0], sf::Vector2f(500, 700), 64, sf::Color::Red);
+	fpsOn->setControlBind(8, 1, 15, 17);
+	fpsOn->onSelect(sf::Color::Blue, 96, 0.25);
+	fpsOn->init(GetEngine()->getFps()->isActive());
+	std::shared_ptr<MenuOption> fpsOff = std::make_shared<MenuOption>("Off", &fonts[0], sf::Vector2f(700, 700), 64, sf::Color::Red);
+	fpsOff->setControlBind(8, 1, 16, 17);
+	fpsOff->onSelect(sf::Color::Blue, 96, 0.25);
+	fpsOff->init(!GetEngine()->getFps()->isActive());
+
+	fpsOn->onEnter([this, fpsOff, fpsOn]() {this->GetEngine()->getFps()->enable(); fpsOn->enable(); fpsOff->disable(); });
+	fpsOff->onEnter([this, fpsOff, fpsOn]() {this->GetEngine()->getFps()->disable(); fpsOn->disable(); fpsOff->enable(); });
+
+
 
 	components.push_back(title);		//0
 	components.push_back(back);			//1
@@ -143,7 +208,16 @@ void MenuManager::Options()
 	components.push_back(fsOff);		//5
 	components.push_back(vsOn);			//6
 	components.push_back(vsOff);		//7
-
+	components.push_back(maxFramerate);	//8
+	components.push_back(max3);			//9
+	components.push_back(max30);		//10
+	components.push_back(max60);		//11
+	components.push_back(max120);		//12
+	components.push_back(max240);		//13
+	components.push_back(uncap);		//14
+	components.push_back(showFps);		//15
+	components.push_back(fpsOn);		//16
+	components.push_back(fpsOff);		//17
 
 	selected = components[1];
 	selected->select();
