@@ -4,10 +4,6 @@
 
 Engine::Engine()
 {
-    // Get the screen resolution and create an SFML window and View
-//    sf::Vector2f resolution;
-//    resolution.x = sf::VideoMode::getDesktopMode().width;
-//    resolution.y = sf::VideoMode::getDesktopMode().height;
     window.init();
     window.SetEngine(this);
     menu.init();
