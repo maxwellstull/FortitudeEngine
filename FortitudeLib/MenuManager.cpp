@@ -70,6 +70,7 @@ void MenuManager::MainMenu()
 	std::shared_ptr<MenuComponent> title = std::make_shared<MenuComponent>("It's High Noon", &fonts[0], sf::Vector2f(960, 200), 100);
 	title->setControlBind(3, 1, 0, 0);
 	title->onSelect(sf::Color::Blue, 200, 0.25);
+	title->onEnter([this]() {this->MapSelect(0); });
 	std::shared_ptr<MenuComponent> achievements = std::make_shared<MenuComponent>("Achievements", &fonts[0], sf::Vector2f(960, 370), 64);
 	achievements->setControlBind(0, 2, 1, 1);
 	achievements->onSelect(sf::Color::Blue, 96, 0.25);
@@ -223,3 +224,43 @@ void MenuManager::Options()
 	selected->select();
 }
 
+void MenuManager::MapSelect(int page)
+{
+	components.clear();
+
+	std::vector<sf::IntRect> locations = {
+		sf::IntRect(100, 100, 760, 340),
+		sf::IntRect(1060, 100, 760, 340),
+		sf::IntRect(100, 540, 760, 340),
+		sf::IntRect(1060, 540, 760, 340)
+	};
+	
+
+	int maps_per_page = locations.size();
+	int mapsAmnt = GetEngine()->getMaps().size();
+
+	std::vector<int> maps;
+	int start = maps_per_page * page;
+	int maps_on_page = (start + maps_per_page) < mapsAmnt ? maps_per_page : maps_per_page - (start + maps_per_page - mapsAmnt);
+
+	std::vector<std::vector<int>> binds = {
+		{1, maps_on_page >= 3 ? 3 : 1, 1, maps_on_page >= 2 ? 2 : 1},
+		{2, maps_on_page >= 4 ? 4 : 2, 1, 2},
+		{1, 3, 3, maps_on_page >= 4 ? 4 : 3},
+		{2, 4, 3, 4},
+	};
+
+	for (int i = start; i < start + maps_per_page; i++)
+	{
+		if (i < mapsAmnt)
+		{
+			std::shared_ptr<MenuMap> t1 = std::make_shared<MenuMap>(GetEngine()->getMap(i)->getName().c_str(), &fonts[0], sf::Vector2f(locations[i % 4].left, locations[i % 4].top), 64, locations[i % 4], GetEngine()->getMap(i)->getTexture());
+			t1->onSelect(sf::Color::Blue, 96, 0.25);
+			t1->setControlBind(binds[i % 4][0]-1, binds[i % 4][1]-1, binds[i % 4][2]-1, binds[i % 4][3]-1);
+			components.push_back(t1);
+		}
+	}
+	selected = components[0];
+	selected->select();
+		
+}

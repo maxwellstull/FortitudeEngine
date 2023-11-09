@@ -3,13 +3,25 @@
 #include "WindowManager.h"
 #include "MenuManager.h"
 #include "FPS.h"
+#include "Map.h"
+#include <vector>
+
+enum Active
+{
+    MENU = 0,
+    GAME = 1,
+};
 
 class Engine
 {
 private:
+    Active act;
     WindowManager window;
     MenuManager menu;
     FPS fps;
+    Map* map;
+    std::vector<Map> maps;
+
     sf::CircleShape shape;
     sf::Sprite sprite;
     sf::Texture texture;
@@ -28,4 +40,7 @@ public:
     void close() { window.close(); }
     WindowManager* GetWindowManager() { return &window; }
     FPS* getFps() { return &fps; }
+    std::vector<Map> getMaps() { return maps; }
+    sf::Texture* getMapTexture(int idx) { return maps[idx].getTexture(); }
+    Map* getMap(int idx) { return &maps[idx]; }
 };

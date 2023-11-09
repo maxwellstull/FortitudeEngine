@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MenuComponent.h"
 #include "MenuOption.h"
+#include "MenuMap.h"
 #include <vector>
 #include <memory>
 
@@ -26,6 +27,8 @@ public:
     void update(float dtAsSeconds);
     void MainMenu();
     void Options();
+    void MapSelect(int page);
+    void MapSelectInit();
 //    void FullscreenContext();
     void Draw(sf::RenderWindow * context);
     bool isActive() { return active; }
