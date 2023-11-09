@@ -11,11 +11,10 @@ Engine::Engine()
     act = Active::MENU;
 //    map.init("img/map1.png");
 
-    Map m1, m2, m3, m4;
-    m1.init("img/map1.png", "Alamo");
-    m2.init("img/map1.png", "Ol Canteen");
-    m3.init("img/map1.png", "Jail");
-    m4.init("img/map1.png", "Lawman");
+    std::shared_ptr<Map> m1 = std::make_shared<Map>("img/map1.png", "Alamo");
+    std::shared_ptr<Map> m2 = std::make_shared<Map>("img/map1.png", "Ol Canteen");
+    std::shared_ptr<Map> m3 = std::make_shared<Map>("img/map1.png", "Jail");
+    std::shared_ptr<Map> m4 = std::make_shared<Map>("img/map1.png", "Lawman");
 
     maps.push_back(m1);
     maps.push_back(m2);

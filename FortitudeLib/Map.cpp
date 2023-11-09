@@ -1,6 +1,11 @@
 #include "include/Map.h"
 
-
+Map::Map(const char* mapname, const char* title)
+{
+	tex.loadFromFile(mapname);
+	spr.setTexture(tex);
+	name = title;
+}
 void Map::init(const char * mapname, const char* title)
 {
 	tex.loadFromFile(mapname);

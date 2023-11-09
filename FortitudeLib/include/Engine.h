@@ -20,7 +20,7 @@ private:
     MenuManager menu;
     FPS fps;
     Map* map;
-    std::vector<Map> maps;
+    std::vector<std::shared_ptr<Map>> maps;
 
     sf::CircleShape shape;
     sf::Sprite sprite;
@@ -40,7 +40,7 @@ public:
     void close() { window.close(); }
     WindowManager* GetWindowManager() { return &window; }
     FPS* getFps() { return &fps; }
-    std::vector<Map> getMaps() { return maps; }
-    sf::Texture* getMapTexture(int idx) { return maps[idx].getTexture(); }
-    Map* getMap(int idx) { return &maps[idx]; }
+    std::vector<std::shared_ptr<Map>> getMaps() { return maps; }
+    sf::Texture* getMapTexture(int idx) { return maps[idx]->getTexture(); }
+    std::shared_ptr<Map> getMap(int idx) { return maps[idx]; }
 };

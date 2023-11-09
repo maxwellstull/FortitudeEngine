@@ -11,6 +11,7 @@ private:
 	sf::Sprite spr;
 	std::string name;
 public:
+	Map(const char* mapname, const char* title);
 	void init(const char* mapname, const char* title);
 	void Draw(sf::RenderWindow* context);
 	sf::Texture* getTexture() { return &tex; }
