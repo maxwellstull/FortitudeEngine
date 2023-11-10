@@ -258,11 +258,11 @@ void MenuManager::MapSelect(int page)
 	components.clear();
 
 	std::shared_ptr<MenuComponent> mainMenu = std::make_shared<MenuComponent>("Main\nMenu", &fonts[0], sf::Vector2f(182, 170), 64);
-	mainMenu->setControlBind(0, 1, 6, 0);
+	mainMenu->setControlBind(0, 1, 6, 13);
 	mainMenu->onSelect(sf::Color::Blue, 96, 0.25);
 	mainMenu->onEnter([this]() { this->MainMenu(); });
 	std::shared_ptr<MenuComponent> waves = std::make_shared<MenuComponent>("Waves", &fonts[0], sf::Vector2f(182, 300), 64);
-	waves->setControlBind(0, 2, 6, 1);
+	waves->setControlBind(0, 2, 6, 13);
 	waves->onSelect(sf::Color::Blue, 96, 0.25);
 	std::shared_ptr<MenuOption> w25 = std::make_shared<MenuOption>("25", &fonts[0], sf::Vector2f(100, 350), 32, sf::Color::Red);
 	w25->setControlBind(1, 5, 2, 3);
@@ -305,7 +305,7 @@ void MenuManager::MapSelect(int page)
 	w100->onEnter([this, w25, w50, w100]() {GetEngine()->getGame()->setWaveCt(100); w25->disable(); w50->disable(); w100->enable(); });
 
 	std::shared_ptr<MenuComponent> leaderboard = std::make_shared<MenuComponent>("Leaderboard", &fonts[0], sf::Vector2f(182, 400), 64);
-	leaderboard->setControlBind(1, 6, 5, 5);
+	leaderboard->setControlBind(1, 6, 5, 13);
 	leaderboard->onSelect(sf::Color::Blue, 96, 0.25);
 	std::shared_ptr<MenuOption> global = std::make_shared<MenuOption>("Global", &fonts[0], sf::Vector2f(100, 450), 32, sf::Color::Red);
 	global->setControlBind(5, 8, 6, 7);
@@ -342,11 +342,14 @@ void MenuManager::MapSelect(int page)
 		time->disable(); maxwave->enable();});
 
 	//Page navigation
+	int maxPage = std::ceil(((float)GetEngine()->getMaps().size() / (float)maps_per_page));
 	std::shared_ptr<MenuComponent> lastPage = std::make_shared<MenuComponent>("Last Page", &fonts[0], sf::Vector2f(1722, 170), 64);
 	lastPage->onSelect(sf::Color::Blue, 96, 0.25);
+	lastPage->onEnter([this, page]() {if(page > 0){this->MapSelect(page - 1); }});
 	std::shared_ptr<MenuComponent> nextPage = std::make_shared<MenuComponent>("Next Page", &fonts[0], sf::Vector2f(1722, 270), 64);
 	nextPage->onSelect(sf::Color::Blue, 96, 0.25);
-	std::string pgStr = std::to_string(page + 1) + "/" + std::to_string((int)std::ceil(((float)GetEngine()->getMaps().size() / (float)maps_per_page)));
+	nextPage->onEnter([this, page, maxPage]() {if(page < maxPage){this->MapSelect(page + 1); }});
+	std::string pgStr = std::to_string(page + 1) + "/" + std::to_string(maxPage);
 	std::shared_ptr<MenuComponent> pageCt = std::make_shared<MenuComponent>(pgStr.c_str(), &fonts[0], sf::Vector2f(1722, 370), 64);
 	pageCt->onSelect(sf::Color::Blue, 96, 0.25);
 
@@ -361,14 +364,9 @@ void MenuManager::MapSelect(int page)
 	components.push_back(friends);		//7
 	components.push_back(time);			//8
 	components.push_back(maxwave);		//9
-
-	components.push_back(lastPage);
-	components.push_back(nextPage);
-	components.push_back(pageCt);
-
-
-
-
+	components.push_back(lastPage);		//10
+	components.push_back(nextPage);		//11
+	components.push_back(pageCt);		//12
 
 	
 	int mapsAmnt = GetEngine()->getMaps().size();
@@ -377,9 +375,12 @@ void MenuManager::MapSelect(int page)
 	int start = maps_per_page * page;
 	int maps_on_page = (start + maps_per_page) < mapsAmnt ? maps_per_page : maps_per_page - (start + maps_per_page - mapsAmnt);
 
+	lastPage->setControlBind(11, 11, maps_on_page >= 2 ? 14 : 13, 10);
+	nextPage->setControlBind(10, 10, maps_on_page >= 2 ? 14 : 13, 11);
+
 	std::vector<std::vector<int>> binds = {
-		{comps + 1, comps + (maps_on_page >= 3 ? 3 : 1), 1, comps + (maps_on_page >= 2 ? 2 : 1)},
-		{comps + 2, comps + (maps_on_page >= 4 ? 4 : 2), comps + 1, comps + 2},
+		{comps + 1, comps + (maps_on_page >= 3 ? 3 : 1), 1, (maps_on_page >= 2 ? comps + 2 : 11)},
+		{comps + 2, comps + (maps_on_page >= 4 ? 4 : 2), comps + 1, 11},
 		{comps + 1, comps + 3, comps + 3, comps + (maps_on_page >= 4 ? 4 : 3)},
 		{comps + 2, comps + 4, comps + 3, comps + 4},
 	};
