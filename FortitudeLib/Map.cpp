@@ -6,11 +6,10 @@ Map::Map(const char* mapname, const char* title)
 	spr.setTexture(tex);
 	name = title;
 }
-void Map::init(const char * mapname, const char* title)
+Map::Map(const char * mapname, const char* title, sf::IntRect rec)
 {
-	tex.loadFromFile(mapname);
+	tex.loadFromFile(mapname, rec);
 	spr.setTexture(tex);
-	name = title;
 }
 
 void Map::Draw(sf::RenderWindow * context)

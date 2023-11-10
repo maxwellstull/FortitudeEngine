@@ -4,6 +4,11 @@
 
 void Engine::input()
 {
+    sf::Vector2i pixelPos = sf::Mouse::getPosition(*window.GetWindow());
+    cursorWorldPos = window.GetWindow()->mapPixelToCoords(pixelPos);
+    
+    hittest(cursorWorldPos);
+
     sf::Event event;
     while (window.GetWindow()->pollEvent(event))
     {
@@ -60,9 +65,30 @@ void Engine::input()
                     case(sf::Keyboard::Enter):
                     {
                         menu.Enter();
+                        break;
                     }
                 }
             }
+        case sf::Event::MouseButtonPressed:
+        {
+            switch (event.mouseButton.button)
+            {
+                case(sf::Mouse::Left):
+                {
+                    if (menu.isActive())
+                    {
+                        menu.Enter();
+                        break;
+                    }
+                }
+            }
+            break;
+        }
         }
     }
+}
+
+void Engine::hittest(sf::Vector2f cursorPos)
+{
+    menu.hitvisit(cursorPos);
 }

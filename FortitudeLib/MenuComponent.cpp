@@ -65,6 +65,11 @@ void MenuComponent::setColor(sf::Color c)
 	onDesel.colour = c;
 	viewedText.setFillColor(c);
 }
+bool MenuComponent::hittest(sf::Vector2f cursorPos)
+{
+	sf::FloatRect bounds = viewedText.getGlobalBounds();
+	return bounds.contains(cursorPos);
+}
 void MenuComponent::select()
 {
 	viewedText.setFillColor(onSel.colour);

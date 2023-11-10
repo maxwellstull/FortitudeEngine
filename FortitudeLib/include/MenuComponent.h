@@ -4,7 +4,7 @@
 
 class MenuComponent
 {
-private:
+public:
     struct states {
         sf::Vector2f origin;
         sf::Color colour;
@@ -18,6 +18,7 @@ private:
         bool active;
         bool increase;
     };
+private:
     sf::Text viewedText;
     int down;
     int up;
@@ -56,7 +57,8 @@ public:
 
     void setColor(sf::Color c);
     sf::Color getColor() { return viewedText.getFillColor(); }
-
+    animation getAnimation() { return anim; }
+    virtual bool hittest(sf::Vector2f cursorPos);
 
 
 };
