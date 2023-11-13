@@ -8,14 +8,16 @@
 #include "Leaderboard.h"
 #include <vector>
 
-/*enum Active
-{
-    MENU = 0,
-    GAME = 1,
-};*/
+
 
 class Engine
 {
+public:
+    enum Active
+    {
+        MENU = 0,
+        GAME = 1,
+    };
 private:
     //Active act;
     WindowManager window;
@@ -23,6 +25,7 @@ private:
     FPS fps;
     Game game;
     Leaderboard leader;
+    Active act;
 
     std::shared_ptr<Map> mainScreen;
     std::shared_ptr<Map> map;
@@ -51,7 +54,7 @@ public:
     std::vector<std::shared_ptr<Map>> getMaps() { return maps; }
     sf::Texture* getMapTexture(int idx) { return maps[idx]->getTexture(); }
     std::shared_ptr<Map> getMap(int idx) { return maps[idx]; }
-    void setMap(int idx) { map = maps[idx]; }
+    void setMap(int idx);// { map = maps[idx]; }
     Game* getGame() { return &game; }
     Leaderboard* getLeaderboard() { return &leader; }
 };

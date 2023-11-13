@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "Path.h"
 
 class Engine;
 
@@ -10,6 +11,7 @@ private:
 	sf::Texture tex;
 	sf::Sprite spr;
 	std::string name;
+	Path path;
 public:
 	Map(const char* mapname, const char* title);
 	Map(const char* mapname, const char* title, sf::IntRect rec);
@@ -17,4 +19,5 @@ public:
 	sf::Texture* getTexture() { return &tex; }
 	std::string getName() { return name; }
 	void setSpriteScale(sf::Vector2f scale) { spr.setScale(scale); }
+	Path* getPath() { return &path; }
 };
