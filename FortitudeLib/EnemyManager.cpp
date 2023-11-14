@@ -14,12 +14,14 @@ void EnemyManager::initialize(GameInfo info)
 {
 	//load textures
 	sf::Texture texture;
-	texture.loadFromFile("img/baddy.png");
+	texture.loadFromFile("img/hat.png");
 	textures.push_back(texture);
-
+	texture.loadFromFile("img/gun.png");
+	textures.push_back(texture);
 
 	std::shared_ptr<Enemy> en = std::make_shared<Enemy>();
 	en->setTexture(&textures[0]);
+	en->setGunTexture(&textures[1]);
 	en->setEnemyManager(this);
 	en->setSpeed(50);
 	en->initialize(*getGame()->getMap()->getPath()->getNextDestination(0).location);

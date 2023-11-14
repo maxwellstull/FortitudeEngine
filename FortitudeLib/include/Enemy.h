@@ -7,21 +7,28 @@ class EnemyManager;
 
 class Enemy {
 private:
-	bool active;
 	EnemyManager* enm;
+
 	sf::Vector2f location;
-	sf::Vector2f deltaPerSec;
 	std::shared_ptr<sf::Vector2f> lastDestination;
 	std::shared_ptr<sf::Vector2f> destination;
 	std::shared_ptr<sf::FloatRect> endBounds;
 	sf::FloatRect pathingBounds;
 	int destinationIdx = 0;
+
+	bool active;
 	float speed;
+	sf::Vector2f deltaPerSec;
 
 	sf::Texture* text;
 	sf::Sprite spr;
+
+	sf::Texture* gunText;
+	sf::Sprite gunSpr;
+
 public:
 	void setTexture(sf::Texture* texture);
+	void setGunTexture(sf::Texture* texture);
 	void setLocation(sf::Vector2f loc) { location = loc; }
 	void setSpeed(int sp) { speed = sp; }
 	void setEnemyManager(EnemyManager* e) { enm = e; }
