@@ -135,7 +135,6 @@
   <ItemGroup>
     <ClInclude Include="FortitudeLib\include\Achievement.h" />
     <ClInclude Include="FortitudeLib\include\Achievements.h" />
-    <ClInclude Include="FortitudeLib\include\Bob.h" />
     <ClInclude Include="FortitudeLib\include\Enemy.h" />
     <ClInclude Include="FortitudeLib\include\EnemyManager.h" />
     <ClInclude Include="FortitudeLib\include\Engine.h" />
@@ -156,7 +155,6 @@
   <ItemGroup>
     <ClCompile Include="FortitudeLib\Achievement.cpp" />
     <ClCompile Include="FortitudeLib\Achievements.cpp" />
-    <ClCompile Include="FortitudeLib\Bob.cpp" />
     <ClCompile Include="FortitudeLib\Draw.cpp" />
     <ClCompile Include="FortitudeLib\Enemy.cpp" />
     <ClCompile Include="FortitudeLib\EnemyManager.cpp" />

@@ -26,7 +26,7 @@ public:
 	void setSpeed(int sp) { speed = sp; }
 	void setEnemyManager(EnemyManager* e) { enm = e; }
 	EnemyManager* getEnemyManager() { return enm; }
-	void newDestination(std::shared_ptr<sf::Vector2f> newD);
+	void newDestination(PathNode newD);
 	void update(float dtAsSeconds);
 	int getDestinationIdx() { return destinationIdx; }
 	void Draw(sf::RenderWindow* context);
