@@ -10,8 +10,8 @@ private:
 	EnemyManager* enm;
 
 	sf::Vector2f location;
-	std::shared_ptr<sf::Vector2f> lastDestination;
-	std::shared_ptr<sf::Vector2f> destination;
+	std::shared_ptr<PathNode> lastDestination;
+	std::shared_ptr<PathNode> destination;
 	std::shared_ptr<sf::FloatRect> endBounds;
 	sf::FloatRect pathingBounds;
 	int destinationIdx = 0;
@@ -33,11 +33,11 @@ public:
 	void setSpeed(int sp) { speed = sp; }
 	void setEnemyManager(EnemyManager* e) { enm = e; }
 	EnemyManager* getEnemyManager() { return enm; }
-	void newDestination(PathNode newD);
+	void newDestination(std::shared_ptr<PathNode>  newD);
 	void update(float dtAsSeconds);
 	int getDestinationIdx() { return destinationIdx; }
 	void Draw(sf::RenderWindow* context);
-	void initialize(sf::Vector2f loc);
+	void initialize(std::shared_ptr<PathNode> start_node);
 	void activate() { active = true; }
 	void deactivate() { active = false; }
 };

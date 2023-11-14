@@ -7,10 +7,10 @@
 
 class Path {
 private:
-	std::vector<PathNode> points;
+	std::vector<std::shared_ptr<PathNode>> points;
 	int length;
 public:
-	PathNode getNextDestination(int idx);
+	std::shared_ptr<PathNode> getNextDestination(int idx);
 	void generatePath();
 
 };

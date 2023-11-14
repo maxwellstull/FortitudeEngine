@@ -2,7 +2,7 @@
 struct GameInfo {
 	int MaxWaves;
 	int Difficulty;
-	int WaveNum;
+	int StartingHealth;
 };
 
 enum PathNodeType {
@@ -12,6 +12,6 @@ enum PathNodeType {
 };
 
 struct PathNode {
-	std::shared_ptr<sf::Vector2f> location;
+	sf::Vector2f location;
 	PathNodeType nodeType;
 };

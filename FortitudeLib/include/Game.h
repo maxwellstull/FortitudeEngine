@@ -10,14 +10,24 @@ class Engine;
 class Game
 {
 private:
+	struct GameState {
+		int maxHealth;
+		int currentHealth;
+	};
 	bool isActive;
 	Engine* engine = nullptr;
 	std::shared_ptr<Map> activeMap;
 	EnemyManager enm;
-	//vector of towers
-//	std::vector<Enemy> enemies;
 	GameInfo info;
 	int waveCt;
+	GameState state;
+
+
+	// money bag
+	sf::Font font;
+	sf::Texture moneyTex;
+	sf::Sprite moneySpr;
+	sf::Text healthHUD;
 
 public:
 	void activate() { isActive = true; }
@@ -31,4 +41,6 @@ public:
 	void setMap(std::shared_ptr<Map> map) { activeMap = map; }
 	void load();
 	void Draw(sf::RenderWindow* context);
+	void updateHealthHUD();
+	void decrementCurrentHealth(int amnt = 1) { state.currentHealth -= amnt; updateHealthHUD(); }
 };

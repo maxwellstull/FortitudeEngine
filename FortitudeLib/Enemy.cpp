@@ -23,8 +23,11 @@ void Enemy::update(float dtAsSeconds)
 
 void Enemy::Draw(sf::RenderWindow* context)
 {
-	context->draw(spr);
-	context->draw(gunSpr);
+	if(active)
+	{
+		context->draw(spr);
+		context->draw(gunSpr);
+	}
 }
 
 void Enemy::setTexture(sf::Texture* texture)
@@ -34,9 +37,10 @@ void Enemy::setTexture(sf::Texture* texture)
 	spr.setScale(0.25, 0.25);
 }
 
-void Enemy::initialize(sf::Vector2f loc)
+void Enemy::initialize(std::shared_ptr<PathNode> start_node)
 {
-	location = loc;
+	location = start_node->location;
+	destination = start_node;
 	spr.setPosition(location);
 	sf::FloatRect bds = spr.getLocalBounds();
 	spr.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
@@ -49,18 +53,29 @@ void Enemy::initialize(sf::Vector2f loc)
 
 }
 
-void Enemy::newDestination(PathNode newD)
+void Enemy::newDestination(std::shared_ptr<PathNode> newD)
 {
-	float theta = atan2((newD.location->y - location.y), (newD.location->x - location.x));
+	if (newD->nodeType == PathNodeType::END)
+	{
+		deactivate();
+		getEnemyManager()->getGame()->decrementCurrentHealth();
+	}
+
+	float theta = atan2((newD->location.y - location.y), (newD->location.x - location.x));
 	deltaPerSec.x = speed * cos(theta);
 	deltaPerSec.y = speed * sin(theta);
 
 	std::cout <<theta<<" " << deltaPerSec.x << " " << deltaPerSec.y << std::endl;
 
-	lastDestination = std::make_shared<sf::Vector2f>(location);
-	destination = newD.location;
+	lastDestination = destination;
+	destination = newD;
 
-	pathingBounds = sf::FloatRect(sf::Vector2f(destination->x < lastDestination->x ? destination->x - 1: lastDestination->x - 1, destination->y < lastDestination->y ? destination->y - 1: lastDestination->y - 1), sf::Vector2f(abs(lastDestination->x - destination->x) + 1, abs(lastDestination->y - destination->y) + 2));	
+	pathingBounds = sf::FloatRect(sf::Vector2f
+		(destination->location.x < location.x ? destination->location.x - 1: location.x - 1, 
+		 destination->location.y < location.y ? destination->location.y - 1: location.y - 1), 
+		sf::Vector2f(
+			abs(location.x - destination->location.x) + 1, 
+			abs(location.y - destination->location.y) + 2));
 }
 
 void Enemy::setGunTexture(sf::Texture* texture)

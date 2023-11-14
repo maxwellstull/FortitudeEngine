@@ -23,8 +23,8 @@ void EnemyManager::initialize(GameInfo info)
 	en->setTexture(&textures[0]);
 	en->setGunTexture(&textures[1]);
 	en->setEnemyManager(this);
-	en->setSpeed(50);
-	en->initialize(*getGame()->getMap()->getPath()->getNextDestination(0).location);
+	en->setSpeed(200);
+	en->initialize(getGame()->getMap()->getPath()->getNextDestination(0));
 //	en->setDestination(getGame()->getMap()->getPath()->getNextDestination(1));
 	
 	enemies.push_back(en);
