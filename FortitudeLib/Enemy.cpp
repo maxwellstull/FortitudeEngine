@@ -11,6 +11,8 @@ void Enemy::update(float dtAsSeconds)
 	{
 		location = location + dtAsSeconds * deltaPerSec;
 		spr.setPosition(location);
+		gunSpr.setPosition(location);
+		gunSpr.setRotation(gunSpr.getRotation() + 1);
 		std::cout << "Location: " << spr.getPosition().x << ", " << spr.getPosition().y << std::endl;
 		if (!pathingBounds.contains(location)) //no longer in rectangle - meaning it met the waypoint
 		{
@@ -21,13 +23,8 @@ void Enemy::update(float dtAsSeconds)
 
 void Enemy::Draw(sf::RenderWindow* context)
 {
-
-	sf::RectangleShape r;
-	r.setPosition(pathingBounds.getPosition());
-	r.setSize(pathingBounds.getSize());
-	r.setFillColor(sf::Color::Black);
-	context->draw(r);
 	context->draw(spr);
+	context->draw(gunSpr);
 }
 
 void Enemy::setTexture(sf::Texture* texture)
@@ -65,3 +62,18 @@ void Enemy::newDestination(PathNode newD)
 
 	pathingBounds = sf::FloatRect(sf::Vector2f(destination->x < lastDestination->x ? destination->x - 1: lastDestination->x - 1, destination->y < lastDestination->y ? destination->y - 1: lastDestination->y - 1), sf::Vector2f(abs(lastDestination->x - destination->x) + 1, abs(lastDestination->y - destination->y) + 2));	
 }
+
+void Enemy::setGunTexture(sf::Texture* texture)
+{
+	gunText = texture;
+	gunSpr.setTexture(*gunText);
+	gunSpr.setScale(0.25, 0.25);
+	sf::FloatRect bds = gunSpr.getLocalBounds();
+	gunSpr.setOrigin(bds.left + (bds.width / 2.f) - 150, bds.top + (bds.height / 2.f));
+	
+}
+
+
+
+
+
