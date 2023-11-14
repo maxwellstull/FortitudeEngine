@@ -7,7 +7,7 @@
 #include "Game.h"
 #include "Leaderboard.h"
 #include <vector>
-
+#include "GameInfo.h"
 
 
 class Engine

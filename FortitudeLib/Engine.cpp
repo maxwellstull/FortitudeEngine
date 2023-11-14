@@ -72,7 +72,7 @@ void Engine::setMap(int idx)
     map = maps[idx];
     game.setMap(maps[idx]);
     //fill out game settings
-    Game::GameInfo gameDetails = {
+    GameInfo gameDetails = {
 
     };
     act = Active::GAME;

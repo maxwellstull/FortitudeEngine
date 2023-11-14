@@ -2,23 +2,21 @@
 #include <SFML/Graphics.hpp>
 #include "Map.h"
 #include "Enemy.h"
+#include "EnemyManager.h"
+#include "GameInfo.h"
 
 class Engine;
 
 class Game
 {
-public:
-	struct GameInfo {
-		int MaxWaves;
-		int Difficulty;
-		int WaveNum;
-	};
 private:
 	bool isActive;
 	Engine* engine = nullptr;
 	std::shared_ptr<Map> activeMap;
+	EnemyManager enm;
 	//vector of towers
-	std::vector<Enemy> enemies;
+//	std::vector<Enemy> enemies;
+	GameInfo info;
 	int waveCt;
 
 public:

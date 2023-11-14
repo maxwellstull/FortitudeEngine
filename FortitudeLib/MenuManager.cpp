@@ -2,7 +2,7 @@
 #include <iostream>
 #include "include/Engine.h"
 #include <string>
-class Engine;
+//class Engine;
 
 void MenuManager::Draw(sf::RenderWindow *context)
 {
