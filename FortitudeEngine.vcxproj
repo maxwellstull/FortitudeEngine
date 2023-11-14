@@ -141,7 +141,7 @@
     <ClInclude Include="FortitudeLib\include\Engine.h" />
     <ClInclude Include="FortitudeLib\include\FPS.h" />
     <ClInclude Include="FortitudeLib\include\Game.h" />
-    <ClInclude Include="FortitudeLib\include\GameInfo.h" />
+    <ClInclude Include="FortitudeLib\include\GameStructures.h" />
     <ClInclude Include="FortitudeLib\include\Leaderboard.h" />
     <ClInclude Include="FortitudeLib\include\Map.h" />
     <ClInclude Include="FortitudeLib\include\MenuManager.h" />

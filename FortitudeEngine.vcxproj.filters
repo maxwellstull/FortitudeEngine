@@ -69,7 +69,7 @@
     <ClInclude Include="FortitudeLib\include\EnemyManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FortitudeLib\include\GameInfo.h">
+    <ClInclude Include="FortitudeLib\include\GameStructures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
