@@ -15,3 +15,8 @@ struct PathNode {
 	sf::Vector2f location;
 	PathNodeType nodeType;
 };
+
+enum TowerTargeting {
+	CLOSEST = 0,
+	FIRST = 1,
+};

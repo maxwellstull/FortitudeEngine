@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "EnemyManager.h"
 #include "GameStructures.h"
+#include "TowerManager.h"
 
 class Engine;
 
@@ -18,6 +19,7 @@ private:
 	Engine* engine = nullptr;
 	std::shared_ptr<Map> activeMap;
 	EnemyManager enm;
+	TowerManager twm;
 	GameInfo info;
 	int waveCt;
 	GameState state;
@@ -39,6 +41,8 @@ public:
 	void update(float dtAsSeconds);
 	std::shared_ptr<Map> getMap() { return activeMap; }
 	void setMap(std::shared_ptr<Map> map) { activeMap = map; }
+	TowerManager* getTowerManager() { return &twm; }
+	EnemyManager* getEnemyManager() { return &enm; }
 	void load();
 	void Draw(sf::RenderWindow* context);
 	void updateHealthHUD();

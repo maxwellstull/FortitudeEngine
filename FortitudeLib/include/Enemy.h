@@ -3,6 +3,7 @@
 #include <memory>
 #include "GameStructures.h"
 
+class Tower;
 class EnemyManager;
 
 class Enemy {
@@ -19,12 +20,23 @@ private:
 	bool active;
 	float speed;
 	sf::Vector2f deltaPerSec;
+	double heading;
+
+	double range;
+	double maxHealth;
+	double health;
+	double damage;
+	double fireRate;
+	double fireTimer;
 
 	sf::Texture* text;
 	sf::Sprite spr;
 
 	sf::Texture* gunText;
 	sf::Sprite gunSpr;
+
+	std::shared_ptr<Tower> target;
+	bool validTarget;
 
 public:
 	void setTexture(sf::Texture* texture);
@@ -40,4 +52,8 @@ public:
 	void initialize(std::shared_ptr<PathNode> start_node);
 	void activate() { active = true; }
 	void deactivate() { active = false; }
+	bool isActive() { return active; }
+	void findTarget();
+	sf::Vector2f getLocation() { return location; }
+	void takeDamage(int amnt) { health -= amnt; }
 };

@@ -19,4 +19,5 @@ public:
 	Game* getGame() { return game; }
 	void setGame(Game* g) { game = g; }
 	void Draw(sf::RenderWindow* context);
+	std::vector<std::shared_ptr<Enemy>> getEnemies() { return enemies; }
 };

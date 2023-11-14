@@ -5,6 +5,7 @@ void Game::update(float dtAsSeconds)
 	if(isActive)
 	{
 		enm.update(dtAsSeconds);
+		twm.update(dtAsSeconds);
 	}
 }
 
@@ -18,6 +19,8 @@ void Game::load()
 {
 	enm.setGame(this);
 	enm.initialize(info);
+	twm.setGame(this);
+	twm.initialize();
 
 	font.loadFromFile("img/cowboy.ttf");
 	moneyTex.loadFromFile("img/moneybag.png");
@@ -48,6 +51,7 @@ void Game::Draw(sf::RenderWindow* context)
 {
 	activeMap->Draw(context);
 	enm.Draw(context);
+	twm.Draw(context);
 
 	context->draw(moneySpr);
 	context->draw(healthHUD);

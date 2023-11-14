@@ -1,25 +1,85 @@
+#define _USE_MATH_DEFINES
 #include "include/Enemy.h"
 #include "include/EnemyManager.h"
 #include "include/Path.h"
 #include "include/Game.h"
+#include "include/Tower.h"
 #include <cmath>
 #include <iostream>
 
+double pythag(double x, double y)
+{
+	return sqrt(pow(x, 2) + pow(y, 2));
+}
+
+
 void Enemy::update(float dtAsSeconds)
 {
-	if(active)
+	if (active)
 	{
 		location = location + dtAsSeconds * deltaPerSec;
 		spr.setPosition(location);
 		gunSpr.setPosition(location);
-		gunSpr.setRotation(gunSpr.getRotation() + 1);
 		std::cout << "Location: " << spr.getPosition().x << ", " << spr.getPosition().y << std::endl;
 		if (!pathingBounds.contains(location)) //no longer in rectangle - meaning it met the waypoint
 		{
 			newDestination(enm->getGame()->getMap()->getPath()->getNextDestination(++destinationIdx));
 		}
+
+		if (validTarget == false)
+		{
+			findTarget();
+		}
+		else
+		{
+			double theta = atan2(target->getLocation().y - getLocation().y, target->getLocation().x - getLocation().x);
+			double distance = pythag(target->getLocation().y - getLocation().y, target->getLocation().x - getLocation().x);
+			if (distance < range)
+			{
+				gunSpr.setRotation(theta * 180 / M_PI);
+			}
+			else
+			{
+				gunSpr.setRotation(0);
+				validTarget = false;
+			}
+		}
+
+		if (health <= 0)
+		{
+			deactivate();
+		}
+		std::cout << "Health: " << health << std::endl;
 	}
 }
+
+
+void Enemy::findTarget()
+{
+	double min_distance = 100000;
+	double distance;
+	double theta;
+	double xd;
+	double yd;
+	for (auto tower : getEnemyManager()->getGame()->getTowerManager()->getTowers())
+	{
+		xd = tower->getLocation().x - getLocation().x;
+		yd = tower->getLocation().y - getLocation().y;
+		theta = atan2(yd, xd);
+		if ((theta < (heading + M_PI_2)) && (theta > (heading - M_PI_2)))
+		{
+			distance = pythag(xd, yd);
+			if (distance < range && distance < min_distance)
+			{
+				min_distance = distance;
+				target = tower;
+				validTarget = true;
+			}
+		}
+	}
+}
+
+
 
 void Enemy::Draw(sf::RenderWindow* context)
 {
@@ -46,6 +106,15 @@ void Enemy::initialize(std::shared_ptr<PathNode> start_node)
 	spr.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
 	destinationIdx = 0;
 	newDestination(getEnemyManager()->getGame()->getMap()->getPath()->getNextDestination(++destinationIdx));
+
+
+	maxHealth = 100;
+	health = 100;
+	damage = 10;
+	fireRate = 0.5;
+	validTarget = false;
+	range = 300;
+
 	activate();
 
 //		sf::FloatRect textRect = viewedText.getLocalBounds();
@@ -62,6 +131,7 @@ void Enemy::newDestination(std::shared_ptr<PathNode> newD)
 	}
 
 	float theta = atan2((newD->location.y - location.y), (newD->location.x - location.x));
+	heading = theta;
 	deltaPerSec.x = speed * cos(theta);
 	deltaPerSec.y = speed * sin(theta);
 
