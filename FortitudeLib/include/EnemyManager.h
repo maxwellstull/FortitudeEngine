@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include <vector>
 #include <memory>
-#include "GameInfo.h"
+#include "GameStructures.h"
 
 class Game;
 

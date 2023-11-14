@@ -1,16 +1,19 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include "GameStructures.h"
 
 class EnemyManager;
 
 class Enemy {
 private:
+	bool active;
 	EnemyManager* enm;
 	sf::Vector2f location;
 	sf::Vector2f deltaPerSec;
 	std::shared_ptr<sf::Vector2f> lastDestination;
 	std::shared_ptr<sf::Vector2f> destination;
+	std::shared_ptr<sf::FloatRect> endBounds;
 	sf::FloatRect pathingBounds;
 	int destinationIdx = 0;
 	float speed;
@@ -26,7 +29,8 @@ public:
 	void newDestination(std::shared_ptr<sf::Vector2f> newD);
 	void update(float dtAsSeconds);
 	int getDestinationIdx() { return destinationIdx; }
-	void setDestination(std::shared_ptr<sf::Vector2f> dest);
 	void Draw(sf::RenderWindow* context);
 	void initialize(sf::Vector2f loc);
+	void activate() { active = true; }
+	void deactivate() { active = false; }
 };

@@ -5,6 +5,7 @@ void EnemyManager::update(float dtAsSeconds)
 {
 	for (std::shared_ptr<Enemy> en : enemies)
 	{
+		//Update location
 		en->update(dtAsSeconds);
 	}
 }

@@ -3,7 +3,7 @@
 #include "Map.h"
 #include "Enemy.h"
 #include "EnemyManager.h"
-#include "GameInfo.h"
+#include "GameStructures.h"
 
 class Engine;
 

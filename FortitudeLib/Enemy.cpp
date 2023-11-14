@@ -7,12 +7,15 @@
 
 void Enemy::update(float dtAsSeconds)
 {
-	location = location + dtAsSeconds * deltaPerSec;
-	spr.setPosition(location);
-	std::cout << "Location: " << spr.getPosition().x << ", " << spr.getPosition().y<<std::endl;
-	if (!pathingBounds.contains(location)) //no longer in rectangle - meaning it met the waypoint
+	if(active)
 	{
-		newDestination(enm->getGame()->getMap()->getPath()->getNextDestination(++destinationIdx));
+		location = location + dtAsSeconds * deltaPerSec;
+		spr.setPosition(location);
+		std::cout << "Location: " << spr.getPosition().x << ", " << spr.getPosition().y << std::endl;
+		if (!pathingBounds.contains(location)) //no longer in rectangle - meaning it met the waypoint
+		{
+			newDestination(enm->getGame()->getMap()->getPath()->getNextDestination(++destinationIdx));
+		}
 	}
 }
 
