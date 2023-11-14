@@ -5,4 +5,5 @@
 void Engine::update(float dtAsSeconds)
 {
 	menu.update(dtAsSeconds);
+	game.update(dtAsSeconds);
 }

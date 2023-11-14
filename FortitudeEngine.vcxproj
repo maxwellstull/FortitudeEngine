@@ -135,11 +135,12 @@
   <ItemGroup>
     <ClInclude Include="FortitudeLib\include\Achievement.h" />
     <ClInclude Include="FortitudeLib\include\Achievements.h" />
-    <ClInclude Include="FortitudeLib\include\Bob.h" />
     <ClInclude Include="FortitudeLib\include\Enemy.h" />
+    <ClInclude Include="FortitudeLib\include\EnemyManager.h" />
     <ClInclude Include="FortitudeLib\include\Engine.h" />
     <ClInclude Include="FortitudeLib\include\FPS.h" />
     <ClInclude Include="FortitudeLib\include\Game.h" />
+    <ClInclude Include="FortitudeLib\include\GameStructures.h" />
     <ClInclude Include="FortitudeLib\include\Leaderboard.h" />
     <ClInclude Include="FortitudeLib\include\Map.h" />
     <ClInclude Include="FortitudeLib\include\MenuManager.h" />
@@ -154,9 +155,9 @@
   <ItemGroup>
     <ClCompile Include="FortitudeLib\Achievement.cpp" />
     <ClCompile Include="FortitudeLib\Achievements.cpp" />
-    <ClCompile Include="FortitudeLib\Bob.cpp" />
     <ClCompile Include="FortitudeLib\Draw.cpp" />
     <ClCompile Include="FortitudeLib\Enemy.cpp" />
+    <ClCompile Include="FortitudeLib\EnemyManager.cpp" />
     <ClCompile Include="FortitudeLib\Engine.cpp" />
     <ClCompile Include="FortitudeLib\FPS.cpp" />
     <ClCompile Include="FortitudeLib\Game.cpp" />

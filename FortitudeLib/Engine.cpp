@@ -67,3 +67,14 @@ void Engine::GameLoop()
         
     }
 }
+void Engine::setMap(int idx)
+{
+    map = maps[idx];
+    game.setMap(maps[idx]);
+    //fill out game settings
+    GameInfo gameDetails = {
+
+    };
+    act = Active::GAME;
+    game.load();
+}

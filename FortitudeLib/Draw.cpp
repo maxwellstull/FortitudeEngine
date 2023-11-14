@@ -9,17 +9,26 @@ void Engine::draw()
 
     
 //    window.GetWindow()->draw(sprite);
-    map->Draw(window.GetWindow());
+    switch(act)
+    {
+        case Active::MENU:
+        {
+            map->Draw(window.GetWindow());
+            menu.Draw(window.GetWindow());
+            break;
+        }
+        case Active::GAME:
+        {
+            game.Draw(window.GetWindow());
+        }
+    }
+
     fps.Draw(window.GetWindow());
 
-    menu.Draw(window.GetWindow());
-
-    
     
 
     
 
-//    window.GetWindow()->draw(shape);
 
     // Show everything we have just drawn
     window.display();
