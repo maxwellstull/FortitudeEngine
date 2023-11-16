@@ -10,7 +10,7 @@ class Enemy;
 class Tower : public Unit {
 private:
 	TowerManager* twm;
-	
+	bool _paused;
 public:
 	Tower(Attributes attr);
 	void update(double dtAsSeconds);
@@ -22,5 +22,6 @@ public:
 	void findTarget();
 
 	void initialize();
-
+	void pause() { _paused = true; }
+	void unpause() { _paused = false; }
 };

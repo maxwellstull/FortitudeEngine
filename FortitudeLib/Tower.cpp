@@ -22,7 +22,7 @@ void Tower::initialize()
 void Tower::update(double dtAsSeconds)
 {
 	Unit::update(dtAsSeconds);
-	if(isActive())
+	if(isActive() && _paused == false)
 	{
 //		if (getHealth() <= 0)
 //		{

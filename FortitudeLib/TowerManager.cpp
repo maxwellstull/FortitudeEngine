@@ -8,6 +8,10 @@ void TowerManager::update(float dtAsSeconds)
   {
     to->update(dtAsSeconds);
   }
+  if(isGrabbed)
+  {
+    grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
+  }
 }
 
 void TowerManager::initialize()
@@ -27,6 +31,7 @@ void TowerManager::initialize()
   to->setLocation(sf::Vector2f(400,400));
   to->initialize();
   towers.push_back(to);
+  isGrabbed = false;
 }
 
 void TowerManager::Draw(sf::RenderWindow* context)
@@ -35,4 +40,22 @@ void TowerManager::Draw(sf::RenderWindow* context)
   {
     to->draw(context);
   }
+  if (isGrabbed)
+  {
+    grabbed->draw(context);
+  }
+}
+
+void TowerManager::spawnLawman()
+{
+  Unit::Attributes attr = { 100, 100, 10, 0.5, 500 };
+  grabbed = std::make_shared<Tower>(attr);
+  grabbed->setBodyTexture(&textures[0], 0.25);
+  grabbed->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
+  grabbed->setTowerManager(this);
+  grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
+  grabbed->initialize();
+  grabbed->pause();
+//  towers.push_back(to);
+  isGrabbed = true;
 }

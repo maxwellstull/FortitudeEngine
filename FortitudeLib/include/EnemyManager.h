@@ -22,4 +22,5 @@ public:
 	void setGame(Game* g) { game = g; }
 	void Draw(sf::RenderWindow* context);
 	std::vector<std::shared_ptr<Enemy>> getEnemies() { return enemies; }
+	void spawnBadGuy();
 };

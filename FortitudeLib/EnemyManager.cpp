@@ -39,4 +39,16 @@ void EnemyManager::Draw(sf::RenderWindow* context)
 	}
 }
 
+void EnemyManager::spawnBadGuy() 
+{
+	Unit::Attributes attr = { 100, 100, 10, 0.2, 300 };
+	std::shared_ptr<Enemy> en = std::make_shared<Enemy>(attr);
+	en->setBodyTexture(&textures[0], 0.25);
+	en->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
+	en->setEnemyManager(this);
+	en->setSpeed(50);
+	en->initialize(getGame()->getMap()->getPath()->getNextDestination(0));
+	enemies.push_back(en);
+}
+
 

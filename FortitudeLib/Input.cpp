@@ -67,6 +67,11 @@ void Engine::input()
                         menu.Enter();
                         break;
                     }
+                    case(sf::Keyboard::Q): 
+                    {
+                      game.getEnemyManager()->spawnBadGuy();
+                      break;
+                    }
                 }
             }
         case sf::Event::MouseButtonPressed:
@@ -75,11 +80,24 @@ void Engine::input()
             {
                 case(sf::Mouse::Left):
                 {
-                    if (menu.isActive())
+                  switch(mouseMode)
+                  {
+                    case(MouseState::SELECT):
                     {
+                      if (menu.isActive())
+                      {
                         menu.Enter();
-                        break;
+                        
+                      }
+                      break;
                     }
+                    case(MouseState::DRAGNPLACE):
+                    {
+                      game.getTowerManager()->release();
+                      mouseMode = MouseState::SELECT;
+                      break;
+                    }
+                  }
                 }
             }
             break;

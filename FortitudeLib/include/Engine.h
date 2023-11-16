@@ -18,6 +18,11 @@ public:
         MENU = 0,
         GAME = 1,
     };
+    enum MouseState
+    {
+      SELECT=0,
+      DRAGNPLACE=1,
+    };
 private:
     //Active act;
     WindowManager window;
@@ -26,6 +31,7 @@ private:
     Game game;
     Leaderboard leader;
     Active act;
+    MouseState mouseMode;
 
     std::shared_ptr<Map> mainScreen;
     std::shared_ptr<Map> map;
@@ -57,4 +63,5 @@ public:
     void setMap(int idx);// { map = maps[idx]; }
     Game* getGame() { return &game; }
     Leaderboard* getLeaderboard() { return &leader; }
+    void setMouseToDrag() { mouseMode = MouseState::DRAGNPLACE; }
 };
