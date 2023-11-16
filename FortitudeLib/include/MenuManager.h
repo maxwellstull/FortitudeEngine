@@ -23,11 +23,13 @@ private:
     Engine * engine = nullptr;
     std::vector<std::shared_ptr<MenuComponent>> components;
     std::vector<std::shared_ptr<sf::Drawable>> shapes;
-    std::vector<sf::Font> fonts;
+    std::vector<const char *> fonts;
+    sf::Font fonty;
     std::vector<sf::Texture> textures;
     std::shared_ptr<MenuComponent> selected;
     bool active = true;
     inputMethod last_active;
+    std::shared_ptr<MenuComponent> defaultComp;
 
 public:
     

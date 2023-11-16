@@ -10,7 +10,7 @@ private:
 	sf::Color disableColor;
 public:
 	MenuOption(const char* label,
-		sf::Font* font, sf::Vector2f position, int size, sf::Color eC);
+		const char* fontName, sf::Vector2f position, int size, sf::Color eC);
 	void Draw(sf::RenderWindow* context);
 	void Update(float dtAsSeconds);
 	void setEnableColor(sf::Color c) { enableColor = c; }

@@ -13,7 +13,7 @@ public:
 	//	MenuMap(const char* label, sf::Font* font, sf::Vector2f position, int size, sf::IntRect rect);
 	//MenuMap(const char* label, sf::Font* font, sf::Vector2f position, int size, sf::IntRect rect, sf::Texture* texture, sf::Vector2f textOffset);
 	
-	MenuShopItem(const char* label, sf::Font* font, sf::IntRect boundaryRect, int textSize, sf::Texture* texture, sf::Vector2f textOffset);
+	MenuShopItem(const char* label, const char* fontName, sf::IntRect boundaryRect, int textSize, sf::Texture* texture, sf::Vector2f textOffset);
 	
 	void Draw(sf::RenderWindow* context);
 	void Update(float dtAsSeconds);

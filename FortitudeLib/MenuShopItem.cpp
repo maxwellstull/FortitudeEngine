@@ -1,7 +1,7 @@
 #include "include/MenuShopItem.h"
 
-MenuShopItem::MenuShopItem(const char* label, sf::Font* font, sf::IntRect boundaryRect, int textSize, sf::Texture* texture, sf::Vector2f textOffset)
- : MenuComponent(label, font, sf::Vector2f(boundaryRect.left + textOffset.x, boundaryRect.top + textOffset.y), textSize)
+MenuShopItem::MenuShopItem(const char* label, const char* fontName, sf::IntRect boundaryRect, int textSize, sf::Texture* texture, sf::Vector2f textOffset)
+ : MenuComponent(label, fontName, sf::Vector2f(boundaryRect.left + textOffset.x, boundaryRect.top + textOffset.y), textSize)
 {
 	text = texture;
 	spr.setTexture(*text);

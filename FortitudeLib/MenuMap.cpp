@@ -1,7 +1,7 @@
 #include "include/MenuMap.h"
 #include <iostream>
-MenuMap::MenuMap(const char* label, sf::Font* font, sf::Vector2f position, int size, sf::IntRect rect, sf::Texture * texture)
-	: MenuComponent(label, font, sf::Vector2f(position.x+510/2,position.y+370), size)
+MenuMap::MenuMap(const char* label, const char* fontName, sf::Vector2f position, int size, sf::IntRect rect, sf::Texture * texture)
+	: MenuComponent(label, fontName, sf::Vector2f(position.x+510/2,position.y+370), size)
 {
 	text = texture;
 	outline = sf::RectangleShape(sf::Vector2f(rect.width, rect.height));

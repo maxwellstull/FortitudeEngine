@@ -1,8 +1,8 @@
 #include "include/MenuOption.h"
 #include <iostream>
 
-MenuOption::MenuOption(const char* label, sf::Font* font, sf::Vector2f position, int size, sf::Color eC) :
-	MenuComponent(label, font, position, size)
+MenuOption::MenuOption(const char* label, const char* fontName, sf::Vector2f position, int size, sf::Color eC) :
+	MenuComponent(label, fontName, position, size)
 {
 	enableColor = eC;
 }

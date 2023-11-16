@@ -2,17 +2,19 @@
 #include <iostream>
 
 MenuComponent::MenuComponent(const char * label,
-	sf::Font *font, sf::Vector2f position, int size)
+	const char * fontName, sf::Vector2f position, int size)
 {
+	font = sf::Font();
+	font.loadFromFile(fontName);
 	viewedText = sf::Text();
 	viewedText.setString(label);
-	viewedText.setFont(*font);
+	viewedText.setFont(font);
 	viewedText.setCharacterSize(size);
 	viewedText.setPosition(position);
 	sf::FloatRect textRect = viewedText.getLocalBounds();
 	viewedText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
 	
-
+	funky = []() {};
 }
 
 void MenuComponent::Update(float dtAsSeconds)

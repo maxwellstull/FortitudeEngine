@@ -70,14 +70,15 @@ void MenuManager::init()
 {
 
 	sf::Font font;
-	font.loadFromFile("img/cowboy.ttf");
-	fonts.push_back(font);
-	font.loadFromFile("img/cowboy.ttf");
-	fonts.push_back(font);
+//	font.loadFromFile("img/cowboy.ttf");
+	fonts.push_back("img/cowboy.ttf");
 
 	sf::Texture texture;
 	texture.loadFromFile("img/wood.jpg");
 	textures.push_back(texture);
+
+	defaultComp = std::make_shared<MenuComponent>("", fonts[0], sf::Vector2f(0, 0), 0);
+
 	MainMenu();
 }
 
@@ -87,18 +88,18 @@ void MenuManager::MainMenu()
 	shapes.clear();
 	components.clear();
 
-	std::shared_ptr<MenuComponent> title = std::make_shared<MenuComponent>("It's High Noon", &fonts[0], sf::Vector2f(960, 200), 100);
+	std::shared_ptr<MenuComponent> title = std::make_shared<MenuComponent>("It's High Noon", fonts[0], sf::Vector2f(960, 200), 100);
 	title->setControlBind(3, 1, 0, 0);
 	title->onSelect(sf::Color::Blue, 200, 0.25);
 	title->onEnter([this]() {this->MapSelect(0); });
-	std::shared_ptr<MenuComponent> achievements = std::make_shared<MenuComponent>("Achievements", &fonts[0], sf::Vector2f(960, 370), 64);
+	std::shared_ptr<MenuComponent> achievements = std::make_shared<MenuComponent>("Achievements", fonts[0], sf::Vector2f(960, 370), 64);
 	achievements->setControlBind(0, 2, 1, 1);
 	achievements->onSelect(sf::Color::Blue, 96, 0.25);
-	std::shared_ptr<MenuComponent> options = std::make_shared<MenuComponent>("Options", &fonts[0], sf::Vector2f(960, 440), 64);
+	std::shared_ptr<MenuComponent> options = std::make_shared<MenuComponent>("Options", fonts[0], sf::Vector2f(960, 440), 64);
 	options->setControlBind(1, 3, 2, 2);
 	options->onSelect(sf::Color::Blue, 96, 0.25);
 	options->onEnter([this]() {this->Options(); });
-	std::shared_ptr<MenuComponent> quit = std::make_shared<MenuComponent>("Quit", &fonts[0], sf::Vector2f(960, 510), 64);
+	std::shared_ptr<MenuComponent> quit = std::make_shared<MenuComponent>("Quit", fonts[0], sf::Vector2f(960, 510), 64);
 	quit->setControlBind(2, 0, 3, 3);
 	quit->onSelect(sf::Color::Blue, 96, 0.25);
 	quit->onEnter([this]() {this->GetEngine()->close(); });
@@ -117,22 +118,22 @@ void MenuManager::Options()
 	shapes.clear();
 	components.clear();
 
-	std::shared_ptr<MenuComponent> title = std::make_shared<MenuComponent>("Options", &fonts[0], sf::Vector2f(200, 200), 64);
+	std::shared_ptr<MenuComponent> title = std::make_shared<MenuComponent>("Options", fonts[0], sf::Vector2f(200, 200), 64);
 	title->setControlBind(0, 0, 0, 0);
 	title->onSelect(sf::Color::Blue, 96, 0.25);
-	std::shared_ptr<MenuComponent> back = std::make_shared<MenuComponent>("Back", &fonts[0], sf::Vector2f(200, 300), 64);
+	std::shared_ptr<MenuComponent> back = std::make_shared<MenuComponent>("Back", fonts[0], sf::Vector2f(200, 300), 64);
 	back->setControlBind(15, 2, 1, 1);
 	back->onSelect(sf::Color::Blue, 96, 0.25);
 	back->onEnter([this]() {this->MainMenu(); });
-	std::shared_ptr<MenuComponent> fullscreen = std::make_shared<MenuComponent>("Fullscreen", &fonts[0], sf::Vector2f(200, 400), 64);
+	std::shared_ptr<MenuComponent> fullscreen = std::make_shared<MenuComponent>("Fullscreen", fonts[0], sf::Vector2f(200, 400), 64);
 	fullscreen->setControlBind(1, 3, 2, 4);
 	fullscreen->onSelect(sf::Color::Blue, 96, 0.25);
 	fullscreen->onEnter([this]() {});
-	std::shared_ptr<MenuOption> fsOn = std::make_shared<MenuOption>("On", &fonts[0], sf::Vector2f(400, 400), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> fsOn = std::make_shared<MenuOption>("On", fonts[0], sf::Vector2f(400, 400), 64, sf::Color::Red);
 	fsOn->setControlBind(1, 3, 2, 5);
 	fsOn->onSelect(sf::Color::Blue, 96, 0.25);
 	fsOn->init(GetEngine()->GetWindowManager()->isFullscreen());
-	std::shared_ptr<MenuOption> fsOff = std::make_shared<MenuOption>("Off", &fonts[0], sf::Vector2f(500, 400), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> fsOff = std::make_shared<MenuOption>("Off", fonts[0], sf::Vector2f(500, 400), 64, sf::Color::Red);
 	fsOff->setControlBind(1, 3, 4, 5);
 	fsOff->onSelect(sf::Color::Blue, 96, 0.25);
 	fsOff->init(!GetEngine()->GetWindowManager()->isFullscreen());
@@ -140,15 +141,15 @@ void MenuManager::Options()
 	fsOff->onEnter([this, fsOff, fsOn]() {this->GetEngine()->GetWindowManager()->disableFullscreen(); fsOff->enable(); fsOn->disable(); });
 	fsOn->onEnter([this, fsOff, fsOn]() {this->GetEngine()->GetWindowManager()->enableFullscreen(); fsOn->enable(); fsOff->disable(); });
 	
-	std::shared_ptr<MenuComponent> vsync = std::make_shared<MenuComponent>("Vsync", &fonts[0], sf::Vector2f(200, 500), 64);
+	std::shared_ptr<MenuComponent> vsync = std::make_shared<MenuComponent>("Vsync", fonts[0], sf::Vector2f(200, 500), 64);
 	vsync->setControlBind(2, 8, 3,6);
 	vsync->onSelect(sf::Color::Blue, 96, 0.25);
 	vsync->onEnter([this]() {});
-	std::shared_ptr<MenuOption> vsOn = std::make_shared<MenuOption>("On", &fonts[0], sf::Vector2f(400, 500), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> vsOn = std::make_shared<MenuOption>("On", fonts[0], sf::Vector2f(400, 500), 64, sf::Color::Red);
 	vsOn->setControlBind(2, 8, 3, 7);
 	vsOn->onSelect(sf::Color::Blue, 96, 0.25);
 	vsOn->init(GetEngine()->GetWindowManager()->isVsync());
-	std::shared_ptr<MenuOption> vsOff = std::make_shared<MenuOption>("Off", &fonts[0], sf::Vector2f(500, 500), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> vsOff = std::make_shared<MenuOption>("Off", fonts[0], sf::Vector2f(500, 500), 64, sf::Color::Red);
 	vsOff->setControlBind(2, 8, 6, 7);
 	vsOff->onSelect(sf::Color::Blue, 96, 0.25);
 	vsOff->init(!GetEngine()->GetWindowManager()->isVsync());
@@ -156,31 +157,31 @@ void MenuManager::Options()
 	vsOff->onEnter([this, vsOff, vsOn]() {this->GetEngine()->GetWindowManager()->disableVsync(); vsOff->enable(); vsOn->disable(); });
 	vsOn->onEnter([this, vsOff, vsOn]() {this->GetEngine()->GetWindowManager()->enableVsync(); vsOff->disable(); vsOn->enable(); });
 
-	std::shared_ptr<MenuComponent> maxFramerate = std::make_shared<MenuComponent>("Max Framerate", &fonts[0], sf::Vector2f(200, 600), 64);
+	std::shared_ptr<MenuComponent> maxFramerate = std::make_shared<MenuComponent>("Max Framerate", fonts[0], sf::Vector2f(200, 600), 64);
 	maxFramerate->setControlBind(3, 15, 8, 9);
 	maxFramerate->onSelect(sf::Color::Blue, 96, 0.25);
 	maxFramerate->onEnter([this]() {});
-	std::shared_ptr<MenuOption> max3 = std::make_shared<MenuOption>("3fps", &fonts[0], sf::Vector2f(500, 600), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> max3 = std::make_shared<MenuOption>("3fps", fonts[0], sf::Vector2f(500, 600), 64, sf::Color::Red);
 	max3->setControlBind(3, 15, 8, 10);
 	max3->onSelect(sf::Color::Blue, 96, 0.25);
 	max3->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 3);
-	std::shared_ptr<MenuOption> max30 = std::make_shared<MenuOption>("30fps", &fonts[0], sf::Vector2f(650, 600), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> max30 = std::make_shared<MenuOption>("30fps", fonts[0], sf::Vector2f(650, 600), 64, sf::Color::Red);
 	max30->setControlBind(3, 15, 9, 11);
 	max30->onSelect(sf::Color::Blue, 96, 0.25);
 	max30->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 30);
-	std::shared_ptr<MenuOption> max60 = std::make_shared<MenuOption>("60fps", &fonts[0], sf::Vector2f(800, 600), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> max60 = std::make_shared<MenuOption>("60fps", fonts[0], sf::Vector2f(800, 600), 64, sf::Color::Red);
 	max60->setControlBind(3, 15, 10,12);
 	max60->onSelect(sf::Color::Blue, 96, 0.25);
 	max60->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 60);
-	std::shared_ptr<MenuOption> max120 = std::make_shared<MenuOption>("120fps", &fonts[0], sf::Vector2f(950, 600), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> max120 = std::make_shared<MenuOption>("120fps", fonts[0], sf::Vector2f(950, 600), 64, sf::Color::Red);
 	max120->setControlBind(3, 15, 11,13);
 	max120->onSelect(sf::Color::Blue, 96, 0.25);
 	max120->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 120);
-	std::shared_ptr<MenuOption> max240 = std::make_shared<MenuOption>("240fps", &fonts[0], sf::Vector2f(1100, 600), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> max240 = std::make_shared<MenuOption>("240fps", fonts[0], sf::Vector2f(1100, 600), 64, sf::Color::Red);
 	max240->setControlBind(3, 15, 12,14);
 	max240->onSelect(sf::Color::Blue, 96, 0.25);
 	max240->init(GetEngine()->GetWindowManager()->getMaxFramerate() ==240);
-	std::shared_ptr<MenuOption> uncap = std::make_shared<MenuOption>("UNLIMITED POWER!!1!", &fonts[0], sf::Vector2f(1500, 600), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> uncap = std::make_shared<MenuOption>("UNLIMITED POWER!!1!", fonts[0], sf::Vector2f(1500, 600), 64, sf::Color::Red);
 	uncap->setControlBind(3, 15, 13,14);
 	uncap->onSelect(sf::Color::Blue, 96, 0.25);
 	uncap->init(GetEngine()->GetWindowManager()->getMaxFramerate() == 0);
@@ -204,15 +205,15 @@ void MenuManager::Options()
 		this->GetEngine()->GetWindowManager()->setMaxFramerate(0);
 		max3->disable(); max30->disable(); max60->disable(); max120->disable(); max240->disable(); uncap->enable(); });
 
-	std::shared_ptr<MenuComponent> showFps = std::make_shared<MenuComponent>("FPS Display", &fonts[0], sf::Vector2f(200, 700), 64);
+	std::shared_ptr<MenuComponent> showFps = std::make_shared<MenuComponent>("FPS Display", fonts[0], sf::Vector2f(200, 700), 64);
 	showFps->setControlBind(8, 1, 15, 16);
 	showFps->onSelect(sf::Color::Blue, 96, 0.25);
 	showFps->onEnter([this]() {});
-	std::shared_ptr<MenuOption> fpsOn = std::make_shared<MenuOption>("On", &fonts[0], sf::Vector2f(500, 700), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> fpsOn = std::make_shared<MenuOption>("On", fonts[0], sf::Vector2f(500, 700), 64, sf::Color::Red);
 	fpsOn->setControlBind(8, 1, 15, 17);
 	fpsOn->onSelect(sf::Color::Blue, 96, 0.25);
 	fpsOn->init(GetEngine()->getFps()->isActive());
-	std::shared_ptr<MenuOption> fpsOff = std::make_shared<MenuOption>("Off", &fonts[0], sf::Vector2f(700, 700), 64, sf::Color::Red);
+	std::shared_ptr<MenuOption> fpsOff = std::make_shared<MenuOption>("Off", fonts[0], sf::Vector2f(700, 700), 64, sf::Color::Red);
 	fpsOff->setControlBind(8, 1, 16, 17);
 	fpsOff->onSelect(sf::Color::Blue, 96, 0.25);
 	fpsOff->init(!GetEngine()->getFps()->isActive());
@@ -259,22 +260,22 @@ void MenuManager::MapSelect(int page)
 	shapes.clear();
 	components.clear();
 
-	std::shared_ptr<MenuComponent> mainMenu = std::make_shared<MenuComponent>("Main\nMenu", &fonts[0], sf::Vector2f(182, 170), 64);
+	std::shared_ptr<MenuComponent> mainMenu = std::make_shared<MenuComponent>("Main\nMenu", fonts[0], sf::Vector2f(182, 170), 64);
 	mainMenu->setControlBind(0, 1, 6, 13);
 	mainMenu->onSelect(sf::Color::Blue, 96, 0.25);
 	mainMenu->onEnter([this]() { this->MainMenu(); });
-	std::shared_ptr<MenuComponent> waves = std::make_shared<MenuComponent>("Waves", &fonts[0], sf::Vector2f(182, 300), 64);
+	std::shared_ptr<MenuComponent> waves = std::make_shared<MenuComponent>("Waves", fonts[0], sf::Vector2f(182, 300), 64);
 	waves->setControlBind(0, 2, 6, 13);
 	waves->onSelect(sf::Color::Blue, 96, 0.25);
-	std::shared_ptr<MenuOption> w25 = std::make_shared<MenuOption>("25", &fonts[0], sf::Vector2f(100, 350), 32, sf::Color::Red);
+	std::shared_ptr<MenuOption> w25 = std::make_shared<MenuOption>("25", fonts[0], sf::Vector2f(100, 350), 32, sf::Color::Red);
 	w25->setControlBind(1, 5, 2, 3);
 	w25->onSelect(sf::Color::Blue, 48, 0.25);
 	w25->init(GetEngine()->getGame()->getWaveCt() == 25);
-	std::shared_ptr<MenuOption> w50 = std::make_shared<MenuOption>("50", &fonts[0], sf::Vector2f(150, 350), 32, sf::Color::Red);
+	std::shared_ptr<MenuOption> w50 = std::make_shared<MenuOption>("50", fonts[0], sf::Vector2f(150, 350), 32, sf::Color::Red);
 	w50->setControlBind(1, 5, 2, 4);
 	w50->onSelect(sf::Color::Blue, 48, 0.25);
 	w50->init(GetEngine()->getGame()->getWaveCt() == 50);
-	std::shared_ptr<MenuOption> w100 = std::make_shared<MenuOption>("100", &fonts[0], sf::Vector2f(200, 350), 32, sf::Color::Red);
+	std::shared_ptr<MenuOption> w100 = std::make_shared<MenuOption>("100", fonts[0], sf::Vector2f(200, 350), 32, sf::Color::Red);
 	w100->setControlBind(1, 5, 3, 4);
 	w100->onSelect(sf::Color::Blue, 48, 0.25);
 	w100->init(GetEngine()->getGame()->getWaveCt() == 100);
@@ -306,22 +307,22 @@ void MenuManager::MapSelect(int page)
 	w50->onEnter([this, w25, w50, w100]() {GetEngine()->getGame()->setWaveCt(50); w25->disable(); w50->enable(); w100->disable(); });
 	w100->onEnter([this, w25, w50, w100]() {GetEngine()->getGame()->setWaveCt(100); w25->disable(); w50->disable(); w100->enable(); });
 
-	std::shared_ptr<MenuComponent> leaderboard = std::make_shared<MenuComponent>("Leaderboard", &fonts[0], sf::Vector2f(182, 400), 64);
+	std::shared_ptr<MenuComponent> leaderboard = std::make_shared<MenuComponent>("Leaderboard", fonts[0], sf::Vector2f(182, 400), 64);
 	leaderboard->setControlBind(1, 6, 5, 13);
 	leaderboard->onSelect(sf::Color::Blue, 96, 0.25);
-	std::shared_ptr<MenuOption> global = std::make_shared<MenuOption>("Global", &fonts[0], sf::Vector2f(100, 450), 32, sf::Color::Red);
+	std::shared_ptr<MenuOption> global = std::make_shared<MenuOption>("Global", fonts[0], sf::Vector2f(100, 450), 32, sf::Color::Red);
 	global->setControlBind(5, 8, 6, 7);
 	global->onSelect(sf::Color::Blue, 48, 0.25);
 	global->init(GetEngine()->getLeaderboard()->getPeopleFilter() == Leaderboard::Filter::GLOBAL);
-	std::shared_ptr<MenuOption> friends = std::make_shared<MenuOption>("Friends", &fonts[0], sf::Vector2f(200, 450), 32, sf::Color::Red);
+	std::shared_ptr<MenuOption> friends = std::make_shared<MenuOption>("Friends", fonts[0], sf::Vector2f(200, 450), 32, sf::Color::Red);
 	friends->setControlBind(5, 9, 6, 7);
 	friends->onSelect(sf::Color::Blue, 48, 0.25);
 	friends->init(GetEngine()->getLeaderboard()->getPeopleFilter() == Leaderboard::Filter::FRIENDS);
-	std::shared_ptr<MenuOption> time = std::make_shared<MenuOption>("Time", &fonts[0], sf::Vector2f(100, 500), 32, sf::Color::Red);
+	std::shared_ptr<MenuOption> time = std::make_shared<MenuOption>("Time", fonts[0], sf::Vector2f(100, 500), 32, sf::Color::Red);
 	time->setControlBind(6, 0, 8, 9);
 	time->onSelect(sf::Color::Blue, 48, 0.25);
 	time->init(GetEngine()->getLeaderboard()->getStatFilter() == Leaderboard::Filter::TIME);
-	std::shared_ptr<MenuOption> maxwave = std::make_shared<MenuOption>("Max Wave", &fonts[0], sf::Vector2f(200, 500), 32, sf::Color::Red);
+	std::shared_ptr<MenuOption> maxwave = std::make_shared<MenuOption>("Max Wave", fonts[0], sf::Vector2f(200, 500), 32, sf::Color::Red);
 	maxwave->setControlBind(7, 0, 8, 9);
 	maxwave->onSelect(sf::Color::Blue, 48, 0.25);
 	maxwave->init(GetEngine()->getLeaderboard()->getStatFilter() == Leaderboard::Filter::WAVES);
@@ -345,14 +346,14 @@ void MenuManager::MapSelect(int page)
 
 	//Page navigation
 	int maxPage = std::ceil(((float)GetEngine()->getMaps().size() / (float)maps_per_page));
-	std::shared_ptr<MenuComponent> lastPage = std::make_shared<MenuComponent>("Last Page", &fonts[0], sf::Vector2f(1722, 170), 64);
+	std::shared_ptr<MenuComponent> lastPage = std::make_shared<MenuComponent>("Last Page", fonts[0], sf::Vector2f(1722, 170), 64);
 	lastPage->onSelect(sf::Color::Blue, 96, 0.25);
 	lastPage->onEnter([this, page]() {if(page > 0){this->MapSelect(page - 1); }});
-	std::shared_ptr<MenuComponent> nextPage = std::make_shared<MenuComponent>("Next Page", &fonts[0], sf::Vector2f(1722, 270), 64);
+	std::shared_ptr<MenuComponent> nextPage = std::make_shared<MenuComponent>("Next Page", fonts[0], sf::Vector2f(1722, 270), 64);
 	nextPage->onSelect(sf::Color::Blue, 96, 0.25);
 	nextPage->onEnter([this, page, maxPage]() {if(page < maxPage){this->MapSelect(page + 1); }});
 	std::string pgStr = std::to_string(page + 1) + "/" + std::to_string(maxPage);
-	std::shared_ptr<MenuComponent> pageCt = std::make_shared<MenuComponent>(pgStr.c_str(), &fonts[0], sf::Vector2f(1722, 370), 64);
+	std::shared_ptr<MenuComponent> pageCt = std::make_shared<MenuComponent>(pgStr.c_str(), fonts[0], sf::Vector2f(1722, 370), 64);
 	pageCt->onSelect(sf::Color::Blue, 96, 0.25);
 
 
@@ -391,7 +392,7 @@ void MenuManager::MapSelect(int page)
 	{
 		if (i < mapsAmnt)
 		{
-			std::shared_ptr<MenuMap> t1 = std::make_shared<MenuMap>(GetEngine()->getMap(i)->getName().c_str(), &fonts[0], sf::Vector2f(locations[i % 4].left, locations[i % 4].top), 64, locations[i % 4], GetEngine()->getMap(i)->getTexture());
+			std::shared_ptr<MenuMap> t1 = std::make_shared<MenuMap>(GetEngine()->getMap(i)->getName().c_str(), fonts[0], sf::Vector2f(locations[i % 4].left, locations[i % 4].top), 64, locations[i % 4], GetEngine()->getMap(i)->getTexture());
 			t1->onSelect(sf::Color::Blue, 96, 0.25);
 			t1->setControlBind(binds[i % 4][0]-1, binds[i % 4][1]-1, binds[i % 4][2]-1, binds[i % 4][3]-1);
 			t1->onEnter([this, i]() {GetEngine()->setMap(i); components.clear(); this->deactivate(); TowerShop(); });
@@ -425,56 +426,56 @@ void MenuManager::TowerShop()
 	components.clear();
 
 
-	std::shared_ptr<MenuShopItem> t1 = std::make_shared<MenuShopItem>("Lawman", &fonts[0], sf::IntRect(1645, 220, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50,90));
+	std::shared_ptr<MenuShopItem> t1 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1645, 220, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50,90));
 	t1->onSelect(sf::Color::Blue, 48, 0.25);
 	t1->setControlBind(7, 3, 2, 2);
-	t1->onEnter([this]() {});
+	t1->onEnter([this]() {this->GetEngine()->setMouseToDrag(); this->GetEngine()->getGame()->getTowerManager()->spawnLawman(); });
 	t1->setFillColor(sf::Color(107, 107, 107));
 	t1->setSpriteScale(0.5, 0.5);
 	t1->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t2 = std::make_shared<MenuShopItem>("Marshall", &fonts[0], sf::IntRect(1795, 220, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(2), sf::Vector2f(50,90));
+	std::shared_ptr<MenuShopItem> t2 = std::make_shared<MenuShopItem>("Marshall", fonts[0], sf::IntRect(1795, 220, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(2), sf::Vector2f(50,90));
 	t2->onSelect(sf::Color::Blue, 48, 0.25);
 	t2->setControlBind(8, 4, 1, 1);
 	t2->onEnter([this]() {});
 	t2->setFillColor(sf::Color(107, 107, 107));
 	t2->setSpriteScale(0.12, 0.12);
 	t2->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t3 = std::make_shared<MenuShopItem>("Lawman", &fonts[0], sf::IntRect(1645, 370, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t3 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1645, 370, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
 	t3->onSelect(sf::Color::Blue, 48, 0.25);
 	t3->setControlBind(1, 5, 4, 4);
 	t3->onEnter([this]() {});
 	t3->setFillColor(sf::Color(107, 107, 107));
 	t3->setSpriteScale(0.5, 0.5);
 	t3->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t4 = std::make_shared<MenuShopItem>("Lawman", &fonts[0], sf::IntRect(1795, 370, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t4 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1795, 370, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
 	t4->onSelect(sf::Color::Blue, 48, 0.25);
 	t4->setControlBind(2, 6, 5, 5);
 	t4->onEnter([this]() {});
 	t4->setFillColor(sf::Color(107, 107, 107));
 	t4->setSpriteScale(0.5, 0.5);
 	t4->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t5 = std::make_shared<MenuShopItem>("Lawman", &fonts[1], sf::IntRect(1645, 520, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t5 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1645, 520, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
 	t5->onSelect(sf::Color::Blue, 48, 0.25);
 	t5->setControlBind(3, 7, 6, 6);
 	t5->onEnter([this]() {});
 	t5->setFillColor(sf::Color(107, 107, 107));
 	t5->setSpriteScale(0.5, 0.5);
 	t5->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t6 = std::make_shared<MenuShopItem>("Lawman", &fonts[1], sf::IntRect(1795, 520, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t6 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1795, 520, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
 	t6->onSelect(sf::Color::Blue, 48, 0.25);
 	t6->setControlBind(4, 8, 5, 5);
 	t6->onEnter([this]() {});
 	t6->setFillColor(sf::Color(107, 107, 107));
 	t6->setSpriteScale(0.5, 0.5);
 	t6->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t7 = std::make_shared<MenuShopItem>("Lawman", &fonts[1], sf::IntRect(1645, 670, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t7 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1645, 670, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
 	t7->onSelect(sf::Color::Blue, 48, 0.25);
 	t7->setControlBind(5, 1, 8, 8);
 	t7->onEnter([this]() {});
 	t7->setFillColor(sf::Color(107, 107, 107));
 	t7->setSpriteScale(0.5, 0.5);
 	t7->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t8 = std::make_shared<MenuShopItem>("Lawman", &fonts[1], sf::IntRect(1795, 670, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t8 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1795, 670, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
 	t8->onSelect(sf::Color::Blue, 48, 0.25);
 	t8->setControlBind(6, 2, 7, 7);
 	t8->onEnter([this]() {});
@@ -496,7 +497,9 @@ void MenuManager::TowerShop()
 
 	std::shared_ptr<sf::Text> shop = std::make_shared<sf::Text>();
 	shop->setString("Shop");
-	shop->setFont(fonts[0]);
+	fonty = sf::Font();
+	fonty.loadFromFile(fonts[0]);
+	shop->setFont(fonty);
 	shop->setCharacterSize(160);
 	sf::FloatRect bds = shop->getLocalBounds();
 	shop->setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
@@ -531,6 +534,7 @@ void MenuManager::hitvisit(sf::Vector2f cursorPos)
 		if (selected->hittest(cursorPos) == false && last_active==inputMethod::MOUSE)
 		{
 			selected->deselect();
+			selected = defaultComp;
 		}
 	}
 }

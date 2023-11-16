@@ -19,6 +19,7 @@ public:
         bool increase;
     };
 private:
+    sf::Font font;
     sf::Text viewedText;
     int down;
     int up;
@@ -31,7 +32,7 @@ private:
 
 public:
     MenuComponent(const char* label,
-        sf::Font * font, sf::Vector2f position, int size);
+      const char* fontName, sf::Vector2f position, int size);
     virtual void Draw(sf::RenderWindow* context);
     void setControlBind(int upB, int downB, int leftB, int rightB) 
     {
