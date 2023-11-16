@@ -6,6 +6,8 @@
 #include <vector>
 #include "GameStructures.h"
 #include "Animation.h"
+#include "Timer.h"
+
 
 class Unit {
 public:
@@ -21,6 +23,10 @@ public:
 private:
   // Current location of unit
   sf::Vector2f _location;
+  // Heading/rotation of unit
+  double _rotation;
+  // Rotation of gun
+  double _gunRotation;
   // Attributes
   Attributes _attributes;
   // If unit is active ("alive")
@@ -39,6 +45,7 @@ private:
   //Generic target
   std::shared_ptr<Unit> target;
   bool validTarget;
+  Timer fireTimer;
 
 public:
   void update(double dt);

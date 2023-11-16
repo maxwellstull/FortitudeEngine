@@ -4,6 +4,7 @@ void Unit::update(double dt)
 {
   _gunFireAnimation.update(dt);
   _gunRecoilAnimation.update(dt);
+  fireTimer.update(dt);
 }
 
 void Unit::draw(sf::RenderWindow* context)
