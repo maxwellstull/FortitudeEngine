@@ -54,4 +54,5 @@ public:
 	void updateWaveHUD();
 	void incrementWave(int amnt = 1 ) { }
 	void decrementCurrentHealth(int amnt = 1) { state.currentHealth -= amnt; updateHealthHUD(); }
+	sf::Texture* getTowerTexture(int idx) { return twm.getTowerTexture(idx); }
 };

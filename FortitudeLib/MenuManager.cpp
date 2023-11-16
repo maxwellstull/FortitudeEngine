@@ -72,6 +72,8 @@ void MenuManager::init()
 	sf::Font font;
 	font.loadFromFile("img/cowboy.ttf");
 	fonts.push_back(font);
+	font.loadFromFile("img/cowboy.ttf");
+	fonts.push_back(font);
 
 	sf::Texture texture;
 	texture.loadFromFile("img/wood.jpg");
@@ -392,7 +394,7 @@ void MenuManager::MapSelect(int page)
 			std::shared_ptr<MenuMap> t1 = std::make_shared<MenuMap>(GetEngine()->getMap(i)->getName().c_str(), &fonts[0], sf::Vector2f(locations[i % 4].left, locations[i % 4].top), 64, locations[i % 4], GetEngine()->getMap(i)->getTexture());
 			t1->onSelect(sf::Color::Blue, 96, 0.25);
 			t1->setControlBind(binds[i % 4][0]-1, binds[i % 4][1]-1, binds[i % 4][2]-1, binds[i % 4][3]-1);
-			t1->onEnter([this, i]() {GetEngine()->setMap(i); components.clear(); this->deactivate(); });
+			t1->onEnter([this, i]() {GetEngine()->setMap(i); components.clear(); this->deactivate(); TowerShop(); });
 			components.push_back(t1);
 		}
 	}
@@ -400,7 +402,6 @@ void MenuManager::MapSelect(int page)
 	selected->select();
 	
 
-	
 
 	std::shared_ptr<sf::RectangleShape> boardLeft = 
 		std::make_shared<sf::RectangleShape>(sf::Vector2f(275, 880));
@@ -416,6 +417,102 @@ void MenuManager::MapSelect(int page)
 	shapes.push_back(boardLeft);
 	shapes.push_back(boardRight);
 }
+
+
+void MenuManager::TowerShop()
+{
+	shapes.clear();
+	components.clear();
+
+
+	std::shared_ptr<MenuShopItem> t1 = std::make_shared<MenuShopItem>("Lawman", &fonts[0], sf::IntRect(1645, 220, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50,90));
+	t1->onSelect(sf::Color::Blue, 48, 0.25);
+	t1->setControlBind(7, 3, 2, 2);
+	t1->onEnter([this]() {});
+	t1->setFillColor(sf::Color(107, 107, 107));
+	t1->setSpriteScale(0.5, 0.5);
+	t1->setSpriteRotation(-30);
+	std::shared_ptr<MenuShopItem> t2 = std::make_shared<MenuShopItem>("Marshall", &fonts[0], sf::IntRect(1795, 220, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(2), sf::Vector2f(50,90));
+	t2->onSelect(sf::Color::Blue, 48, 0.25);
+	t2->setControlBind(8, 4, 1, 1);
+	t2->onEnter([this]() {});
+	t2->setFillColor(sf::Color(107, 107, 107));
+	t2->setSpriteScale(0.12, 0.12);
+	t2->setSpriteRotation(-30);
+	std::shared_ptr<MenuShopItem> t3 = std::make_shared<MenuShopItem>("Lawman", &fonts[0], sf::IntRect(1645, 370, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	t3->onSelect(sf::Color::Blue, 48, 0.25);
+	t3->setControlBind(1, 5, 4, 4);
+	t3->onEnter([this]() {});
+	t3->setFillColor(sf::Color(107, 107, 107));
+	t3->setSpriteScale(0.5, 0.5);
+	t3->setSpriteRotation(-30);
+	std::shared_ptr<MenuShopItem> t4 = std::make_shared<MenuShopItem>("Lawman", &fonts[0], sf::IntRect(1795, 370, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	t4->onSelect(sf::Color::Blue, 48, 0.25);
+	t4->setControlBind(2, 6, 5, 5);
+	t4->onEnter([this]() {});
+	t4->setFillColor(sf::Color(107, 107, 107));
+	t4->setSpriteScale(0.5, 0.5);
+	t4->setSpriteRotation(-30);
+	std::shared_ptr<MenuShopItem> t5 = std::make_shared<MenuShopItem>("Lawman", &fonts[1], sf::IntRect(1645, 520, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	t5->onSelect(sf::Color::Blue, 48, 0.25);
+	t5->setControlBind(3, 7, 6, 6);
+	t5->onEnter([this]() {});
+	t5->setFillColor(sf::Color(107, 107, 107));
+	t5->setSpriteScale(0.5, 0.5);
+	t5->setSpriteRotation(-30);
+	std::shared_ptr<MenuShopItem> t6 = std::make_shared<MenuShopItem>("Lawman", &fonts[1], sf::IntRect(1795, 520, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	t6->onSelect(sf::Color::Blue, 48, 0.25);
+	t6->setControlBind(4, 8, 5, 5);
+	t6->onEnter([this]() {});
+	t6->setFillColor(sf::Color(107, 107, 107));
+	t6->setSpriteScale(0.5, 0.5);
+	t6->setSpriteRotation(-30);
+	std::shared_ptr<MenuShopItem> t7 = std::make_shared<MenuShopItem>("Lawman", &fonts[1], sf::IntRect(1645, 670, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	t7->onSelect(sf::Color::Blue, 48, 0.25);
+	t7->setControlBind(5, 1, 8, 8);
+	t7->onEnter([this]() {});
+	t7->setFillColor(sf::Color(107, 107, 107));
+	t7->setSpriteScale(0.5, 0.5);
+	t7->setSpriteRotation(-30);
+	std::shared_ptr<MenuShopItem> t8 = std::make_shared<MenuShopItem>("Lawman", &fonts[1], sf::IntRect(1795, 670, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	t8->onSelect(sf::Color::Blue, 48, 0.25);
+	t8->setControlBind(6, 2, 7, 7);
+	t8->onEnter([this]() {});
+	t8->setFillColor(sf::Color(107, 107, 107));
+	t8->setSpriteScale(0.5, 0.5);
+	t8->setSpriteRotation(-30);
+
+
+
+	components.push_back(t1);	//1
+	components.push_back(t2);	//2
+	components.push_back(t3);	//3
+	components.push_back(t4);	//4
+	components.push_back(t5);	//5
+	components.push_back(t6);	//6
+	components.push_back(t7);	//7
+	components.push_back(t8);	//8
+
+
+	std::shared_ptr<sf::Text> shop = std::make_shared<sf::Text>();
+	shop->setString("Shop");
+	shop->setFont(fonts[0]);
+	shop->setCharacterSize(160);
+	sf::FloatRect bds = shop->getLocalBounds();
+	shop->setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
+	shop->setPosition(sf::Vector2f(1770, 80));
+
+
+	std::shared_ptr<sf::RectangleShape> shopBoard =
+		std::make_shared<sf::RectangleShape>(sf::Vector2f(300, 1080));
+	shopBoard->setTexture(&textures[0]);
+	shopBoard->setPosition(1620, 0);
+
+	shapes.push_back(shopBoard);
+	shapes.push_back(shop);
+	activate();
+}
+
 
 void MenuManager::hitvisit(sf::Vector2f cursorPos)
 {

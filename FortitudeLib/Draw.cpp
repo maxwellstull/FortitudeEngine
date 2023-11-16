@@ -20,6 +20,7 @@ void Engine::draw()
         case Active::GAME:
         {
             game.Draw(window.GetWindow());
+            menu.Draw(window.GetWindow());
         }
     }
 

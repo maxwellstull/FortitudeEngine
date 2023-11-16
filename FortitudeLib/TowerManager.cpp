@@ -17,7 +17,8 @@ void TowerManager::initialize()
   textures.push_back(texture);
   texture.loadFromFile("img/gun.png");
   textures.push_back(texture);
-
+  texture.loadFromFile("img/rifle.png");
+  textures.push_back(texture);
   Unit::Attributes attr = { 100, 100, 10, 0.5, 500 };
   std::shared_ptr<Tower> to = std::make_shared<Tower>(attr);
   to->setBodyTexture(&textures[0], 0.25);

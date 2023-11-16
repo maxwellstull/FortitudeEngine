@@ -81,6 +81,9 @@
     <ClInclude Include="FortitudeLib\include\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FortitudeLib\include\MenuShopItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -147,6 +150,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FortitudeLib\Unit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortitudeLib\MenuShopItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

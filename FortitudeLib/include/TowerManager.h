@@ -20,4 +20,5 @@ public:
   Game* getGame() { return game; }
   void setGame(Game* g) { game = g;}
   std::vector<std::shared_ptr<Tower>> getTowers() { return towers; }
+  sf::Texture* getTowerTexture(int idx) { return &textures[idx]; }
 }; 

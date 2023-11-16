@@ -148,6 +148,7 @@
     <ClInclude Include="FortitudeLib\include\MenuComponent.h" />
     <ClInclude Include="FortitudeLib\include\MenuMap.h" />
     <ClInclude Include="FortitudeLib\include\MenuOption.h" />
+    <ClInclude Include="FortitudeLib\include\MenuShopItem.h" />
     <ClInclude Include="FortitudeLib\include\Path.h" />
     <ClInclude Include="FortitudeLib\include\Timer.h" />
     <ClInclude Include="FortitudeLib\include\Tower.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="FortitudeLib\MenuComponent.cpp" />
     <ClCompile Include="FortitudeLib\MenuMap.cpp" />
     <ClCompile Include="FortitudeLib\MenuOption.cpp" />
+    <ClCompile Include="FortitudeLib\MenuShopItem.cpp" />
     <ClCompile Include="FortitudeLib\Path.cpp" />
     <ClCompile Include="FortitudeLib\Tower.cpp" />
     <ClCompile Include="FortitudeLib\TowerManager.cpp" />

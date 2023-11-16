@@ -3,6 +3,7 @@
 #include "MenuComponent.h"
 #include "MenuOption.h"
 #include "MenuMap.h"
+#include "MenuShopItem.h"
 #include <vector>
 #include <memory>
 
@@ -21,7 +22,7 @@ public:
 private:
     Engine * engine = nullptr;
     std::vector<std::shared_ptr<MenuComponent>> components;
-    std::vector<std::shared_ptr<sf::Shape>> shapes;
+    std::vector<std::shared_ptr<sf::Drawable>> shapes;
     std::vector<sf::Font> fonts;
     std::vector<sf::Texture> textures;
     std::shared_ptr<MenuComponent> selected;
@@ -39,6 +40,7 @@ public:
     void MainMenu();
     void Options();
     void MapSelect(int page);
+    void TowerShop();
 //    void MapSelectInit();
 //    void FullscreenContext();
     void Draw(sf::RenderWindow * context);
