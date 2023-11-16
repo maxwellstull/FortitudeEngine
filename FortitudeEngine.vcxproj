@@ -149,6 +149,7 @@
     <ClInclude Include="FortitudeLib\include\MenuMap.h" />
     <ClInclude Include="FortitudeLib\include\MenuOption.h" />
     <ClInclude Include="FortitudeLib\include\Path.h" />
+    <ClInclude Include="FortitudeLib\include\Timer.h" />
     <ClInclude Include="FortitudeLib\include\Tower.h" />
     <ClInclude Include="FortitudeLib\include\TowerManager.h" />
     <ClInclude Include="FortitudeLib\include\Unit.h" />

@@ -25,8 +25,6 @@ private:
   sf::Vector2f _location;
   // Heading/rotation of unit
   double _rotation;
-  // Rotation of gun
-  double _gunRotation;
   // Attributes
   Attributes _attributes;
   // If unit is active ("alive")
@@ -36,26 +34,41 @@ private:
   sf::Sprite _bodySpr;
   sf::Texture* _gunTexture;
   sf::Sprite _gunSpr;
-  Animation _gunFireAnimation;
   Animation _gunRecoilAnimation;
+  Animation _gunResetAnimation;
   sf::RectangleShape _curHealthBar;
   sf::RectangleShape _maxHealthBar;
   bool _healthBar;
 
   //Generic target
-  std::shared_ptr<Unit> target;
-  bool validTarget;
-  Timer fireTimer;
+  std::shared_ptr<Unit> _target;
+  bool _validTarget;
+  Timer _targetFindTimer;
+  Timer _fireTimer;
 
 public:
+  Unit(Attributes attr);
   void update(double dt);
   void draw(sf::RenderWindow* context);
+  void initialize(bool showHealthBar);
 
   void setBodyTexture(sf::Texture* texture, double scale);
+  sf::Sprite* getBodySprite() { return &_bodySpr; }
   void setGunTexture(sf::Texture* texture, double scale, sf::Vector2f offset);
-  void initialize(bool showHealthBar);
-  void findTarget(std::vector<std::shared_ptr<Unit>> ops);
+  sf::Sprite* getGunSprite() { return &_gunSpr; }
+  void setGunRotation(double rot) { _gunSpr.setRotation(rot); }
+  Animation* getRecoilAnimation() { return &_gunRecoilAnimation; }
+  Animation* getResetAnimation() { return &_gunResetAnimation; }
+
+  bool getIsTargetValid() { return _validTarget; }
+  void setIsTargetValid(bool v) { _validTarget = v; }
+  void setTarget(std::shared_ptr<Unit> tar) { _target = tar; }
+  std::shared_ptr<Unit> getTarget() { return _target; }
+  double getTargetTheta();
+  double getTargetDistance();
+
   double getAnimationValue();
+  bool getFireTimerStatus() { return _fireTimer.get(); }
 
   void setAttributes(Attributes attr) { _attributes = attr; }
   Attributes getAttributes() { return _attributes; }
@@ -75,6 +88,7 @@ public:
   void activate() { _active = true; }
   void deactivate() { _active = false; }
   sf::Vector2f getLocation() { return _location; }
-  void setLocation(sf::Vector2f loc) { _location = loc; }
-
+  void setLocation(sf::Vector2f loc);
+  void fire();
+  void takeDamage(double damage);
 };

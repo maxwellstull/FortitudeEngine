@@ -78,6 +78,9 @@
     <ClInclude Include="FortitudeLib\include\Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FortitudeLib\include\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

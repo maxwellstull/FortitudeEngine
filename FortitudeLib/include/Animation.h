@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
+#include <functional>
 
 
 class Animation
@@ -15,6 +15,8 @@ private:
   bool _active;
   bool _inversed;
   bool _shouldInverse;
+  std::function<void()> _onComplete;
+  bool _doOnComplete;
 
 public:
   bool isActive() { return _active; }
@@ -38,6 +40,10 @@ public:
           else 
           {
             _active = false;
+          }
+          if (_doOnComplete == true)
+          {
+            _onComplete();
           }
         }
         else
@@ -89,5 +95,12 @@ public:
     _active = false;
     _inversed = false;
     _shouldInverse = false;
+    _doOnComplete = false;
+  }
+  Animation() {};
+  void setOnCompleteFunction(std::function<void()> func)
+  {
+    _onComplete = func;
+    _doOnComplete = true;
   }
 };

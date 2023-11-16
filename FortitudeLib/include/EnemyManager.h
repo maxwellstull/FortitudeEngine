@@ -5,6 +5,8 @@
 #include <memory>
 #include "GameStructures.h"
 
+#include "Unit.h"
+
 class Game;
 
 class EnemyManager

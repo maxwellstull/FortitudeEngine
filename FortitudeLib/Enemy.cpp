@@ -7,119 +7,108 @@
 #include <cmath>
 #include <iostream>
 
-double pythag(double x, double y)
+Enemy::Enemy(Attributes attr) : Unit(attr) 
 {
-	return sqrt(pow(x, 2) + pow(y, 2));
+
 }
 
 
 void Enemy::update(float dtAsSeconds)
 {
-	if (active)
+	Unit::update(dtAsSeconds);
+	if (isActive())
 	{
-		location = location + dtAsSeconds * deltaPerSec;
-		spr.setPosition(location);
-		gunSpr.setPosition(location);
-		std::cout << "Location: " << spr.getPosition().x << ", " << spr.getPosition().y << std::endl;
-		if (!pathingBounds.contains(location)) //no longer in rectangle - meaning it met the waypoint
+//		if (getHealth() <= 0)
+//		{
+//			deactivate();
+//		}
+
+		setLocation(getLocation() + dtAsSeconds * deltaPerSec);
+//		getBodySprite()->setPosition(getLocation());
+//		getGunSprite()->setPosition(getLocation());
+
+		if (!pathingBounds.contains(getLocation())) //no longer in rectangle - meaning it met the waypoint
 		{
 			newDestination(enm->getGame()->getMap()->getPath()->getNextDestination(++destinationIdx));
 		}
 
-		if (validTarget == false)
+		if (getIsTargetValid() == false)
 		{
 			findTarget();
 		}
 		else
 		{
-			double theta = atan2(target->getLocation().y - getLocation().y, target->getLocation().x - getLocation().x);
-			double distance = pythag(target->getLocation().y - getLocation().y, target->getLocation().x - getLocation().x);
-			if (distance < range)
+			double theta = getTargetTheta();
+			double distance = getTargetDistance(); 
+			if (distance < getRange())
 			{
-				gunSpr.setRotation(theta * 180 / M_PI);
+				setGunRotation((theta * 180 / M_PI) - getAnimationValue());
+				if (getFireTimerStatus() == true)
+				{
+					fire();
+				}
 			}
 			else
 			{
-				gunSpr.setRotation(0);
-				validTarget = false;
+				getGunSprite()->setRotation(0);
+				setIsTargetValid(false); //out of range
 			}
 		}
 
-		if (health <= 0)
-		{
-			deactivate();
-		}
-		std::cout << "Health: " << health << std::endl;
+		
+		std::cout << "Health: " << getHealth() << std::endl;
 	}
 }
 
-
 void Enemy::findTarget()
 {
-	double min_distance = 100000;
+	double min_distance = INFINITY;
 	double distance;
 	double theta;
 	double xd;
 	double yd;
-	for (auto tower : getEnemyManager()->getGame()->getTowerManager()->getTowers())
+
+	for (std::shared_ptr<Unit> op : getEnemyManager()->getGame()->getTowerManager()->getTowers())
 	{
-		xd = tower->getLocation().x - getLocation().x;
-		yd = tower->getLocation().y - getLocation().y;
-		theta = atan2(yd, xd);
-		if ((theta < (heading + M_PI_2)) && (theta > (heading - M_PI_2)))
+		if (op->isActive())
 		{
-			distance = pythag(xd, yd);
-			if (distance < range && distance < min_distance)
+			xd = op->getLocation().x - getLocation().x;
+			yd = op->getLocation().y - getLocation().y;
+			theta = atan2(yd, xd);
+
+			distance = computeDistance(xd, yd);
+			if (distance < getAttributes().range && distance < min_distance)
 			{
 				min_distance = distance;
-				target = tower;
-				validTarget = true;
+				setTarget(op);
+				setIsTargetValid(true);
 			}
 		}
 	}
 }
 
-
-
-void Enemy::Draw(sf::RenderWindow* context)
+void Enemy::draw(sf::RenderWindow* context)
 {
-	if(active)
-	{
-		context->draw(spr);
-		context->draw(gunSpr);
-	}
+	Unit::draw(context);
 }
 
-void Enemy::setTexture(sf::Texture* texture)
-{
-	text = texture;
-	spr.setTexture(*text);
-	spr.setScale(0.25, 0.25);
-}
 
 void Enemy::initialize(std::shared_ptr<PathNode> start_node)
 {
-	location = start_node->location;
+	setLocation(start_node->location);
 	destination = start_node;
-	spr.setPosition(location);
-	sf::FloatRect bds = spr.getLocalBounds();
-	spr.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
+	getBodySprite()->setPosition(getLocation());
 	destinationIdx = 0;
 	newDestination(getEnemyManager()->getGame()->getMap()->getPath()->getNextDestination(++destinationIdx));
 
+	//temporary
+	setMaxHealth(100);
+	setHealth(100);
+	setDamage(10);
+	setFireRate(0.5);
+	setRange(300);
 
-	maxHealth = 100;
-	health = 100;
-	damage = 10;
-	fireRate = 0.5;
-	validTarget = false;
-	range = 300;
-
-	activate();
-
-//		sf::FloatRect textRect = viewedText.getLocalBounds();
-//	viewedText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-
+	Unit::initialize(true);
 }
 
 void Enemy::newDestination(std::shared_ptr<PathNode> newD)
@@ -130,32 +119,22 @@ void Enemy::newDestination(std::shared_ptr<PathNode> newD)
 		getEnemyManager()->getGame()->decrementCurrentHealth();
 	}
 
-	float theta = atan2((newD->location.y - location.y), (newD->location.x - location.x));
+	float theta = atan2((newD->location.y - getLocation().y), (newD->location.x - getLocation().x));
 	heading = theta;
 	deltaPerSec.x = speed * cos(theta);
 	deltaPerSec.y = speed * sin(theta);
 
-	std::cout <<theta<<" " << deltaPerSec.x << " " << deltaPerSec.y << std::endl;
+//	std::cout <<theta<<" " << deltaPerSec.x << " " << deltaPerSec.y << std::endl;
 
 	lastDestination = destination;
 	destination = newD;
 
 	pathingBounds = sf::FloatRect(sf::Vector2f
-		(destination->location.x < location.x ? destination->location.x - 1: location.x - 1, 
-		 destination->location.y < location.y ? destination->location.y - 1: location.y - 1), 
+		(destination->location.x < getLocation().x ? destination->location.x - 1: getLocation().x - 1,
+		 destination->location.y < getLocation().y ? destination->location.y - 1: getLocation().y - 1),
 		sf::Vector2f(
-			abs(location.x - destination->location.x) + 1, 
-			abs(location.y - destination->location.y) + 2));
-}
-
-void Enemy::setGunTexture(sf::Texture* texture)
-{
-	gunText = texture;
-	gunSpr.setTexture(*gunText);
-	gunSpr.setScale(0.25, 0.25);
-	sf::FloatRect bds = gunSpr.getLocalBounds();
-	gunSpr.setOrigin(bds.left + (bds.width / 2.f) - 150, bds.top + (bds.height / 2.f));
-	
+			abs(getLocation().x - destination->location.x) + 1,
+			abs(getLocation().y - destination->location.y) + 2));
 }
 
 

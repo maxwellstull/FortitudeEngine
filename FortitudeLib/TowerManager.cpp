@@ -18,13 +18,11 @@ void TowerManager::initialize()
   texture.loadFromFile("img/gun.png");
   textures.push_back(texture);
 
-  std::shared_ptr<Tower> to = std::make_shared<Tower>();
-  to->setTexture(&textures[0]);
-  to->setGunTexture(&textures[1]);
+  Unit::Attributes attr = { 100, 100, 10, 0.5, 500 };
+  std::shared_ptr<Tower> to = std::make_shared<Tower>(attr);
+  to->setBodyTexture(&textures[0], 0.25);
+  to->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150,0));
   to->setTowerManager(this);
-  to->setDamage(10);
-  to->setFireRate(2);
-  to->setHealth(100);
   to->setLocation(sf::Vector2f(400,400));
   to->initialize();
   towers.push_back(to);
@@ -32,8 +30,8 @@ void TowerManager::initialize()
 
 void TowerManager::Draw(sf::RenderWindow* context)
 {
-  for (std::shared_ptr<Tower> to : towers)
+  for (std::shared_ptr<Unit> to : towers)
   {
-    to->Draw(context);
+    to->draw(context);
   }
 }
