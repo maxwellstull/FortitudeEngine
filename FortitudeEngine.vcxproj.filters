@@ -72,6 +72,12 @@
     <ClInclude Include="FortitudeLib\include\TowerManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FortitudeLib\include\Unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FortitudeLib\include\Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -135,6 +141,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FortitudeLib\TowerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortitudeLib\Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

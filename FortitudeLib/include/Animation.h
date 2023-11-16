@@ -84,6 +84,7 @@ public:
   }
   Animation(double start, double stop, double duration) : _startState(start), _stopState(stop), _duration(duration)
   {
+    _current = start;
     _elapsed = 0;
     _active = false;
     _inversed = false;

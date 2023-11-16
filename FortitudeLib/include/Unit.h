@@ -9,6 +9,7 @@
 
 class Unit {
 public:
+  // Common attributes of a unit
   struct Attributes {
     double maxHealth;
     double health;
@@ -18,12 +19,13 @@ public:
   };
 
 private:
+  // Current location of unit
   sf::Vector2f _location;
-
+  // Attributes
   Attributes _attributes;
-
+  // If unit is active ("alive")
   bool _active;
-
+  //Textures, sprites, gun animation info, and health bar
   sf::Texture* _bodyTexture;
   sf::Sprite _bodySpr;
   sf::Texture* _gunTexture;
@@ -34,6 +36,7 @@ private:
   sf::RectangleShape _maxHealthBar;
   bool _healthBar;
 
+  //Generic target
   std::shared_ptr<Unit> target;
   bool validTarget;
 
