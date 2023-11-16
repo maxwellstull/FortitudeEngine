@@ -15,6 +15,12 @@ void Game::updateHealthHUD()
 	healthHUD.setString(dollabills);
 }
 
+void Game::updateWaveHUD()
+{
+	std::string waves = std::to_string(state.currentWave) + "/" + std::to_string(info.MaxWaves);
+	waveHUD.setString(waves);
+}
+
 void Game::load()
 {
 	enm.setGame(this);
@@ -22,26 +28,45 @@ void Game::load()
 	twm.setGame(this);
 	twm.initialize();
 
+	state.maxHealth = 100;
+	state.currentHealth = 100;
+	state.currentWave = 1;
+
+
 	font.loadFromFile("img/cowboy.ttf");
 	moneyTex.loadFromFile("img/moneybag.png");
 	moneySpr.setTexture(moneyTex);
 	sf::FloatRect bds = moneySpr.getLocalBounds();
 	moneySpr.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
 	moneySpr.setScale(0.2, 0.2);
-
-	state.maxHealth = 100;
-	state.currentHealth = 100;
+	waveTex.loadFromFile("img/3men.png");
+	waveSpr.setTexture(waveTex);
+	bds = waveSpr.getLocalBounds();
+	waveSpr.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
+	waveSpr.setScale(0.2, 0.2);
 
 	
-	updateHealthHUD();
 	healthHUD.setFont(font);
 	healthHUD.setCharacterSize(48);
+	updateHealthHUD();
 	bds = healthHUD.getLocalBounds();
 	healthHUD.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
+		
+
+	waveHUD.setFont(font);
+	waveHUD.setCharacterSize(48);
+	updateWaveHUD();
+
+	bds = waveHUD.getLocalBounds();
+	waveHUD.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
+
+	healthHUD.setPosition(300, 50);
+	moneySpr.setPosition(200, 50);
+	waveHUD.setPosition(500, 50);
+	waveSpr.setPosition(420, 50);
 
 
-	healthHUD.setPosition(200, 50);
-	moneySpr.setPosition(300, 50);
+
 
 
 	activate();
@@ -55,4 +80,6 @@ void Game::Draw(sf::RenderWindow* context)
 
 	context->draw(moneySpr);
 	context->draw(healthHUD);
+	context->draw(waveHUD);
+	context->draw(waveSpr);
 }

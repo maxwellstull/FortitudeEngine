@@ -14,6 +14,7 @@ private:
 	struct GameState {
 		int maxHealth;
 		int currentHealth;
+		int currentWave;
 	};
 	bool isActive;
 	Engine* engine = nullptr;
@@ -21,7 +22,6 @@ private:
 	EnemyManager enm;
 	TowerManager twm;
 	GameInfo info;
-	int waveCt;
 	GameState state;
 
 
@@ -31,11 +31,16 @@ private:
 	sf::Sprite moneySpr;
 	sf::Text healthHUD;
 
+	// wave ctr
+	sf::Texture waveTex;
+	sf::Sprite waveSpr;
+	sf::Text waveHUD;
+
 public:
 	void activate() { isActive = true; }
 	void deactivate() { isActive = false; }
-	int getWaveCt() { return waveCt; }
-	void setWaveCt(int wavs) { waveCt = wavs; }
+	int getWaveCt() { return info.MaxWaves; }
+	void setWaveCt(int wavs) { info.MaxWaves = wavs; }
 	void SetEngine(Engine* e) { engine = e; }
 	Engine* GetEngine() { return engine; }
 	void update(float dtAsSeconds);
@@ -46,5 +51,7 @@ public:
 	void load();
 	void Draw(sf::RenderWindow* context);
 	void updateHealthHUD();
+	void updateWaveHUD();
+	void incrementWave(int amnt = 1 ) { }
 	void decrementCurrentHealth(int amnt = 1) { state.currentHealth -= amnt; updateHealthHUD(); }
 };
