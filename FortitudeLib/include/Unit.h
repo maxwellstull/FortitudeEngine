@@ -35,6 +35,7 @@ private:
   sf::Texture* _gunTexture;
   sf::Sprite _gunSpr;
   bool gunLeft;
+  double _staticGunRotation;
   Animation _gunRecoilAnimation;
   Animation _gunResetAnimation;
   sf::RectangleShape _curHealthBar;
@@ -58,6 +59,9 @@ public:
   void setGunTexture(sf::Texture* texture, double scale, sf::Vector2f offset);
   sf::Sprite* getGunSprite() { return &_gunSpr; }
   void setGunRotation(double rot, double rotmod);
+  double getGunRotation() { return _gunSpr.getRotation(); }
+  void setStaticGunRotation(double rot) { _staticGunRotation = rot; }
+  double getStaticGunRotation() { return _staticGunRotation; }
   Animation* getRecoilAnimation() { return &_gunRecoilAnimation; }
   Animation* getResetAnimation() { return &_gunResetAnimation; }
 
@@ -70,6 +74,7 @@ public:
 
   double getAnimationValue();
   bool getFireTimerStatus() { return _fireTimer.get(); }
+  bool getTargetingTimerStatus() { return _targetFindTimer.get(); }
 
   void setAttributes(Attributes attr) { _attributes = attr; }
   Attributes getAttributes() { return _attributes; }

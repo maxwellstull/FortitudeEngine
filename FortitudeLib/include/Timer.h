@@ -28,6 +28,7 @@ public:
       }
     }
   };
+  void clear() { _timer = _period; _primed = false; }
   /*
   * Getting the timer will reset it and it will begin counting again.
   */

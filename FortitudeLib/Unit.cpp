@@ -9,6 +9,7 @@ Unit::Unit(Attributes attr)
   _active = false;
   _gunRecoilAnimation = Animation(0, 60, 0.05);
   _gunResetAnimation = Animation(60, 0, 0.5);
+  _staticGunRotation = 0;
   _healthBar = false;
   _validTarget = false;
   _targetFindTimer = Timer(0.25);
@@ -102,7 +103,7 @@ double Unit::getAnimationValue()
 void Unit::takeDamage(double damage)
 {
   _attributes.health -= damage;
-  if(getHealth() >= 0)
+  if(getHealth() > 0)
   {
     double bar = (_maxHealthBar.getSize().x / getMaxHealth()) * getHealth();
     _curHealthBar.setSize(sf::Vector2f(bar, 5));
@@ -130,6 +131,7 @@ void Unit::fire()
   if (getTarget()->isActive() == false)
   {
     setIsTargetValid(false);
+    _targetFindTimer.clear();
   }
 }
 

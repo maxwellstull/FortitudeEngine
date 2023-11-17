@@ -24,17 +24,6 @@ void Path::generatePath()
 		sf::Vector2f(400 * scale, 180 * scale),
 		sf::Vector2f(600 * scale, 180 * scale),
 		sf::Vector2f(650 * scale, 182 * scale) };
-	/*
-	std::vector<sf::Vector2f> pts = {
-	sf::Vector2f(0 * scale, 221 * scale),
-	sf::Vector2f(100 * scale, 221 * scale),
-	sf::Vector2f(100 * scale, 98 * scale),
-	sf::Vector2f(220 * scale, 98 * scale),
-	sf::Vector2f(220 * scale, 260 * scale),
-	sf::Vector2f(379 * scale, 260 * scale),
-	sf::Vector2f(379 * scale, 180 * scale),
-	sf::Vector2f(600 * scale, 180 * scale),
-	sf::Vector2f(650 * scale, 180 * scale) };*/
 
 	//generate the segments
 	for (int i = 0; i < pts.size() - 1; i++)

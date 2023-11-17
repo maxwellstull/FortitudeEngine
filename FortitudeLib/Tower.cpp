@@ -38,25 +38,33 @@ void Tower::update(double dtAsSeconds)
 //		}
 		if (getIsTargetValid() == false)
 		{
-			findTarget();
+			if (getTargetingTimerStatus())
+			{
+				findTarget();
+			}
+			setGunRotation(getStaticGunRotation(), getAnimationValue());
 		}
 		else
 		{
-			double theta = getTargetTheta();
-			double distance = getTargetDistance();
-			std::cout << theta << " " << distance << std::endl;
-			if (distance < getRange())
+			if(getIsTargetValid())
 			{
-				setGunRotation((theta * 180 / M_PI), getAnimationValue());
-
-				if (getFireTimerStatus() == true)
+				double theta = getTargetTheta();
+				double distance = getTargetDistance();
+				//std::cout << theta << " " << distance << std::endl;
+				if (distance < getRange())
 				{
-					fire();
+					setGunRotation((theta * 180 / M_PI), getAnimationValue());
+
+					if (getFireTimerStatus() == true)
+					{
+						fire();
+						setStaticGunRotation((theta * 180 / M_PI));
+					}
 				}
-			}
-			else
-			{
-				setIsTargetValid(false); //out of range
+				else
+				{
+					setIsTargetValid(false); //out of range
+				}
 			}
 		}
 	}
