@@ -14,7 +14,6 @@ Tower::Tower(Attributes attr) : Unit(attr)
 
 void Tower::initialize()
 {
-	getBodySprite()->setColor(sf::Color::Magenta);
 	Unit::initialize(true);
 }
 
@@ -40,7 +39,7 @@ void Tower::update(double dtAsSeconds)
 			std::cout << theta << " " << distance << std::endl;
 			if (distance < getRange())
 			{
-				setGunRotation((theta * 180 / M_PI) - getAnimationValue());
+				setGunRotation((theta * 180 / M_PI), getAnimationValue());
 
 				if (getFireTimerStatus() == true)
 				{
@@ -68,14 +67,18 @@ void Tower::findTarget()
 		{
 			xd = op->getLocation().x - getLocation().x;
 			yd = op->getLocation().y - getLocation().y;
-			theta = atan2(yd, xd);
-			std::cout << xd << " " << yd << " " << theta << std::endl;
-			distance = computeDistance(xd, yd);
-			if (distance < getAttributes().range && distance < min_distance)
+			if(abs(xd) < getAttributes().range && abs(yd) < getAttributes().range)
 			{
-				min_distance = distance;
-				setTarget(op);
-				setIsTargetValid(true);
+//				theta = atan2(yd, xd);
+//				std::cout << xd << " " << yd << " " << theta << std::endl;
+				distance = computeDistance(xd, yd);
+				if (distance < getAttributes().range && distance < min_distance)
+				{
+					min_distance = distance;
+					setTarget(op);
+					setIsTargetValid(true);
+					break;
+				}
 			}
 		}
 	}

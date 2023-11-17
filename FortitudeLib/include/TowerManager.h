@@ -24,5 +24,9 @@ public:
   std::vector<std::shared_ptr<Tower>> getTowers() { return towers; }
   sf::Texture* getTowerTexture(int idx) { return &textures[idx]; }
   void spawnLawman();
+  void spawnMarshall();
+  void spawnPistol();
+  void spawnProspector();
+  void spawnBlaster();
   void release() { isGrabbed = false; grabbed->unpause(); towers.push_back(grabbed); }
 }; 

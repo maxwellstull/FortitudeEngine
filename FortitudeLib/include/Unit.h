@@ -34,6 +34,7 @@ private:
   sf::Sprite _bodySpr;
   sf::Texture* _gunTexture;
   sf::Sprite _gunSpr;
+  bool gunLeft;
   Animation _gunRecoilAnimation;
   Animation _gunResetAnimation;
   sf::RectangleShape _curHealthBar;
@@ -56,7 +57,7 @@ public:
   sf::Sprite* getBodySprite() { return &_bodySpr; }
   void setGunTexture(sf::Texture* texture, double scale, sf::Vector2f offset);
   sf::Sprite* getGunSprite() { return &_gunSpr; }
-  void setGunRotation(double rot) { _gunSpr.setRotation(rot); }
+  void setGunRotation(double rot, double rotmod);
   Animation* getRecoilAnimation() { return &_gunRecoilAnimation; }
   Animation* getResetAnimation() { return &_gunResetAnimation; }
 

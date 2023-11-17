@@ -1,4 +1,5 @@
 #include "include/Unit.h"
+#include <iostream>
 
 Unit::Unit(Attributes attr)
 {
@@ -12,6 +13,7 @@ Unit::Unit(Attributes attr)
   _validTarget = false;
   _targetFindTimer = Timer(0.25);
   _fireTimer = Timer(1.f / attr.fireRate);
+  gunLeft = false;
 }
 
 void Unit::update(double dt)
@@ -123,8 +125,8 @@ double Unit::getTargetDistance()
 
 void Unit::fire()
 {
-  getTarget()->takeDamage(getDamage());
   _gunRecoilAnimation.activateForward();
+  getTarget()->takeDamage(getDamage());
   if (getTarget()->isActive() == false)
   {
     setIsTargetValid(false);
@@ -138,4 +140,22 @@ void Unit::setLocation(sf::Vector2f loc)
   _gunSpr.setPosition(loc);
   _curHealthBar.setPosition(loc);
   _maxHealthBar.setPosition(loc);
+}
+
+void Unit::setGunRotation(double rot, double rotmod) 
+{ 
+  std::cout << "rot " << rot << std::endl;
+ 
+  if ((rot > 90 || rot < -90) && (gunLeft == false))
+  {
+    gunLeft = true;
+    _gunSpr.scale(-1.f, 1.f);
+  }
+  else if(rot < 90 && rot > -90 && gunLeft == true)
+  {
+    gunLeft = false;
+    _gunSpr.scale(-1.f, 1.f);
+  }
+  
+  _gunSpr.setRotation(rot + (gunLeft ? 180 + rotmod : -rotmod));
 }

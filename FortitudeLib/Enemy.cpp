@@ -42,7 +42,7 @@ void Enemy::update(float dtAsSeconds)
 			double distance = getTargetDistance(); 
 			if (distance < getRange())
 			{
-				setGunRotation((theta * 180 / M_PI) - getAnimationValue());
+				setGunRotation((theta * 180 / M_PI), getAnimationValue());
 				if (getFireTimerStatus() == true)
 				{
 					fire();
@@ -107,6 +107,8 @@ void Enemy::initialize(std::shared_ptr<PathNode> start_node)
 	setDamage(10);
 	setFireRate(0.5);
 	setRange(300);
+
+	getBodySprite()->setColor(sf::Color(50,50,50));
 
 	Unit::initialize(true);
 }
