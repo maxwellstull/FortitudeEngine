@@ -24,12 +24,10 @@ void Enemy::update(float dtAsSeconds)
 //		}
 
 		setLocation(getLocation() + dtAsSeconds * deltaPerSec);
-//		getBodySprite()->setPosition(getLocation());
-//		getGunSprite()->setPosition(getLocation());
 
-		if (!pathingBounds.contains(getLocation())) //no longer in rectangle - meaning it met the waypoint
+		if (destination->contains(getLocation())) //no longer in rectangle - meaning it met the waypoint
 		{
-			newDestination(enm->getGame()->getMap()->getPath()->getNextDestination(++destinationIdx));
+			nextDestination();
 		}
 
 		if (getIsTargetValid() == false)
@@ -93,50 +91,33 @@ void Enemy::draw(sf::RenderWindow* context)
 }
 
 
-void Enemy::initialize(std::shared_ptr<PathNode> start_node)
+void Enemy::initialize(PathSegment* st)
 {
-	setLocation(start_node->location);
-	destination = start_node;
+	setLocation(st->getSegmentStart());
+	destination = st;
 	getBodySprite()->setPosition(getLocation());
 	destinationIdx = 0;
-	newDestination(getEnemyManager()->getGame()->getMap()->getPath()->getNextDestination(++destinationIdx));
+	nextDestination();
 
-	//temporary
-	setMaxHealth(100);
-	setHealth(100);
-	setDamage(10);
-	setFireRate(0.5);
-	setRange(300);
 
 	getBodySprite()->setColor(sf::Color(50,50,50));
 
 	Unit::initialize(true);
 }
 
-void Enemy::newDestination(std::shared_ptr<PathNode> newD)
+void Enemy::nextDestination()
 {
-	if (newD->nodeType == PathNodeType::END)
+	destination = destination->getNext();
+	if (destination->getNodeType() == PathNodeType::END) //made it to the end
 	{
 		deactivate();
 		getEnemyManager()->getGame()->decrementCurrentHealth();
 	}
 
-	float theta = atan2((newD->location.y - getLocation().y), (newD->location.x - getLocation().x));
+	double theta = atan2((destination->getSegmentEnd().y - getLocation().y), (destination->getSegmentEnd().x - getLocation().x));
 	heading = theta;
 	deltaPerSec.x = speed * cos(theta);
 	deltaPerSec.y = speed * sin(theta);
-
-//	std::cout <<theta<<" " << deltaPerSec.x << " " << deltaPerSec.y << std::endl;
-
-	lastDestination = destination;
-	destination = newD;
-
-	pathingBounds = sf::FloatRect(sf::Vector2f
-		(destination->location.x < getLocation().x ? destination->location.x - 1: getLocation().x - 1,
-		 destination->location.y < getLocation().y ? destination->location.y - 1: getLocation().y - 1),
-		sf::Vector2f(
-			abs(getLocation().x - destination->location.x) + 1,
-			abs(getLocation().y - destination->location.y) + 2));
 }
 
 

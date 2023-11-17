@@ -1,56 +1,111 @@
 #include "include/Path.h"
 
-std::shared_ptr<PathNode> Path::getNextDestination(int idx)
-{
-	if (idx >= length)
-	{
-
-	}
-	return points[idx];
-}
 
 void Path::generatePath()
 {
-	points.clear();
-
-	float scale = 2.7;
-	std::shared_ptr<PathNode> p0 = std::make_shared<PathNode>();
-	p0->location = sf::Vector2f(5 * scale, 217 * scale),
-	p0->nodeType = PathNodeType::START;
-	std::shared_ptr<PathNode> p1 = std::make_shared<PathNode>();
-	p1->location = sf::Vector2f(98 * scale, 217 * scale),
-	p1->nodeType = PathNodeType::MIDPOINT;
-	std::shared_ptr<PathNode> p2 = std::make_shared<PathNode>();
-	p2->location = sf::Vector2f(102 * scale, 102 * scale),
-	p2->nodeType = PathNodeType::MIDPOINT;
-	std::shared_ptr<PathNode> p3 = std::make_shared<PathNode>();
-	p3->location = sf::Vector2f(220 * scale, 102 * scale),
-	p3->nodeType = PathNodeType::MIDPOINT;
-	std::shared_ptr<PathNode> p4 = std::make_shared<PathNode>();
-	p4->location = sf::Vector2f(222 * scale, 257 * scale),
-	p4->nodeType = PathNodeType::MIDPOINT;
-	std::shared_ptr<PathNode> p5 = std::make_shared<PathNode>();
-	p5->location = sf::Vector2f(381 * scale, 257 * scale),
-	p5->nodeType = PathNodeType::MIDPOINT;
-	std::shared_ptr<PathNode> p6 = std::make_shared<PathNode>();
-	p6->location = sf::Vector2f(381 * scale, 182 * scale),
-	p6->nodeType = PathNodeType::MIDPOINT;
-	std::shared_ptr<PathNode> p7 = std::make_shared<PathNode>();
-	p7->location = sf::Vector2f(600 * scale, 182 * scale),
-	p7->nodeType = PathNodeType::MIDPOINT;
-	std::shared_ptr<PathNode> p8 = std::make_shared<PathNode>();
-	p8->location = sf::Vector2f(650 * scale, 182 * scale),
-	p8->nodeType = PathNodeType::END;
-	points.push_back(p0);
-	points.push_back(p1);
-	points.push_back(p2);
-	points.push_back(p3);
-	points.push_back(p4);
-	points.push_back(p5);
-	points.push_back(p6);
-	points.push_back(p7);
-	points.push_back(p8);
 	
+	double scale = 2.7;
+	double pathWidth = 20;
+	double subSubmentSize = 20;
 
-	length = points.size();
+	std::vector<sf::Vector2f> pts = {
+		sf::Vector2f(0 * scale, 221 * scale),
+		sf::Vector2f(81 * scale, 221 * scale),
+		sf::Vector2f(100 * scale, 201 * scale),
+		sf::Vector2f(100 * scale, 120 * scale),
+		sf::Vector2f(120 * scale, 98 * scale),
+		sf::Vector2f(199 * scale, 98 * scale),
+		sf::Vector2f(220 * scale, 120 * scale),
+		sf::Vector2f(220 * scale, 241 * scale),
+		sf::Vector2f(240 * scale, 260 * scale),
+		sf::Vector2f(359 * scale, 260 * scale),
+		sf::Vector2f(379 * scale, 241 * scale),
+		sf::Vector2f(379 * scale, 199 * scale),
+		sf::Vector2f(400 * scale, 180 * scale),
+		sf::Vector2f(600 * scale, 180 * scale),
+		sf::Vector2f(650 * scale, 182 * scale) };
+	/*
+	std::vector<sf::Vector2f> pts = {
+	sf::Vector2f(0 * scale, 221 * scale),
+	sf::Vector2f(100 * scale, 221 * scale),
+	sf::Vector2f(100 * scale, 98 * scale),
+	sf::Vector2f(220 * scale, 98 * scale),
+	sf::Vector2f(220 * scale, 260 * scale),
+	sf::Vector2f(379 * scale, 260 * scale),
+	sf::Vector2f(379 * scale, 180 * scale),
+	sf::Vector2f(600 * scale, 180 * scale),
+	sf::Vector2f(650 * scale, 180 * scale) };*/
+
+	//generate the segments
+	for (int i = 0; i < pts.size() - 1; i++)
+	{
+		sf::Vector2f start = pts[i];
+		sf::Vector2f end = pts[i + 1];
+
+		double pathLength = sqrt(pow(end.y - start.y, 2) + pow(end.x - start.x, 2));
+		double segmentAmnt = floor(pathLength / subSubmentSize);
+		double pathHeading = atan2(end.y - start.y, end.x - start.x);
+		double eachSegmentLength = pathLength / segmentAmnt;
+
+		sf::Vector2f tmpStart = start;
+		sf::Vector2f tmpEnd;
+		for (int i = 0; i < segmentAmnt; i++)
+		{
+			PathSegment segment;
+
+			tmpEnd.x = tmpStart.x + eachSegmentLength * cos(pathHeading);
+			tmpEnd.y = tmpStart.y + eachSegmentLength * sin(pathHeading);
+
+			segment.setSegmentStart(tmpStart);
+			segment.setSegmentEnd(tmpEnd);
+			segment.setSize(sf::Vector2f(pathWidth * 2, eachSegmentLength));
+
+			if (tmpEnd.x > tmpStart.x && tmpEnd.y > tmpStart.y) //down-right
+			{
+				segment.setXGreaterThan(true);
+				segment.setYGreaterThan(true);
+			}
+			else if (tmpEnd.x < tmpStart.x && tmpEnd.y > tmpStart.y) //down-left
+			{
+				segment.setXGreaterThan(false);
+				segment.setYGreaterThan(true);
+			}
+			else if (tmpEnd.x < tmpStart.x && tmpEnd.y < tmpStart.y) //up-left
+			{
+				segment.setXGreaterThan(false);
+				segment.setYGreaterThan(false);
+			}
+			else if (tmpEnd.x > tmpStart.x && tmpEnd.y < tmpStart.y) //up-right
+			{
+				segment.setXGreaterThan(true);
+				segment.setYGreaterThan(false);
+			}
+
+
+			if (i == 0)
+			{
+				segment.setNodeType(PathNodeType::START);
+			}
+			else if (i == (pts.size() - 1))
+			{
+				segment.setNodeType(PathNodeType::END);
+			}
+			else
+			{
+				segment.setNodeType(PathNodeType::MIDPOINT);
+			}
+
+			
+			segments.push_back(segment);
+			tmpStart = tmpEnd;
+		}
+	}
+	//Link nodes
+	for (int i = 0; i < segments.size() - 1; i++)
+	{
+		segments[i].setNext(&segments[i + 1]);
+		segments[i + 1].setPrev(&segments[i]);
+	}
+
+
 }

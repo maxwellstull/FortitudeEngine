@@ -2,15 +2,16 @@
 #include <SFML/Graphics.hpp>
 #include "GameStructures.h"
 #include <vector>
-
+#include "PathSegment.h"
 
 
 class Path {
 private:
-	std::vector<std::shared_ptr<PathNode>> points;
+	std::vector<PathSegment> segments;
 	int length;
 public:
-	std::shared_ptr<PathNode> getNextDestination(int idx);
+	PathSegment* getSegment(int idx) { return &segments[idx];}
 	void generatePath();
+	PathSegment* getStartSegment() { return getSegment(0); }
 
 };

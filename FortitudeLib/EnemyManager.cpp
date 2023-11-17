@@ -25,7 +25,7 @@ void EnemyManager::initialize(GameInfo info)
 	en->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
 	en->setEnemyManager(this);
 	en->setSpeed(50);
-	en->initialize(getGame()->getMap()->getPath()->getNextDestination(0));
+	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
 //	en->setDestination(getGame()->getMap()->getPath()->getNextDestination(1));
 	
 	enemies.push_back(en);
@@ -47,7 +47,7 @@ void EnemyManager::spawnBadGuy()
 	en->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
 	en->setEnemyManager(this);
 	en->setSpeed(50);
-	en->initialize(getGame()->getMap()->getPath()->getNextDestination(0));
+	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
 	enemies.push_back(en);
 }
 

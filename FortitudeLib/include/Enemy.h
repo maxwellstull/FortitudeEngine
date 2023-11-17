@@ -3,6 +3,7 @@
 #include <memory>
 #include "GameStructures.h"
 #include "Unit.h"
+#include "PathSegment.h"
 
 class Tower;
 class EnemyManager;
@@ -11,10 +12,10 @@ class Enemy : public Unit {
 private:
 	EnemyManager* enm;
 
-	std::shared_ptr<PathNode> lastDestination;
-	std::shared_ptr<PathNode> destination;
-	std::shared_ptr<sf::FloatRect> endBounds;
-	sf::FloatRect pathingBounds;
+//	std::shared_ptr<PathNode> lastDestination;
+	PathSegment * destination;
+//	std::shared_ptr<sf::FloatRect> endBounds;
+//	sf::FloatRect pathingBounds;
 	int destinationIdx = 0;
 
 	float speed;
@@ -29,8 +30,8 @@ public:
 	void setSpeed(int sp) { speed = sp; }
 	void setEnemyManager(EnemyManager* e) { enm = e; }
 	EnemyManager* getEnemyManager() { return enm; }
-	void newDestination(std::shared_ptr<PathNode>  newD);
+	void nextDestination();
 	int getDestinationIdx() { return destinationIdx; }
 	
-	void initialize(std::shared_ptr<PathNode> start_node);
+	void initialize(PathSegment * st);
 };
