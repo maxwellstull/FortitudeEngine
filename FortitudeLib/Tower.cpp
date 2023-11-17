@@ -14,6 +14,14 @@ Tower::Tower(Attributes attr) : Unit(attr)
 
 void Tower::initialize()
 {
+	_rangeCircle = sf::CircleShape(getRange());
+	sf::FloatRect bds = _rangeCircle.getLocalBounds();
+	_rangeCircle.setOrigin(bds.left + bds.width / 2.0f, bds.top + bds.height / 2.0f);
+	_rangeCircle.setPosition(getLocation());
+	_rangeCircle.setOutlineColor(sf::Color(50, 50, 50));
+	_rangeCircle.setFillColor(sf::Color::Transparent);
+	_rangeCircle.setOutlineThickness(4);
+
 	Unit::initialize(true);
 }
 
@@ -87,4 +95,9 @@ void Tower::findTarget()
 void Tower::draw(sf::RenderWindow* context)
 {
 	Unit::draw(context);
+}
+
+void Tower::drawRangeCircle(sf::RenderWindow* context)
+{
+	context->draw(_rangeCircle);
 }

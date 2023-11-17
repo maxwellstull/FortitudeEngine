@@ -11,6 +11,7 @@ void TowerManager::update(float dtAsSeconds)
   if(isGrabbed)
   {
     grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
+    grabbed->setRangeLocation(sf::Vector2f(sf::Mouse::getPosition()));
   }
 }
 
@@ -41,6 +42,7 @@ void TowerManager::Draw(sf::RenderWindow* context)
   if (isGrabbed)
   {
     grabbed->draw(context);
+    grabbed->drawRangeCircle(context);
   }
 }
 
