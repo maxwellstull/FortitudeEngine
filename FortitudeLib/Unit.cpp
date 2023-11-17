@@ -15,6 +15,7 @@ Unit::Unit(Attributes attr)
   _targetFindTimer = Timer(0.25);
   _fireTimer = Timer(1.f / attr.fireRate);
   gunLeft = false;
+  _deltaPerSec = sf::Vector2f(0, 0);
 }
 
 void Unit::update(double dt)
@@ -144,7 +145,7 @@ void Unit::fire()
     _gunRecoilAnimation.activateForward();
     std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), _attributes.accuracy, 1000, _attributes.damage);
     proj->setProjTexture(_projTexture, _bulletScale);
-    proj->fire(getTarget(), sf::Vector2f(0, 0));
+    proj->fire(getTarget());
     shots.push_back(proj);
   }
 }

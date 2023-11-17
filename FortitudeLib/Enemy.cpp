@@ -23,7 +23,7 @@ void Enemy::update(float dtAsSeconds)
 //			deactivate();
 //		}
 
-		setLocation(getLocation() + dtAsSeconds * deltaPerSec);
+		setLocation(getLocation() + dtAsSeconds * getDeltaPerSec());
 
 		if (destination->contains(getLocation())) //no longer in rectangle - meaning it met the waypoint
 		{
@@ -116,8 +116,10 @@ void Enemy::nextDestination()
 
 	double theta = atan2((destination->getSegmentEnd().y - getLocation().y), (destination->getSegmentEnd().x - getLocation().x));
 	heading = theta;
-	deltaPerSec.x = speed * cos(theta);
-	deltaPerSec.y = speed * sin(theta);
+	sf::Vector2f delta;
+	delta.x = speed * cos(theta);
+	delta.y = speed * sin(theta);
+	setDeltaPerSec(delta);
 }
 
 

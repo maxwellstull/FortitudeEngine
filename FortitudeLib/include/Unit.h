@@ -45,6 +45,7 @@ private:
   sf::RectangleShape _curHealthBar;
   sf::RectangleShape _maxHealthBar;
   bool _healthBar;
+  sf::Vector2f _deltaPerSec;
 
   //Generic target
   std::shared_ptr<Unit> _target;
@@ -65,11 +66,14 @@ public:
   sf::Sprite* getGunSprite() { return &_gunSpr; }
   void setProjTexture(sf::Texture* texture, double scale);
   void setGunRotation(double rot, double rotmod);
+  sf::FloatRect getBodyBounds() { return _bodySpr.getLocalBounds(); }
   double getGunRotation() { return _gunSpr.getRotation(); }
   void setStaticGunRotation(double rot) { _staticGunRotation = rot; }
   double getStaticGunRotation() { return _staticGunRotation; }
   Animation* getRecoilAnimation() { return &_gunRecoilAnimation; }
   Animation* getResetAnimation() { return &_gunResetAnimation; }
+  void setDeltaPerSec(sf::Vector2f d) { _deltaPerSec = d; }
+  sf::Vector2f getDeltaPerSec() { return _deltaPerSec; }
 
   bool getIsTargetValid() { return _validTarget; }
   void setIsTargetValid(bool v) { _validTarget = v; }

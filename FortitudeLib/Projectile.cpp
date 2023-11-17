@@ -81,7 +81,9 @@ void Projectile::update(float dt)
   if(_active)
   {
     setLocation(getLocation() + (dt * _deltaPerSec));
-    if (!_despawning && between(_origin, _location, _targetLoc))
+    double dist = sqrt(pow(_target->getLocation().y - getLocation().y, 2) + pow(_target->getLocation().x - getLocation().x, 2));
+    
+    if (!_despawning && (dist > (_target->getBodyBounds().width / 3) || dist > (_target->getBodyBounds().height / 3)))
     {
       //vibe
     }
@@ -123,11 +125,11 @@ void Projectile::draw(sf::RenderWindow* context)
   }
 }
 
-void Projectile::fire(std::shared_ptr<Unit> target, sf::Vector2f enemyDeltaPS)
+void Projectile::fire(std::shared_ptr<Unit> target)
 {
   double distance = sqrt(pow(target->getLocation().y - _location.y, 2) + pow(target->getLocation().x - _location.x, 2));
   double travelTime = distance / _speed;
-  sf::Vector2f leadingTarget = target->getLocation() + sf::Vector2f(enemyDeltaPS.x * travelTime, enemyDeltaPS.y * travelTime);
+  sf::Vector2f leadingTarget = target->getLocation() + sf::Vector2f(target->getDeltaPerSec().x * travelTime, target->getDeltaPerSec().y * travelTime);
 
   double theta = atan2(leadingTarget.y - _location.y, leadingTarget.x - _location.x);
   _deltaPerSec.x = _speed * cos(theta);

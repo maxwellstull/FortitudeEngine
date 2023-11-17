@@ -19,7 +19,7 @@ private:
 	int destinationIdx = 0;
 
 	float speed;
-	sf::Vector2f deltaPerSec;
+	
 	double heading;
 public:
 	Enemy(Attributes attr);

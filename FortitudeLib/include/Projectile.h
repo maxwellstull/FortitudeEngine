@@ -32,7 +32,7 @@ public:
   Projectile(sf::Vector2f origin, double accuracy, double speed, double damage);
   void update(float dt);
   void draw(sf::RenderWindow* context);
-  void fire(std::shared_ptr<Unit> target, sf::Vector2f enemyDeltaPS);
+  void fire(std::shared_ptr<Unit> target);
   void setProjTexture(sf::Texture* texture, double scale);
   sf::Vector2f getLocation() { return _location; }
   void setLocation(sf::Vector2f loc);
