@@ -18,11 +18,14 @@ void EnemyManager::initialize(GameInfo info)
 	textures.push_back(texture);
 	texture.loadFromFile("img/gun.png");
 	textures.push_back(texture);
+	texture.loadFromFile("img/bullet.png");
+	textures.push_back(texture);
 
 	Unit::Attributes attr = { 100, 100, 10, 0.2, 300 };
 	std::shared_ptr<Enemy> en = std::make_shared<Enemy>(attr);
 	en->setBodyTexture(&textures[0], 0.25);
 	en->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
+	en->setProjTexture(&textures[2], 0.25);
 	en->setEnemyManager(this);
 	en->setSpeed(50);
 	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
@@ -46,6 +49,7 @@ void EnemyManager::spawnBadGuy()
 	en->setBodyTexture(&textures[0], 0.25);
 	en->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
 	en->setEnemyManager(this);
+	en->setProjTexture(&textures[2], 0.25);
 	en->setSpeed(50);
 	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
 	enemies.push_back(en);

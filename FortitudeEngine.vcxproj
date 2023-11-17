@@ -151,6 +151,7 @@
     <ClInclude Include="FortitudeLib\include\MenuShopItem.h" />
     <ClInclude Include="FortitudeLib\include\Path.h" />
     <ClInclude Include="FortitudeLib\include\PathSegment.h" />
+    <ClInclude Include="FortitudeLib\include\Projectile.h" />
     <ClInclude Include="FortitudeLib\include\Timer.h" />
     <ClInclude Include="FortitudeLib\include\Tower.h" />
     <ClInclude Include="FortitudeLib\include\TowerManager.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="FortitudeLib\MenuShopItem.cpp" />
     <ClCompile Include="FortitudeLib\Path.cpp" />
     <ClCompile Include="FortitudeLib\PathSegment.cpp" />
+    <ClCompile Include="FortitudeLib\Projectile.cpp" />
     <ClCompile Include="FortitudeLib\Tower.cpp" />
     <ClCompile Include="FortitudeLib\TowerManager.cpp" />
     <ClCompile Include="FortitudeLib\Unit.cpp" />

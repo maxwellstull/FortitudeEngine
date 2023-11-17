@@ -38,7 +38,7 @@ void Path::generatePath()
 
 		sf::Vector2f tmpStart = start;
 		sf::Vector2f tmpEnd;
-		for (int i = 0; i < segmentAmnt; i++)
+		for (int j = 0; j < segmentAmnt; j++)
 		{
 			PathSegment segment;
 

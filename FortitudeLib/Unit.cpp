@@ -25,6 +25,10 @@ void Unit::update(double dt)
     _gunResetAnimation.update(dt);
     _fireTimer.update(dt);
     _targetFindTimer.update(dt);
+    for (auto proj : shots)
+    {
+      proj->update(dt);
+    }
   }
 }
 
@@ -39,6 +43,10 @@ void Unit::draw(sf::RenderWindow* context)
     }
     context->draw(_bodySpr);
     context->draw(_gunSpr);
+    for (auto proj : shots)
+    {
+      proj->draw(context);
+    }
   }
 }
 
@@ -126,12 +134,18 @@ double Unit::getTargetDistance()
 
 void Unit::fire()
 {
-  _gunRecoilAnimation.activateForward();
-  getTarget()->takeDamage(getDamage());
   if (getTarget()->isActive() == false)
   {
     setIsTargetValid(false);
     _targetFindTimer.clear();
+  }
+  else
+  {
+    _gunRecoilAnimation.activateForward();
+    std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), _attributes.accuracy, 1000, _attributes.damage);
+    proj->setProjTexture(_projTexture, _bulletScale);
+    proj->fire(getTarget(), sf::Vector2f(0, 0));
+    shots.push_back(proj);
   }
 }
 
@@ -144,7 +158,13 @@ void Unit::setLocation(sf::Vector2f loc)
   _maxHealthBar.setPosition(loc);
 }
 
-void Unit::setGunRotation(double rot, double rotmod) 
+void Unit::setProjTexture(sf::Texture* texture, double scale)
+{
+  _projTexture = texture;
+  _bulletScale = scale;
+}
+
+void Unit::setGunRotation(double rot, double rotmod)
 { 
   std::cout << "rot " << rot << std::endl;
  

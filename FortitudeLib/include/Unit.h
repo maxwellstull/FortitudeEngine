@@ -7,6 +7,7 @@
 #include "GameStructures.h"
 #include "Animation.h"
 #include "Timer.h"
+#include "Projectile.h"
 
 
 class Unit {
@@ -18,6 +19,7 @@ public:
     double damage;
     double fireRate;
     double range;
+    double accuracy; //between 0 and 100
   };
 
 private:
@@ -34,6 +36,8 @@ private:
   sf::Sprite _bodySpr;
   sf::Texture* _gunTexture;
   sf::Sprite _gunSpr;
+  sf::Texture* _projTexture;
+  double _bulletScale;
   bool gunLeft;
   double _staticGunRotation;
   Animation _gunRecoilAnimation;
@@ -47,6 +51,7 @@ private:
   bool _validTarget;
   Timer _targetFindTimer;
   Timer _fireTimer;
+  std::vector<std::shared_ptr<Projectile>> shots;
 
 public:
   Unit(Attributes attr);
@@ -58,6 +63,7 @@ public:
   sf::Sprite* getBodySprite() { return &_bodySpr; }
   void setGunTexture(sf::Texture* texture, double scale, sf::Vector2f offset);
   sf::Sprite* getGunSprite() { return &_gunSpr; }
+  void setProjTexture(sf::Texture* texture, double scale);
   void setGunRotation(double rot, double rotmod);
   double getGunRotation() { return _gunSpr.getRotation(); }
   void setStaticGunRotation(double rot) { _staticGunRotation = rot; }
