@@ -96,7 +96,7 @@ void TowerManager::spawnProspector()
   grabbed = std::make_shared<Tower>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[4], 0.1, sf::Vector2f(-150, -200));
-  grabbed->setProjTexture(&textures[6], 0.25);
+  grabbed->setProjTexture(&textures[4], 0.1);
   grabbed->setTowerManager(this);
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();
