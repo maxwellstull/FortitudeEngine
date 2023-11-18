@@ -20,3 +20,4 @@ enum TowerTargeting {
 	CLOSEST = 0,
 	FIRST = 1,
 };
+
