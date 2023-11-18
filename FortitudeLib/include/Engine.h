@@ -45,7 +45,8 @@ private:
     void input();
     void update(float dtAsSeconds);
     void draw();
-    void hittest(sf::Vector2f cursorPos);
+    void hovertest(sf::Vector2f cursorPos);
+    void clicktest(sf::Vector2f cursorPos);
 
 public:
     // The Engine constructor

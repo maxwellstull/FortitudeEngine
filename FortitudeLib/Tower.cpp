@@ -9,7 +9,7 @@
 
 Tower::Tower(Attributes attr) : Unit(attr)
 {
-
+	_drawRange = false;
 }
 
 void Tower::initialize()
@@ -23,6 +23,30 @@ void Tower::initialize()
 	_rangeCircle.setOutlineThickness(4);
 
 	Unit::initialize(true);
+}
+
+std::string trimDoubleToString(double num)
+{
+	return std::to_string(num).substr(0, std::to_string(num).find(".") + 2);
+}
+std::string Tower::getHealthString()
+{
+	return "Hp: " + trimDoubleToString(getHealth()) + "/" + trimDoubleToString(getMaxHealth());
+}
+
+std::string Tower::getDamageString()
+{
+	return "Dmg: " + trimDoubleToString(getDamage() * getFireRate()) + "dps (" + trimDoubleToString(getDamage()) + ", " + trimDoubleToString(getFireRate()) + "/sec";
+}
+
+std::string Tower::getRangeString()
+{
+	return "Rng: " + trimDoubleToString(getRange());
+}
+
+std::string Tower::getAccuracyString()
+{
+	return "Acc: " + trimDoubleToString(getAccuracy());
 }
 
 
@@ -100,9 +124,21 @@ void Tower::findTarget()
 	}
 }
 
+bool Tower::hittest(sf::Vector2f cursorPos)
+{
+	sf::FloatRect bodybounds = getBodySprite()->getGlobalBounds();
+	return bodybounds.contains(cursorPos);
+}
+
 void Tower::draw(sf::RenderWindow* context)
 {
+	
 	Unit::draw(context);
+	if (_drawRange)
+	{
+		std::cout << "HEY" << std::endl;
+		drawRangeCircle(context);
+	}
 }
 
 void Tower::drawRangeCircle(sf::RenderWindow* context)

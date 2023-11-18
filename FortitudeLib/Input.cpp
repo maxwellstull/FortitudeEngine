@@ -7,7 +7,7 @@ void Engine::input()
     sf::Vector2i pixelPos = sf::Mouse::getPosition(*window.GetWindow());
     cursorWorldPos = window.GetWindow()->mapPixelToCoords(pixelPos);
     
-    hittest(cursorWorldPos);
+    hovertest(cursorWorldPos);
 
     sf::Event event;
     while (window.GetWindow()->pollEvent(event))
@@ -87,7 +87,10 @@ void Engine::input()
                       if (menu.isActive())
                       {
                         menu.Enter();
-                        
+                      }
+                      if (act == Active::GAME)
+                      {
+                        clicktest(cursorWorldPos);
                       }
                       break;
                     }
@@ -106,7 +109,15 @@ void Engine::input()
     }
 }
 
-void Engine::hittest(sf::Vector2f cursorPos)
+void Engine::hovertest(sf::Vector2f cursorPos)
 {
-    menu.hitvisit(cursorPos);
+  menu.hitvisit(cursorPos);
+}
+
+void Engine::clicktest(sf::Vector2f cursorPos)
+{    
+  if (act == Active::GAME)
+  {
+    game.hitvisit(cursorPos);
+  }
 }

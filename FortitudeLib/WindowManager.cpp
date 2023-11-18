@@ -15,3 +15,8 @@ void WindowManager::init()
 	window.setView(view);
 	
 }
+
+sf::Vector2f WindowManager::getWindowSize()
+{
+	return sf::Vector2f(window.getSize().x, window.getSize().y);
+}

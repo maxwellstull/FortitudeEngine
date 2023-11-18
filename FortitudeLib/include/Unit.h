@@ -98,6 +98,7 @@ public:
   double getDamage() { return _attributes.damage; }
   double getFireRate() { return _attributes.fireRate; }
   double getRange() { return  _attributes.range; }
+  double getAccuracy() { return _attributes.accuracy; }
 
   double computeDistance(double dx, double dy) { return sqrt(pow(dx, 2) + pow(dy, 2)); }
   bool isActive() { return _active; }

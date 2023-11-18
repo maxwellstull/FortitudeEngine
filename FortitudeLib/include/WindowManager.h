@@ -31,5 +31,6 @@ public:
     void enableVsync() { vsync = true; window.setVerticalSyncEnabled(vsync); }
     void disableVsync() { vsync = false; window.setVerticalSyncEnabled(vsync); }
     int getMaxFramerate() { return maxFR; }
+    sf::Vector2f getWindowSize();
     void setMaxFramerate(int fr) { maxFR = fr; window.setFramerateLimit(fr); }
 };

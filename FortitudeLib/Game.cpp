@@ -21,6 +21,14 @@ void Game::updateWaveHUD()
 	waveHUD.setString(waves);
 }
 
+void Game::hitvisit(sf::Vector2f cursorPos)
+{
+	if (isActive)
+	{
+		twm.hitvisit(cursorPos);
+	}
+}
+
 void Game::load()
 {
 	enm.setGame(this);

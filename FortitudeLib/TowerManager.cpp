@@ -13,6 +13,10 @@ void TowerManager::update(float dtAsSeconds)
     grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
     grabbed->setRangeLocation(sf::Vector2f(sf::Mouse::getPosition()));
   }
+  if (splashActive)
+  {
+    selectedSplash.update(dtAsSeconds);
+  }
 }
 
 void TowerManager::initialize()
@@ -33,18 +37,25 @@ void TowerManager::initialize()
   texture.loadFromFile("img/bullet.png");
   textures.push_back(texture);
   isGrabbed = false;
+  splashActive = false;
+  selectedSplash.init();
+  selectedSplash.SetEngine(getGame()->GetEngine());
 }
 
 void TowerManager::Draw(sf::RenderWindow* context)
 {
-  for (std::shared_ptr<Unit> to : towers)
+  for (std::shared_ptr<Tower> to : towers)
   {
     to->draw(context);
   }
   if (isGrabbed)
   {
     grabbed->draw(context);
-    grabbed->drawRangeCircle(context);
+    //grabbed->drawRangeCircle(context);
+  }
+  if (splashActive)
+  {
+    selectedSplash.Draw(context);
   }
 }
 
@@ -59,6 +70,7 @@ void TowerManager::spawnLawman()
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();
   grabbed->pause();
+  grabbed->setDrawRange();
   isGrabbed = true;
 }
 
@@ -73,6 +85,7 @@ void TowerManager::spawnMarshall()
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();
   grabbed->pause();
+  grabbed->setDrawRange();
   isGrabbed = true;
 }
 
@@ -87,6 +100,7 @@ void TowerManager::spawnPistol()
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();
   grabbed->pause();
+  grabbed->setDrawRange();
   isGrabbed = true;
 }
 
@@ -101,6 +115,7 @@ void TowerManager::spawnProspector()
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();
   grabbed->pause();
+  grabbed->setDrawRange();
   isGrabbed = true;
 }
 
@@ -115,5 +130,32 @@ void TowerManager::spawnBlaster()
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();
   grabbed->pause();
+  grabbed->setDrawRange();
   isGrabbed = true;
+}
+
+void TowerManager::hitvisit(sf::Vector2f cursorPos)
+{
+  if(splashedTower)
+  {
+    splashedTower->clearDrawRange();
+  }
+  selectedSplash.deactivate();
+  splashActive = false;
+  splashedTower = nullptr;
+  for (std::shared_ptr<Tower> to : towers)
+  {
+    if (to->hittest(cursorPos))
+    {
+      if (to->isPaused() == false);
+      {
+        selectedSplash.TowerSplash(to);
+        splashedTower = to;
+        splashedTower->setDrawRange();
+        splashedTower->setRangeLocation(splashedTower->getLocation());
+        splashActive = true;
+        break;
+      }  
+    }
+  }
 }

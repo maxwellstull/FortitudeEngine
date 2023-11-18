@@ -8,7 +8,7 @@
 #include <memory>
 
 class Engine;
-
+class Tower;
 
 
 class MenuManager
@@ -53,4 +53,9 @@ public:
     void deactivate() { active = false; }
     void activate() { active = true; }
     void hitvisit(sf::Vector2f cursorPos);
+    std::vector<std::shared_ptr<MenuComponent>>* getComponents() { return &components; }
+    std::vector<std::shared_ptr<sf::Drawable>>* getShapes() { return &shapes; }
+    std::vector<sf::Texture>* getTextures() { return &textures; }
+    sf::Texture* getTexture(int idx) { return &textures[idx]; }
+    const char* getFont(int idx) { return fonts[idx]; }
 };

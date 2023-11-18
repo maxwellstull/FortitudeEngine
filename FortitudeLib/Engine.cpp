@@ -10,6 +10,7 @@ Engine::Engine()
     game.setWaveCt(25);
     menu.init();
     menu.SetEngine(this);
+    menu.MainMenu();
     leader.init();
 
 

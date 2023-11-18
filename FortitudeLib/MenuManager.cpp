@@ -2,6 +2,7 @@
 #include <iostream>
 #include "include/Engine.h"
 #include <string>
+#include "include/Tower.h"
 //class Engine;
 
 void MenuManager::Draw(sf::RenderWindow *context)
@@ -76,10 +77,10 @@ void MenuManager::init()
 	sf::Texture texture;
 	texture.loadFromFile("img/wood.jpg");
 	textures.push_back(texture);
+	texture.loadFromFile("img/notice.png");
+	textures.push_back(texture);
 
 	defaultComp = std::make_shared<MenuComponent>("", fonts[0], sf::Vector2f(0, 0), 0);
-
-	MainMenu();
 }
 
 
@@ -419,7 +420,6 @@ void MenuManager::MapSelect(int page)
 	shapes.push_back(boardRight);
 }
 
-
 void MenuManager::TowerShop()
 {
 	shapes.clear();
@@ -515,7 +515,6 @@ void MenuManager::TowerShop()
 	shapes.push_back(shop);
 	activate();
 }
-
 
 void MenuManager::hitvisit(sf::Vector2f cursorPos)
 {

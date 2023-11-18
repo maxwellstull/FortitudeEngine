@@ -24,7 +24,6 @@ private:
 	GameInfo info;
 	GameState state;
 
-
 	// money bag
 	sf::Font font;
 	sf::Texture moneyTex;
@@ -55,4 +54,5 @@ public:
 	void incrementWave(int amnt = 1 ) { }
 	void decrementCurrentHealth(int amnt = 1) { state.currentHealth -= amnt; updateHealthHUD(); }
 	sf::Texture* getTowerTexture(int idx) { return twm.getTowerTexture(idx); }
+	void hitvisit(sf::Vector2f cursorPos);
 };
