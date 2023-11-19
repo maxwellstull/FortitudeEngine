@@ -90,6 +90,24 @@
     <ClInclude Include="FortitudeLib\include\Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FortitudeLib\include\Blaster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FortitudeLib\include\Lawman.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FortitudeLib\include\Marshall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FortitudeLib\include\Pistol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FortitudeLib\include\Prospector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FortitudeLib\include\TowerStatMenuManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -165,6 +183,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FortitudeLib\Projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortitudeLib\Blaster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortitudeLib\Lawman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortitudeLib\Marshall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortitudeLib\Pistol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortitudeLib\Prospector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FortitudeLib\TowerStatMenuManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

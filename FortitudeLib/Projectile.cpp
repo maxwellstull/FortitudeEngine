@@ -127,9 +127,13 @@ void Projectile::draw(sf::RenderWindow* context)
 
 void Projectile::fire(std::shared_ptr<Unit> target)
 {
-  double distance = sqrt(pow(target->getLocation().y - _location.y, 2) + pow(target->getLocation().x - _location.x, 2));
+  fire(target, sf::Vector2f(0, 0));
+}
+void Projectile::fire(std::shared_ptr<Unit> target, sf::Vector2f spread)
+{
+  double distance = sqrt(pow(target->getLocation().y + spread.y - _location.y, 2) + pow(target->getLocation().x + spread.x - _location.x, 2));
   double travelTime = distance / _speed;
-  sf::Vector2f leadingTarget = target->getLocation() + sf::Vector2f(target->getDeltaPerSec().x * travelTime, target->getDeltaPerSec().y * travelTime);
+  sf::Vector2f leadingTarget = (target->getLocation() + spread) + sf::Vector2f(target->getDeltaPerSec().x * travelTime, target->getDeltaPerSec().y * travelTime);
 
   double theta = atan2(leadingTarget.y - _location.y, leadingTarget.x - _location.x);
   _deltaPerSec.x = _speed * cos(theta);

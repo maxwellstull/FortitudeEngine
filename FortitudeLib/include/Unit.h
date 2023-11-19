@@ -20,6 +20,7 @@ public:
     double fireRate;
     double range;
     double accuracy; //between 0 and 100
+    double projectileSpeed;
   };
 
 private:
@@ -65,6 +66,7 @@ public:
   void setGunTexture(sf::Texture* texture, double scale, sf::Vector2f offset);
   sf::Sprite* getGunSprite() { return &_gunSpr; }
   void setProjTexture(sf::Texture* texture, double scale);
+  sf::Texture* getProjTexture() { return _projTexture; }
   void setGunRotation(double rot, double rotmod);
   sf::FloatRect getBodyBounds() { return _bodySpr.getLocalBounds(); }
   double getGunRotation() { return _gunSpr.getRotation(); }
@@ -74,7 +76,8 @@ public:
   Animation* getResetAnimation() { return &_gunResetAnimation; }
   void setDeltaPerSec(sf::Vector2f d) { _deltaPerSec = d; }
   sf::Vector2f getDeltaPerSec() { return _deltaPerSec; }
-
+  double getBulletScale() { return _bulletScale; }
+  void addProjectile(std::shared_ptr<Projectile> proj) { shots.push_back(proj); }
   bool getIsTargetValid() { return _validTarget; }
   void setIsTargetValid(bool v) { _validTarget = v; }
   void setTarget(std::shared_ptr<Unit> tar) { _target = tar; }
@@ -85,6 +88,7 @@ public:
   double getAnimationValue();
   bool getFireTimerStatus() { return _fireTimer.get(); }
   bool getTargetingTimerStatus() { return _targetFindTimer.get(); }
+  Timer* getTargetFindTimer() { return &_targetFindTimer; }
 
   void setAttributes(Attributes attr) { _attributes = attr; }
   Attributes getAttributes() { return _attributes; }
@@ -99,6 +103,7 @@ public:
   double getFireRate() { return _attributes.fireRate; }
   double getRange() { return  _attributes.range; }
   double getAccuracy() { return _attributes.accuracy; }
+  double getProjectileSpeed() { return _attributes.projectileSpeed; }
 
   double computeDistance(double dx, double dy) { return sqrt(pow(dx, 2) + pow(dy, 2)); }
   bool isActive() { return _active; }
@@ -106,6 +111,6 @@ public:
   void deactivate() { _active = false; }
   sf::Vector2f getLocation() { return _location; }
   void setLocation(sf::Vector2f loc);
-  void fire();
+  virtual void fire();
   void takeDamage(double damage);
 };

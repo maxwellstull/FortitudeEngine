@@ -136,14 +136,17 @@
     <ClInclude Include="FortitudeLib\include\Achievement.h" />
     <ClInclude Include="FortitudeLib\include\Achievements.h" />
     <ClInclude Include="FortitudeLib\include\Animation.h" />
+    <ClInclude Include="FortitudeLib\include\Blaster.h" />
     <ClInclude Include="FortitudeLib\include\Enemy.h" />
     <ClInclude Include="FortitudeLib\include\EnemyManager.h" />
     <ClInclude Include="FortitudeLib\include\Engine.h" />
     <ClInclude Include="FortitudeLib\include\FPS.h" />
     <ClInclude Include="FortitudeLib\include\Game.h" />
     <ClInclude Include="FortitudeLib\include\GameStructures.h" />
+    <ClInclude Include="FortitudeLib\include\Lawman.h" />
     <ClInclude Include="FortitudeLib\include\Leaderboard.h" />
     <ClInclude Include="FortitudeLib\include\Map.h" />
+    <ClInclude Include="FortitudeLib\include\Marshall.h" />
     <ClInclude Include="FortitudeLib\include\MenuManager.h" />
     <ClInclude Include="FortitudeLib\include\MenuComponent.h" />
     <ClInclude Include="FortitudeLib\include\MenuMap.h" />
@@ -151,10 +154,13 @@
     <ClInclude Include="FortitudeLib\include\MenuShopItem.h" />
     <ClInclude Include="FortitudeLib\include\Path.h" />
     <ClInclude Include="FortitudeLib\include\PathSegment.h" />
+    <ClInclude Include="FortitudeLib\include\Pistol.h" />
     <ClInclude Include="FortitudeLib\include\Projectile.h" />
+    <ClInclude Include="FortitudeLib\include\Prospector.h" />
     <ClInclude Include="FortitudeLib\include\Timer.h" />
     <ClInclude Include="FortitudeLib\include\Tower.h" />
     <ClInclude Include="FortitudeLib\include\TowerManager.h" />
+    <ClInclude Include="FortitudeLib\include\TowerStatMenuManager.h" />
     <ClInclude Include="FortitudeLib\include\Unit.h" />
     <ClInclude Include="FortitudeLib\include\WindowManager.h" />
     <ClInclude Include="main.h" />
@@ -162,6 +168,7 @@
   <ItemGroup>
     <ClCompile Include="FortitudeLib\Achievement.cpp" />
     <ClCompile Include="FortitudeLib\Achievements.cpp" />
+    <ClCompile Include="FortitudeLib\Blaster.cpp" />
     <ClCompile Include="FortitudeLib\Draw.cpp" />
     <ClCompile Include="FortitudeLib\Enemy.cpp" />
     <ClCompile Include="FortitudeLib\EnemyManager.cpp" />
@@ -169,8 +176,10 @@
     <ClCompile Include="FortitudeLib\FPS.cpp" />
     <ClCompile Include="FortitudeLib\Game.cpp" />
     <ClCompile Include="FortitudeLib\Input.cpp" />
+    <ClCompile Include="FortitudeLib\Lawman.cpp" />
     <ClCompile Include="FortitudeLib\Leaderboard.cpp" />
     <ClCompile Include="FortitudeLib\Map.cpp" />
+    <ClCompile Include="FortitudeLib\Marshall.cpp" />
     <ClCompile Include="FortitudeLib\MenuManager.cpp" />
     <ClCompile Include="FortitudeLib\MenuComponent.cpp" />
     <ClCompile Include="FortitudeLib\MenuMap.cpp" />
@@ -178,9 +187,12 @@
     <ClCompile Include="FortitudeLib\MenuShopItem.cpp" />
     <ClCompile Include="FortitudeLib\Path.cpp" />
     <ClCompile Include="FortitudeLib\PathSegment.cpp" />
+    <ClCompile Include="FortitudeLib\Pistol.cpp" />
     <ClCompile Include="FortitudeLib\Projectile.cpp" />
+    <ClCompile Include="FortitudeLib\Prospector.cpp" />
     <ClCompile Include="FortitudeLib\Tower.cpp" />
     <ClCompile Include="FortitudeLib\TowerManager.cpp" />
+    <ClCompile Include="FortitudeLib\TowerStatMenuManager.cpp" />
     <ClCompile Include="FortitudeLib\Unit.cpp" />
     <ClCompile Include="FortitudeLib\Update.cpp" />
     <ClCompile Include="FortitudeLib\WindowManager.cpp" />

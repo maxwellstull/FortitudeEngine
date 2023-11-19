@@ -26,7 +26,7 @@ void Unit::update(double dt)
     _gunResetAnimation.update(dt);
     _fireTimer.update(dt);
     _targetFindTimer.update(dt);
-    for (auto proj : shots)
+    for (std::shared_ptr<Projectile> proj : shots)
     {
       proj->update(dt);
     }
@@ -138,7 +138,7 @@ void Unit::fire()
   if (getTarget()->isActive() == false)
   {
     setIsTargetValid(false);
-    _targetFindTimer.clear();
+    getTargetFindTimer()->clear();
   }
   else
   {

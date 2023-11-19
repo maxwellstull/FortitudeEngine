@@ -33,6 +33,7 @@ public:
   void update(float dt);
   void draw(sf::RenderWindow* context);
   void fire(std::shared_ptr<Unit> target);
+  void fire(std::shared_ptr<Unit> target, sf::Vector2f spread);
   void setProjTexture(sf::Texture* texture, double scale);
   sf::Vector2f getLocation() { return _location; }
   void setLocation(sf::Vector2f loc);
