@@ -1,9 +1,16 @@
 #include "include/Blaster.h"
-
+#include <cstdlib>
 
 Blaster::Blaster(Attributes attr) : Tower(attr)
 {
   _projectileCount = 3;
+
+  _mods.clear();
+
+  for (int i = 0; i < _projectileCount; i++)
+  {
+    _mods.push_back(sf::Vector2f(((rand() % 2 == 0) ? -1 : 1) * (rand() % 10), (((rand() % 2 == 0) ? -1 : 1) * (rand() % 10))));
+  }
 }
 
 
@@ -16,10 +23,8 @@ void Blaster::fire()
   }
   else
   {
-    std::vector<sf::Vector2f> mods = { sf::Vector2f(15, 10), sf::Vector2f(-10, 5), sf::Vector2f(-10, -3), sf::Vector2f(10, -10) };
-
     getRecoilAnimation()->activateForward();
-    for(sf::Vector2f mod : mods)
+    for(sf::Vector2f mod : _mods)
     {
       std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), getAccuracy(), getProjectileSpeed(), getDamage());
       proj->setProjTexture(getProjTexture(), getBulletScale());
