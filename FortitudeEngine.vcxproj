@@ -157,6 +157,7 @@
     <ClInclude Include="FortitudeLib\include\Pistol.h" />
     <ClInclude Include="FortitudeLib\include\Projectile.h" />
     <ClInclude Include="FortitudeLib\include\Prospector.h" />
+    <ClInclude Include="FortitudeLib\include\SplashProjectile.h" />
     <ClInclude Include="FortitudeLib\include\Timer.h" />
     <ClInclude Include="FortitudeLib\include\Tower.h" />
     <ClInclude Include="FortitudeLib\include\TowerManager.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="FortitudeLib\Pistol.cpp" />
     <ClCompile Include="FortitudeLib\Projectile.cpp" />
     <ClCompile Include="FortitudeLib\Prospector.cpp" />
+    <ClCompile Include="FortitudeLib\SplashProjectile.cpp" />
     <ClCompile Include="FortitudeLib\Tower.cpp" />
     <ClCompile Include="FortitudeLib\TowerManager.cpp" />
     <ClCompile Include="FortitudeLib\TowerStatMenuManager.cpp" />
