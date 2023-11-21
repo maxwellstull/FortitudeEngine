@@ -40,4 +40,5 @@ public:
 	std::string getDamageString();
 	std::string getRangeString();
 	std::string getAccuracyString();
+	void findNearby();
 };

@@ -52,9 +52,6 @@ void Enemy::update(float dtAsSeconds)
 				setIsTargetValid(false); //out of range
 			}
 		}
-
-		
-		std::cout << "Health: " << getHealth() << std::endl;
 	}
 }
 
@@ -107,7 +104,9 @@ void Enemy::initialize(PathSegment* st)
 
 void Enemy::nextDestination()
 {
+	destination->remove(getID());
 	destination = destination->getNext();
+	destination->add(this);
 	if (destination->getNodeType() == PathNodeType::END) //made it to the end
 	{
 		deactivate();
@@ -123,6 +122,44 @@ void Enemy::nextDestination()
 }
 
 
+void Enemy::splashDamageAssist(double rng, double dmg, sf::Vector2f origin)
+{
+	std::cout << " what the higgity higgity heck" << std::endl;
+	std::vector<Enemy *> toCheck;
+	for (Enemy* en : destination->getContained())
+	{
+		toCheck.push_back(en);
+	}
+	double dist = 0;
+	PathSegment* ahead = destination->getNext();
+	PathSegment* behind = destination->getPrev();
 
+	while (dist < rng)
+	{
+		dist += ahead->getLength();
+
+		for (Enemy* en : ahead->getContained())
+		{
+			toCheck.push_back(en);
+		}
+		for (Enemy* en : behind->getContained())
+		{
+			toCheck.push_back(en);
+		}
+
+		ahead = ahead->getNext();
+		behind = behind->getPrev();
+	}
+
+	
+	for (Enemy* en : toCheck)
+	{
+		dist = sqrt(pow(en->getLocation().y - origin.y, 2) + pow(en->getLocation().x - origin.x, 2));
+		if (dist < rng)
+		{
+			en->takeDamage(dmg);
+		}
+	}
+}
 
 

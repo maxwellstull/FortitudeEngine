@@ -12,6 +12,7 @@ class Game;
 class EnemyManager
 {
 private:
+	int enemyIDCtr;
 	Game* game;
 	std::vector<std::shared_ptr<Enemy>> enemies;
 	std::vector<sf::Texture> textures;

@@ -81,7 +81,7 @@ void Projectile::update(float dt)
   if(_active)
   {
     setLocation(getLocation() + (dt * _deltaPerSec));
-    double dist = sqrt(pow(_target->getLocation().y - getLocation().y, 2) + pow(_target->getLocation().x - getLocation().x, 2));
+    double dist = sqrt(pow(_targetLoc.y - getLocation().y, 2) + pow(_targetLoc.x - getLocation().x, 2));
     
     if (!_despawning && (dist > (_target->getBodyBounds().width / 3) || dist > (_target->getBodyBounds().height / 3)))
     {
@@ -129,6 +129,7 @@ void Projectile::fire(std::shared_ptr<Unit> target)
 {
   fire(target, sf::Vector2f(0, 0));
 }
+
 void Projectile::fire(std::shared_ptr<Unit> target, sf::Vector2f spread)
 {
   double distance = sqrt(pow(target->getLocation().y + spread.y - _location.y, 2) + pow(target->getLocation().x + spread.x - _location.x, 2));

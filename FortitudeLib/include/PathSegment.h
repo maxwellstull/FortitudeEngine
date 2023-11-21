@@ -1,7 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <map>
 #include "GameStructures.h"
+
+class Enemy;
 
 class PathSegment
 {
@@ -18,6 +21,8 @@ private:
   PathSegment* _next;
   PathSegment* _prev;
 
+  //std::vector<Enemy*> _contained;
+  std::map<int, Enemy*> _contained;
 
 
 //  std::vector<sf::Vector2f> _leftEdge;
@@ -34,6 +39,7 @@ public:
   PathNodeType getNodeType() { return _type; }
 
   void setSize(sf::Vector2f sz) { _size = sz; }
+  double getLength() { return _size.y; }
   void setNext(PathSegment* seg) { _next = seg; }
   PathSegment* getNext() { return _next; }
   void setPrev(PathSegment* seg) { _prev = seg; }
@@ -41,5 +47,10 @@ public:
   void setXGreaterThan(bool t) { _xGreaterThan = t; }
   void setYGreaterThan(bool t) { _yGreaterThan = t; }
   bool contains(sf::Vector2f check);
+  void remove(int idx);
+  void add(Enemy* en);
+
+//  std::map<int, Enemy*>* getContained() { return &_contained; }
+  std::vector<Enemy*> getContained();
 
 };

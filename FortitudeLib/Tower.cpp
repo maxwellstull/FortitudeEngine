@@ -136,7 +136,6 @@ void Tower::draw(sf::RenderWindow* context)
 	Unit::draw(context);
 	if (_drawRange)
 	{
-		std::cout << "HEY" << std::endl;
 		drawRangeCircle(context);
 	}
 }

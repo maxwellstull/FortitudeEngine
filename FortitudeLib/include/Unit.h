@@ -8,7 +8,7 @@
 #include "Animation.h"
 #include "Timer.h"
 #include "Projectile.h"
-
+#include <iostream>
 
 class Unit {
 public:
@@ -113,4 +113,5 @@ public:
   void setLocation(sf::Vector2f loc);
   virtual void fire();
   void takeDamage(double damage);
+  virtual void splashDamageAssist(double rng, double dmg, sf::Vector2f origin) { std::cout << "shit" << std::endl; }
 };

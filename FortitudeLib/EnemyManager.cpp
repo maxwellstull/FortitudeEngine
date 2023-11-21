@@ -21,6 +21,8 @@ void EnemyManager::initialize(GameInfo info)
 	texture.loadFromFile("img/bullet.png");
 	textures.push_back(texture);
 
+	enemyIDCtr = 0;
+
 	spawnBadGuy();
 }
 
@@ -42,6 +44,7 @@ void EnemyManager::spawnBadGuy()
 	en->setProjTexture(&textures[2], 0.25);
 	en->setSpeed(50);
 	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
+	en->setID(enemyIDCtr++);
 	enemies.push_back(en);
 }
 

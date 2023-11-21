@@ -9,6 +9,8 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
 
 ## Todo
 ### Tasks
+#### Actual todo
+- Make bullets use LESS cheese on hit detection
 #### Save data
 #### Restructure how menus are made
 - Pass in options, sub-options, size, function pointers, etc.

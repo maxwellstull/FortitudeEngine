@@ -17,6 +17,7 @@ private:
 //	std::shared_ptr<sf::FloatRect> endBounds;
 //	sf::FloatRect pathingBounds;
 	int destinationIdx = 0;
+	int uniqueID;
 
 	float speed;
 	
@@ -32,6 +33,9 @@ public:
 	EnemyManager* getEnemyManager() { return enm; }
 	void nextDestination();
 	int getDestinationIdx() { return destinationIdx; }
-	
+	void setID(int uid) { uniqueID = uid; }
+	int getID() { return uniqueID; }
+
 	void initialize(PathSegment * st);
+	void splashDamageAssist(double rng, double dmg, sf::Vector2f origin);
 };

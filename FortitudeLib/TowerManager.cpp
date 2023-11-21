@@ -1,6 +1,7 @@
 #include "include/TowerManager.h"
 #include "include/Game.h"
 #include "include/Blaster.h"
+#include "include/Prospector.h"
 
 
 void TowerManager::update(float dtAsSeconds)
@@ -107,8 +108,8 @@ void TowerManager::spawnPistol()
 
 void TowerManager::spawnProspector()
 {
-  Unit::Attributes attr = { 300, 300, 80, 0.2, 250, 75 };
-  grabbed = std::make_shared<Tower>(attr);
+  Unit::Attributes attr = { 300, 300, 80, 0.2, 500, 75, 300 };
+  grabbed = std::make_shared<Prospector>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[4], 0.1, sf::Vector2f(-150, -200));
   grabbed->setProjTexture(&textures[4], 0.1);

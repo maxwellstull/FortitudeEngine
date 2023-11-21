@@ -166,9 +166,7 @@ void Unit::setProjTexture(sf::Texture* texture, double scale)
 }
 
 void Unit::setGunRotation(double rot, double rotmod)
-{ 
-  std::cout << "rot " << rot << std::endl;
- 
+{  
   if ((rot > 90 || rot < -90) && (gunLeft == false))
   {
     gunLeft = true;
