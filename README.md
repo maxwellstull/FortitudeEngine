@@ -9,24 +9,109 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
 
 ## Todo
 ### Tasks
-#### Actual todo
-- Make bullets use LESS cheese on hit detection
-#### Save data
-#### Restructure how menus are made
-- Pass in options, sub-options, size, function pointers, etc.
-- Layouts will be made automatically
-  - Method for manual layout too
-#### Achievements
-- Create basic implementation of first achievement. Figure out how to tag it onto something
+- [ ] Create classes for each tower
+  - [ ] Prospector needs damage falloff for range of explosion
+- [ ] Implement reload mechanics
+  - [ ] Remove targeting timer
+  - [ ] Add reload progress bar near health bar
+- [ ] Create classes for each enemy
+  - [ ] Draw skin for enemies (bandana and eyecovers)
+- [ ] Create wall (just make it placable, don't worry about blocking bullets)
+- [ ] Create damage type for melee (derive from projectile since this is anarchy)
+- [ ] Create "waves" and gameplay
+  - [ ] Create 'start wave' button
+  - [ ] Create way to auto-generate enemies
+- [ ] Make bullets use less cheese on hit detection (???)
+- [ ] Create pause menu with save & exit, options, etc
+- [ ] Implement save game
+- [ ] Implement "bank"
 
-#### Tower base class
-- Damage type
-#### Enemy base class
 
 ### Features
 
+#### Towers
+- Lawman
+  - Basic unit with a 6-shooter
+  - Ammo: 6
+  - Special: Roulette
+    - One round in the clip deals more damage.
+    - Upgrading increases damage
+- Marshall
+  - Long-range tower with high damage but slower fire rate
+  - Ammo: 8
+  - Special: Armor Piercing
+- Repeater
+  - Fast-firing tower with an automatic pistol
+  - Ammo: 16
+  - Special: Pocket Sand!
+    - Throws pocket sand at enemy when reloading
+    - Blinds enemy from shooting for an upgradable time
+- Prospector
+  - Dynamite-throwing tower that deals splash damage to enemies
+  - Special: Bigger Booms
+    - Increased radius, less damage dropoff
+- Blaster
+  - Shotgun-wielding tower that shoots multiple projectiles
+  - Special: More Pellets
+- Brawler
+  - Throws broken bottles at enemies with a chance to stun, and shanks enemies with a broken bottle if they're close enough
+  - Special: Sharper bottles
+    - Increases bleed time
+- Doc
+  - Movable tower that heals nearby units
+  - Special: Wall repair
+- Sheriff
+  - Player-controllable tower with 2 revolvers
+    - Can be set to auto or manual
+  - Special: How!?!
+    - Increases ammo capacity
+#### Enemies
+- Robber
+  - 6-shooter wielding enemy
+- Train Robber
+  - Robber on a horse! Moves faster
+- Corrupt Politician
+  - Slow-moving tank unit that does no damage
+- Gold Rusher
+  - Fast-moving unit that swings his pickaxe at anything he can reach
+- Modifiers
+  - Armored: Reduces damage taken
+  - Hidden: Increases tower miss chance
+  - Trigger Happy: Increases fire rate
+
+#### Skin Customization
+- Sheriff has steam-tradable skins that are gotten from cases
+  - Cases are given after reaching certain progressions
+  - Attributes
+    - Bandanas (color, pattern)
+    - Hat bands (color, pattern)
+    - Hat colors
+    - Hat pins
+    - Projectile skins
+  - Rare: 
+    - Cowboy boots (colors, patterns)
+    - Weapon skins
+  - Special: 
+    - Football helmet
+      - With the caption of "wrong kind of cowboy", inspired by when I looked up "cowboy hat" and got pictures of hats for the Dallas Cowboys
+    - Ram horns
+      - With the caption "18 more wild cowboys out in the yard"
+- Tower skins are unlocked by progression and non-tradable, same as sheriff but to a lesser extent
+
+#### Bank
+- 
+#### Achievements
+- Create basic implementation of first achievement.
+
+#### Leaderboards
+- Each map will have a leaderboard based on settings
+- Speedrun & max waves
+  - Open (any bank level)
+  - Presets for bank 0, 10, 30, 50, with everyone having the same bank
+
 #### Procedural/random map generation
 - Create random map and place random houses, blocks, etc
+
 #### Map of the Day
 - Using procedural maps, have map of the day with leaderboard that tracks highest wave
 
