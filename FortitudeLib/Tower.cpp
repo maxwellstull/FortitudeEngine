@@ -9,7 +9,14 @@
 
 Tower::Tower(Attributes attr) : Unit(attr)
 {
+	double reloadTime = 5;
+
 	_drawRange = false;
+	_reloadAnim = Animation(30, 0, reloadTime);
+	_reloadAnim.setOnCompleteFunction([this]() {completeReload(); });
+	
+
+	_reloadBar.setPosition(getLocation());
 }
 
 void Tower::initialize()
@@ -22,6 +29,11 @@ void Tower::initialize()
 	_rangeCircle.setFillColor(sf::Color::Transparent);
 	_rangeCircle.setOutlineThickness(4);
 
+	_reloadBar = sf::RectangleShape(sf::Vector2f(30, 5));
+	bds = _reloadBar.getLocalBounds();
+	_reloadBar.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f) - 27);
+	_reloadBar.setFillColor(sf::Color::Yellow);
+	_reloadBar.setSize(sf::Vector2f(0, 5));
 	Unit::initialize(true);
 }
 
@@ -49,17 +61,41 @@ std::string Tower::getAccuracyString()
 	return "Acc: " + trimDoubleToString(getAccuracy());
 }
 
+void Tower::decrementBullet()
+{
+	_gunAmmo.ammo -= 1;
+}
+
+bool Tower::isAmmoEmpty()
+{
+	if (_gunAmmo.ammo <= 0)
+	{
+		std::cout << " HEY WE OUT FAM" << std::endl;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Tower::isAmmoReloading()
+{
+	return _reloadAnim.isActive();
+}
+
 
 void Tower::update(double dtAsSeconds)
 {
 	Unit::update(dtAsSeconds);
-	if(isActive() && _paused == false)
+	_reloadAnim.update(dtAsSeconds);
+	if (isActive() && _paused == false)
 	{
-//		if (getHealth() <= 0)
-//		{
-//			deactivate();
-//			std::cout << " deactivate" << std::endl;
-//		}
+		//		if (getHealth() <= 0)
+		//		{
+		//			deactivate();
+		//			std::cout << " deactivate" << std::endl;
+		//		}
 		if (getIsTargetValid() == false)
 		{
 			if (getTargetingTimerStatus())
@@ -70,7 +106,7 @@ void Tower::update(double dtAsSeconds)
 		}
 		else
 		{
-			if(getIsTargetValid())
+			if (getIsTargetValid())
 			{
 				double theta = getTargetTheta();
 				double distance = getTargetDistance();
@@ -78,11 +114,19 @@ void Tower::update(double dtAsSeconds)
 				if (distance < getRange())
 				{
 					setGunRotation((theta * 180 / M_PI), getAnimationValue());
-
-					if (getFireTimerStatus() == true)
+					if(isAmmoReloading() == false)
 					{
-						fire();
-						setStaticGunRotation((theta * 180 / M_PI));
+						if (getFireTimerStatus() == true)
+						{
+							fire();
+							setStaticGunRotation((theta * 180 / M_PI));
+
+							if (isAmmoEmpty())
+							{
+								std::cout << "queueing reload" << std::endl;
+								queueReload();
+							}
+						}
 					}
 				}
 				else
@@ -90,6 +134,10 @@ void Tower::update(double dtAsSeconds)
 					setIsTargetValid(false); //out of range
 				}
 			}
+		}
+		if (isAmmoReloading())
+		{
+			_reloadBar.setSize(sf::Vector2f(_reloadAnim.get(), 5));
 		}
 	}
 }
@@ -132,15 +180,41 @@ bool Tower::hittest(sf::Vector2f cursorPos)
 
 void Tower::draw(sf::RenderWindow* context)
 {
-	
-	Unit::draw(context);
 	if (_drawRange)
 	{
 		drawRangeCircle(context);
 	}
+//	if (isAmmoReloading())
+//	{
+		drawReloadBar(context);
+//	}
+	Unit::draw(context);
 }
 
 void Tower::drawRangeCircle(sf::RenderWindow* context)
 {
 	context->draw(_rangeCircle);
+}
+
+
+void Tower::queueReload()
+{
+	_reloadAnim.activateForward();
+}
+
+void Tower::drawReloadBar(sf::RenderWindow* context)
+{
+	//std::cout << "draw reload bar" << std::endl;
+	context->draw(_reloadBar);
+}
+
+void Tower::setLocation(sf::Vector2f loc)
+{
+	_reloadBar.setPosition(loc);
+	Unit::setLocation(loc);
+}
+
+void Tower::completeReload()
+{
+	_gunAmmo.ammo = _gunAmmo.maxClip;
 }

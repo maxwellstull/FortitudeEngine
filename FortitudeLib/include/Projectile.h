@@ -36,6 +36,7 @@ public:
   virtual void fire(std::shared_ptr<Unit> target);
   void fire(std::shared_ptr<Unit> target, sf::Vector2f spread);
   void setProjTexture(sf::Texture* texture, double scale);
+  void setSpriteColor(sf::Color c);
   sf::Vector2f getLocation() { return _location; }
   std::shared_ptr<Unit> getTarget() { return _target; }
   void setLocation(sf::Vector2f loc);
@@ -50,4 +51,5 @@ public:
   Animation* getFadeAway() { return &_fadeAway; }
   double getDamage() { return _damage; }
   virtual void computeSplash() { std::cout << "shit mfer" << std::endl; };
+  void setDamage(double dmg) { _damage = dmg; }
 };

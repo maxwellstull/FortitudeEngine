@@ -2,6 +2,7 @@
 #include "include/Game.h"
 #include "include/Blaster.h"
 #include "include/Prospector.h"
+#include "include/Lawman.h"
 
 
 void TowerManager::update(float dtAsSeconds)
@@ -63,11 +64,13 @@ void TowerManager::Draw(sf::RenderWindow* context)
 
 void TowerManager::spawnLawman()
 {
-  Unit::Attributes attr = { 100, 100, 10, 0.5, 500, 75};
-  grabbed = std::make_shared<Tower>(attr);
+  Unit::Attributes attr = { 100, 100, 10, 0.5, 500, 90, 300};
+  Tower::AmmoInfo ami = { 6, 6};
+  grabbed = std::make_shared<Lawman>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
   grabbed->setProjTexture(&textures[6], 0.25);
+  grabbed->setAmmoInfo(ami);
   grabbed->setTowerManager(this);
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();

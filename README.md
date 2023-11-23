@@ -13,7 +13,7 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
   - [ ] Prospector needs damage falloff for range of explosion
 - [ ] Implement reload mechanics
   - [ ] Remove targeting timer
-  - [ ] Add reload progress bar near health bar
+  - [x] Add reload progress bar near health bar
 - [ ] Create classes for each enemy
   - [ ] Draw skin for enemies (bandana and eyecovers)
 - [ ] Create wall (just make it placable, don't worry about blocking bullets)

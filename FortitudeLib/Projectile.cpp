@@ -156,3 +156,8 @@ void Projectile::setProjTexture(sf::Texture* texture, double scale)
   _projSprite.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f));
   setLocation(_location);
 }
+
+void Projectile::setSpriteColor(sf::Color c)
+{
+    _projSprite.setColor(c);
+}

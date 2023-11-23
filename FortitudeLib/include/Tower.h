@@ -9,11 +9,20 @@ class Enemy;
 
 
 class Tower : public Unit {
+public:
+	struct AmmoInfo {
+		int ammo;
+		int maxClip;
+	};
+
 private:
 	TowerManager* twm;
 	sf::CircleShape _rangeCircle;
 	bool _paused;
 	bool _drawRange;
+	AmmoInfo _gunAmmo;
+	Animation _reloadAnim;
+	sf::RectangleShape _reloadBar;
 public:
 	Tower(Attributes attr);
 	void update(double dtAsSeconds);
@@ -41,4 +50,14 @@ public:
 	std::string getRangeString();
 	std::string getAccuracyString();
 	void findNearby();
+	void setLocation(sf::Vector2f loc);
+
+	void setAmmoInfo(AmmoInfo ami) { _gunAmmo = ami; }
+	int getRemainingBullets() { return _gunAmmo.ammo; }
+	void decrementBullet();
+	bool isAmmoEmpty();
+	bool isAmmoReloading();
+	void queueReload();
+	void drawReloadBar(sf::RenderWindow* context);
+	void completeReload();
 };
