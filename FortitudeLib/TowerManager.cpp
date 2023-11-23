@@ -3,6 +3,7 @@
 #include "include/Blaster.h"
 #include "include/Prospector.h"
 #include "include/Lawman.h"
+#include "include/Marshall.h"
 
 
 void TowerManager::update(float dtAsSeconds)
@@ -81,11 +82,13 @@ void TowerManager::spawnLawman()
 
 void TowerManager::spawnMarshall()
 {
-  Unit::Attributes attr = { 200, 200, 25, 0.5, 1000, 75 };
-  grabbed = std::make_shared<Tower>(attr);
+  Unit::Attributes attr = { 200, 200, 25, 0.5, 1000, 75 , 500};
+  Tower::AmmoInfo ami = { 8, 8 };
+  grabbed = std::make_shared<Marshall>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[2], 0.15, sf::Vector2f(-150, -150));
   grabbed->setProjTexture(&textures[6], 0.25);
+  grabbed->setAmmoInfo(ami);
   grabbed->setTowerManager(this);
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();

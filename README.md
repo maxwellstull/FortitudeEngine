@@ -14,6 +14,7 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
 - [x] Implement reload mechanics
   - [x] Remove targeting timer
   - [x] Add reload progress bar near health bar
+- [ ] Add armor for unit class
 - [ ] Create classes for each enemy
   - [ ] Draw skin for enemies (bandana and eyecovers)
 - [ ] Create wall (just make it placable, don't worry about blocking bullets)
@@ -25,6 +26,7 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
 - [ ] Create pause menu with save & exit, options, etc
 - [ ] Implement save game
 - [ ] Implement "bank"
+- [ ] Fix bug: if unit reaches end when projectile is en route to them, and unit despawns, the game crashes
 
 
 ### Features
