@@ -25,5 +25,6 @@ void Blaster::fire()
         proj->fire(getTarget(), mod);
         addProjectile(proj);
     }
+    decrementBullet();
 
 }

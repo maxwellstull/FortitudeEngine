@@ -137,10 +137,12 @@ void TowerManager::spawnProspector()
 void TowerManager::spawnBlaster()
 {
   Unit::Attributes attr = { 600, 600, 20, 1, 500, 75, 300 };
+  Tower::AmmoInfo ami = { 4, 4 };
   grabbed = std::make_shared<Blaster>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[5], 0.1, sf::Vector2f(-150, -200));
   grabbed->setProjTexture(&textures[6], 0.25);
+  grabbed->setAmmoInfo(ami);
   grabbed->setTowerManager(this);
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();
