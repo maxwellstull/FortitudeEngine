@@ -37,6 +37,6 @@ public:
 	int getID() { return uniqueID; }
 
 	void initialize(PathSegment * st);
-	void splashDamageAssist(double rng, double dmg, sf::Vector2f origin);
+	void splashDamageAssist(double rng, double dmg, sf::Vector2f origin, double dropoffCoeff);
 	void fire();
 };

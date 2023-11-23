@@ -6,8 +6,8 @@
 class Prospector : public Tower
 {
 private:
-  bool _something;
-  std::shared_ptr<SplashProjectile> sp;
+	double _blastRadius;
+	double _damageDropoffMod;
 public:
   Prospector(Attributes attr);
   void fire();

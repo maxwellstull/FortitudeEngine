@@ -3,7 +3,8 @@
 
 Prospector::Prospector(Attributes attr) : Tower(attr)
 {
-  _something = false;
+    _blastRadius = 50;
+    _damageDropoffMod = 5;
 }
 
 
@@ -12,8 +13,9 @@ void Prospector::fire()
   
     getRecoilAnimation()->activateForward();
     
-    std::shared_ptr<SplashProjectile> proj = std::make_shared<SplashProjectile>(getLocation(), getAccuracy(), getProjectileSpeed(), getDamage(), 100);
+    std::shared_ptr<SplashProjectile> proj = std::make_shared<SplashProjectile>(getLocation(), getAccuracy(), getProjectileSpeed(), getDamage(), _blastRadius);
     proj->setProjTexture(getProjTexture(), getBulletScale());
+    proj->setDropoff(_damageDropoffMod);
     proj->fire(getTarget());
     addProjectile(proj);
     decrementBullet();

@@ -126,6 +126,14 @@ void Tower::update(double dtAsSeconds)
 								queueReload();
 							}
 						}
+						else
+						{
+						//	std::cout << "fire timer not ready need more seconds: "<<DEBUGgetFireTimerStatus() << std::endl;
+						}
+					}
+					else
+					{
+					//	std::cout << "da ammo is reloading need moor boolets" << std::endl;
 					}
 				}
 				else

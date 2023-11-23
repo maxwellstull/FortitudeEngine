@@ -59,7 +59,7 @@ void SplashProjectile::update(float dt)
 void SplashProjectile::computeSplash()
 {
   std::cout << " what the actual heck" << std::endl;
-  getTarget()->splashDamageAssist(_radius, getDamage(), getLocation());
+  getTarget()->splashDamageAssist(_radius, getDamage(), getLocation(), getDropoff());
 }
 
 

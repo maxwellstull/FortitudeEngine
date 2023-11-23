@@ -122,9 +122,8 @@ void Enemy::nextDestination()
 }
 
 
-void Enemy::splashDamageAssist(double rng, double dmg, sf::Vector2f origin)
+void Enemy::splashDamageAssist(double rng, double dmg, sf::Vector2f origin, double dropoffCoeff)
 {
-	std::cout << " what the higgity higgity heck" << std::endl;
 	std::vector<Enemy *> toCheck;
 	for (Enemy* en : destination->getContained())
 	{
@@ -157,7 +156,9 @@ void Enemy::splashDamageAssist(double rng, double dmg, sf::Vector2f origin)
 		dist = sqrt(pow(en->getLocation().y - origin.y, 2) + pow(en->getLocation().x - origin.x, 2));
 		if (dist < rng)
 		{
-			en->takeDamage(dmg);
+			double appliedDmg = dmg / pow(rng / (rng - dist), dropoffCoeff);
+			std::cout << "Applied damage: " << appliedDmg << " dist " << dist << std::endl;
+			en->takeDamage(appliedDmg);
 		}
 	}
 }

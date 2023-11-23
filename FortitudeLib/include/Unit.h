@@ -117,7 +117,7 @@ public:
   void setLocation(sf::Vector2f loc);
   virtual void fire();
   void takeDamage(double damage);
-  virtual void splashDamageAssist(double rng, double dmg, sf::Vector2f origin) { std::cout << "shit" << std::endl; }
+  virtual void splashDamageAssist(double rng, double dmg, sf::Vector2f origin, double dropoffCoeff) { std::cout << "shit" << std::endl; }
 
 
   void addStatusEffect(StatusEffects eft, double duration);
