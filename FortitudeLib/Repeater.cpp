@@ -8,22 +8,16 @@ Repeater::Repeater(Attributes attr, sf::Texture * tex, double scale) : Tower(att
 
 void Repeater::fire()
 {
-	if (getTarget()->isActive() == false)
-	{
-		setIsTargetValid(false);
-	}
-	else
-	{
-		getRecoilAnimation()->activateForward();
 
-		double damage = getDamage();
+	getRecoilAnimation()->activateForward();
 
-		std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), getAccuracy(), getProjectileSpeed(), damage);
-		proj->setProjTexture(getProjTexture(), getBulletScale());
-		proj->fire(getTarget());
-		addProjectile(proj);
-		decrementBullet();
-	}
+	double damage = getDamage();
+
+	std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), getAccuracy(), getProjectileSpeed(), damage);
+	proj->setProjTexture(getProjTexture(), getBulletScale());
+	proj->fire(getTarget());
+	addProjectile(proj);
+	decrementBullet();
 }
 
 void Repeater::queueReload()

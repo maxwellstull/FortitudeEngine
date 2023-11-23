@@ -92,6 +92,7 @@ public:
 
   double getAnimationValue();
   bool getFireTimerStatus() { return _fireTimer.get(); }
+  double DEBUGgetFireTimerStatus() { return _fireTimer.DEBUGget(); }
 
   void setAttributes(Attributes attr) { _attributes = attr; }
   Attributes getAttributes() { return _attributes; }

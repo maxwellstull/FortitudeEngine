@@ -8,23 +8,17 @@ Marshall::Marshall(Attributes attr) : Tower(attr)
 
 void Marshall::fire()
 {
-	if (getTarget()->isActive() == false)
-	{
-		setIsTargetValid(false);
-	}
-	else
-	{
-		getRecoilAnimation()->activateForward();
 
-		double damage = getDamage();
+	getRecoilAnimation()->activateForward();
 
-		std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), getAccuracy(), getProjectileSpeed(), damage);
-		proj->setProjTexture(getProjTexture(), getBulletScale());
+	double damage = getDamage();
 
-		// Todo: Implement armor piercing once armor is implemented :)
+	std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), getAccuracy(), getProjectileSpeed(), damage);
+	proj->setProjTexture(getProjTexture(), getBulletScale());
 
-		proj->fire(getTarget());
-		addProjectile(proj);
-		decrementBullet();
-	}
+	// Todo: Implement armor piercing once armor is implemented :)
+
+	proj->fire(getTarget());
+	addProjectile(proj);
+	decrementBullet();
 }

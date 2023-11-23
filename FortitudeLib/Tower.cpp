@@ -90,11 +90,13 @@ void Tower::update(double dtAsSeconds)
 	_reloadAnim.update(dtAsSeconds);
 	if (isActive() && _paused == false)
 	{
-		//		if (getHealth() <= 0)
-		//		{
-		//			deactivate();
-		//			std::cout << " deactivate" << std::endl;
-		//		}
+		if (getTarget())
+		{
+			if (getTarget()->isActive() == false)
+			{
+				setIsTargetValid(false);
+			}
+		}
 		if (getIsTargetValid() == false)
 		{
 			findTarget();

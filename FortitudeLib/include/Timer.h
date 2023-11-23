@@ -54,4 +54,13 @@ public:
       return false;
     }
   }
+  void setReady()
+  {
+      _primed = true;
+      _timer = 0;
+  }
+  double DEBUGget()
+  {
+      return _timer;
+  }
 };

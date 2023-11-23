@@ -13,6 +13,7 @@ Unit::Unit(Attributes attr)
   _healthBar = false;
   _validTarget = false;
   _fireTimer = Timer(1.f / attr.fireRate);
+  _fireTimer.setReady();
   gunLeft = false;
   _deltaPerSec = sf::Vector2f(0, 0);
 

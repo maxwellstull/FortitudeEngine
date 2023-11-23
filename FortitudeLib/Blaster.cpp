@@ -16,19 +16,14 @@ Blaster::Blaster(Attributes attr) : Tower(attr)
 
 void Blaster::fire()
 {
-  if (getTarget()->isActive() == false)
-  {
-    setIsTargetValid(false);
-  }
-  else
-  {
+
     getRecoilAnimation()->activateForward();
     for(sf::Vector2f mod : _mods)
     {
-      std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), getAccuracy(), getProjectileSpeed(), getDamage());
-      proj->setProjTexture(getProjTexture(), getBulletScale());
-      proj->fire(getTarget(), mod);
-      addProjectile(proj);
+        std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), getAccuracy(), getProjectileSpeed(), getDamage());
+        proj->setProjTexture(getProjTexture(), getBulletScale());
+        proj->fire(getTarget(), mod);
+        addProjectile(proj);
     }
-  }
+
 }
