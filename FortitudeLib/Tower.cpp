@@ -177,14 +177,17 @@ bool Tower::hittest(sf::Vector2f cursorPos)
 
 void Tower::draw(sf::RenderWindow* context)
 {
-	if (_drawRange)
+	if(isActive())
 	{
-		drawRangeCircle(context);
+		if (_drawRange)
+		{
+			drawRangeCircle(context);
+		}
+		if (isAmmoReloading())
+		{
+			drawReloadBar(context);
+		}
 	}
-//	if (isAmmoReloading())
-//	{
-		drawReloadBar(context);
-//	}
 	Unit::draw(context);
 }
 
