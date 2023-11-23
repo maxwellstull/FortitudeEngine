@@ -28,4 +28,5 @@ enum TowerTargeting {
 
 enum StatusEffects {
 	BLINDED = 0,
+	BLEEDING = 1,
 };

@@ -32,6 +32,7 @@ public:
   void spawnRepeater();
   void spawnProspector();
   void spawnBlaster();
+  void spawnBrawler();
   void release() { isGrabbed = false; grabbed->unpause(); grabbed->clearDrawRange();  towers.push_back(grabbed); }
   void hitvisit(sf::Vector2f cursorPos);
 }; 

@@ -130,16 +130,21 @@ void Unit::takeDamage(double damage)
 
 void Unit::addStatusEffect(StatusEffects eft, double duration)
 {
+    BlindTimer t1 = BlindTimer(duration);
     switch (eft)
     {
     case StatusEffects::BLINDED:
     {
         setBlinded();
+        t1.setOnCompleteFunction([this]() {this->clearBlinded(); });
         break;
     }
+    case StatusEffects::BLEEDING:
+        setBleeding();        
+        t1.setOnCompleteFunction([this]() {this->clearBleeding(); });
+        break;
     }
-    BlindTimer t1 = BlindTimer(duration);
-    t1.setOnCompleteFunction([this]() {this->clearBlinded(); });
+
     _statusTimers.push_back(t1);
 }
 

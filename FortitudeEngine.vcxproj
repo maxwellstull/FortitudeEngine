@@ -137,6 +137,8 @@
     <ClInclude Include="FortitudeLib\include\Achievements.h" />
     <ClInclude Include="FortitudeLib\include\Animation.h" />
     <ClInclude Include="FortitudeLib\include\Blaster.h" />
+    <ClInclude Include="FortitudeLib\include\Brawler.h" />
+    <ClInclude Include="FortitudeLib\include\Doc.h" />
     <ClInclude Include="FortitudeLib\include\Enemy.h" />
     <ClInclude Include="FortitudeLib\include\EnemyManager.h" />
     <ClInclude Include="FortitudeLib\include\Engine.h" />
@@ -157,6 +159,7 @@
     <ClInclude Include="FortitudeLib\include\Repeater.h" />
     <ClInclude Include="FortitudeLib\include\Projectile.h" />
     <ClInclude Include="FortitudeLib\include\Prospector.h" />
+    <ClInclude Include="FortitudeLib\include\Sheriff.h" />
     <ClInclude Include="FortitudeLib\include\SplashProjectile.h" />
     <ClInclude Include="FortitudeLib\include\BlindTimer.h" />
     <ClInclude Include="FortitudeLib\include\Timer.h" />
@@ -171,6 +174,8 @@
     <ClCompile Include="FortitudeLib\Achievement.cpp" />
     <ClCompile Include="FortitudeLib\Achievements.cpp" />
     <ClCompile Include="FortitudeLib\Blaster.cpp" />
+    <ClCompile Include="FortitudeLib\Brawler.cpp" />
+    <ClCompile Include="FortitudeLib\Doc.cpp" />
     <ClCompile Include="FortitudeLib\Draw.cpp" />
     <ClCompile Include="FortitudeLib\Enemy.cpp" />
     <ClCompile Include="FortitudeLib\EnemyManager.cpp" />
@@ -192,6 +197,7 @@
     <ClCompile Include="FortitudeLib\Repeater.cpp" />
     <ClCompile Include="FortitudeLib\Projectile.cpp" />
     <ClCompile Include="FortitudeLib\Prospector.cpp" />
+    <ClCompile Include="FortitudeLib\Sheriff.cpp" />
     <ClCompile Include="FortitudeLib\SplashProjectile.cpp" />
     <ClCompile Include="FortitudeLib\Tower.cpp" />
     <ClCompile Include="FortitudeLib\TowerManager.cpp" />

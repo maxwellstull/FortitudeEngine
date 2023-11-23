@@ -87,7 +87,7 @@ bool Tower::isAmmoReloading()
 void Tower::update(double dtAsSeconds)
 {
 	Unit::update(dtAsSeconds);
-	_reloadAnim.update(dtAsSeconds);
+	updateReloadAnim(dtAsSeconds);
 	if (isActive() && _paused == false)
 	{
 		if (getTarget())

@@ -58,6 +58,7 @@ private:
 private:
     std::vector<BlindTimer> _statusTimers;
     bool _blinded;
+    bool _bleeding;
 
 
 public:
@@ -124,5 +125,8 @@ public:
   void setBlinded() { _blinded = true; }
   bool getBlinded() { return _blinded; }
   void clearBlinded() { _blinded = false; }
+  void setBleeding() { _bleeding = true; }
+  bool getBleeding() { return _bleeding; }
+  void clearBleeding() { _blinded = false; }
 
 };

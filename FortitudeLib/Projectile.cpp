@@ -21,6 +21,7 @@ Projectile::Projectile(sf::Vector2f origin, double accuracy, double speed, doubl
   _heading = 0;
   _despawning = false;
   _doOnImpact = false;
+  _spin = false;
   _fadeAway = Animation(100, 0, 0.2);
   _fadeAway.setOnCompleteFunction([this]() {this->deactivate(); });
 }
@@ -82,6 +83,10 @@ void Projectile::update(float dt)
   if(_active)
   {
     setLocation(getLocation() + (dt * _deltaPerSec));
+    if (getSpin() == true)
+    {
+        _projSprite.rotate(-5);
+    }
     double dist = sqrt(pow(_targetLoc.y - getLocation().y, 2) + pow(_targetLoc.x - getLocation().x, 2));
     
     if (!_despawning && (dist > (_target->getBodyBounds().width / 3) || dist > (_target->getBodyBounds().height / 3)))

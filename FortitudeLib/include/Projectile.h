@@ -31,6 +31,8 @@ private:
   std::function<void()> _onImpact;
   bool _doOnImpact;
 
+  bool _spin;
+
 
 public:
   Projectile(sf::Vector2f origin, double accuracy, double speed, double damage);
@@ -60,4 +62,7 @@ public:
 	  _onImpact = func;
 	  _doOnImpact = true;
   }
+
+  void setSpin(bool t) { _spin = t; }
+  bool getSpin() { return _spin; }
 };

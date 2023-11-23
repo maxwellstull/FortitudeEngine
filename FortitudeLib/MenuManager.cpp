@@ -461,10 +461,10 @@ void MenuManager::TowerShop()
 	t5->setFillColor(sf::Color(107, 107, 107));
 	t5->setSpriteScale(0.2, 0.2);
 	t5->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t6 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1795, 520, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t6 = std::make_shared<MenuShopItem>("Brawler", fonts[0], sf::IntRect(1795, 520, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(8), sf::Vector2f(50, 90));
 	t6->onSelect(sf::Color::Blue, 48, 0.25);
 	t6->setControlBind(4, 8, 5, 5);
-	t6->onEnter([this]() {});
+	t6->onEnter([this]() {this->GetEngine()->setMouseToDrag(); this->GetEngine()->getGame()->getTowerManager()->spawnBrawler(); });
 	t6->setFillColor(sf::Color(107, 107, 107));
 	t6->setSpriteScale(0.5, 0.5);
 	t6->setSpriteRotation(-30);

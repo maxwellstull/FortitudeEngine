@@ -25,10 +25,10 @@ private:
 	sf::RectangleShape _reloadBar;
 public:
 	Tower(Attributes attr);
-	void update(double dtAsSeconds);
+	virtual void update(double dtAsSeconds);
 	void draw(sf::RenderWindow * context) ;
-	void drawRangeCircle(sf::RenderWindow* context);
-	void setRangeLocation(sf::Vector2f loc) { _rangeCircle.setPosition(loc); }
+	virtual void drawRangeCircle(sf::RenderWindow* context);
+	virtual void setRangeLocation(sf::Vector2f loc) { _rangeCircle.setPosition(loc); }
 	void setTowerManager(TowerManager* t) { twm = t; }
 	TowerManager* getTowerManager() { return twm; }
 
@@ -41,7 +41,7 @@ public:
 	}
 	void clearDrawRange() { _drawRange = false; }
 
-	void initialize();
+	virtual void initialize();
 	bool isPaused() { return _paused; }
 	void pause() { _paused = true; }
 	void unpause() { _paused = false; }
@@ -60,4 +60,6 @@ public:
 	virtual void queueReload();
 	void drawReloadBar(sf::RenderWindow* context);
 	void completeReload();
+	void updateReloadAnim(double dt) { _reloadAnim.update(dt); }
+	void updateReloadToAnim() { _reloadBar.setSize(sf::Vector2f(_reloadAnim.get(), 5)); }
 };
