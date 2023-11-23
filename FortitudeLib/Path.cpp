@@ -23,10 +23,10 @@ void Path::generatePath()
 		sf::Vector2f(379 * scale, 199 * scale),
 		sf::Vector2f(400 * scale, 180 * scale),
 		sf::Vector2f(600 * scale, 180 * scale),
-		sf::Vector2f(650 * scale, 182 * scale) };
+		sf::Vector2f(620 * scale, 182 * scale) };
 
 	//generate the segments
-	for (int i = 0; i < pts.size() - 1; i++)
+	for (int i = 0; i < pts.size()-1; i++)
 	{
 		sf::Vector2f start = pts[i];
 		sf::Vector2f end = pts[i + 1];
@@ -71,14 +71,14 @@ void Path::generatePath()
 			}
 
 
-			if (i == 0)
+			if (i == 0 && j == 0)
 			{
 				segment.setNodeType(PathNodeType::START);
 			}
-			else if (i == (pts.size() - 1))
-			{
-				segment.setNodeType(PathNodeType::END);
-			}
+//			else if (i == (pts.size() - 1) && (j == segmentAmnt - 1))
+//			{
+//				segment.setNodeType(PathNodeType::END);
+//			}
 			else
 			{
 				segment.setNodeType(PathNodeType::MIDPOINT);
@@ -95,6 +95,7 @@ void Path::generatePath()
 		segments[i].setNext(&segments[i + 1]);
 		segments[i + 1].setPrev(&segments[i]);
 	}
+	segments[segments.size() - 1].setNodeType(PathNodeType::END);
 
 
 }

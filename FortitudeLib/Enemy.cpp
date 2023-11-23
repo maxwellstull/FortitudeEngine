@@ -104,21 +104,24 @@ void Enemy::initialize(PathSegment* st)
 
 void Enemy::nextDestination()
 {
-	destination->remove(getID());
-	destination = destination->getNext();
-	destination->add(this);
 	if (destination->getNodeType() == PathNodeType::END) //made it to the end
 	{
 		deactivate();
 		getEnemyManager()->getGame()->decrementCurrentHealth();
 	}
+	else
+	{
+		destination->remove(getID());
+		destination = destination->getNext();
+		destination->add(this);
 
-	double theta = atan2((destination->getSegmentEnd().y - getLocation().y), (destination->getSegmentEnd().x - getLocation().x));
-	heading = theta;
-	sf::Vector2f delta;
-	delta.x = speed * cos(theta);
-	delta.y = speed * sin(theta);
-	setDeltaPerSec(delta);
+		double theta = atan2((destination->getSegmentEnd().y - getLocation().y), (destination->getSegmentEnd().x - getLocation().x));
+		heading = theta;
+		sf::Vector2f delta;
+		delta.x = speed * cos(theta);
+		delta.y = speed * sin(theta);
+		setDeltaPerSec(delta);
+	}
 }
 
 
