@@ -51,7 +51,6 @@ private:
   //Generic target
   std::shared_ptr<Unit> _target;
   bool _validTarget;
-  Timer _targetFindTimer;
   Timer _fireTimer;
   std::vector<std::shared_ptr<Projectile>> shots;
 
@@ -87,8 +86,6 @@ public:
 
   double getAnimationValue();
   bool getFireTimerStatus() { return _fireTimer.get(); }
-  bool getTargetingTimerStatus() { return _targetFindTimer.get(); }
-  Timer* getTargetFindTimer() { return &_targetFindTimer; }
 
   void setAttributes(Attributes attr) { _attributes = attr; }
   Attributes getAttributes() { return _attributes; }

@@ -12,7 +12,6 @@ Unit::Unit(Attributes attr)
   _staticGunRotation = 0;
   _healthBar = false;
   _validTarget = false;
-  _targetFindTimer = Timer(0.25);
   _fireTimer = Timer(1.f / attr.fireRate);
   gunLeft = false;
   _deltaPerSec = sf::Vector2f(0, 0);
@@ -25,7 +24,6 @@ void Unit::update(double dt)
     _gunRecoilAnimation.update(dt);
     _gunResetAnimation.update(dt);
     _fireTimer.update(dt);
-    _targetFindTimer.update(dt);
     for (std::shared_ptr<Projectile> proj : shots)
     {
       proj->update(dt);
@@ -138,7 +136,6 @@ void Unit::fire()
   if (getTarget()->isActive() == false)
   {
     setIsTargetValid(false);
-    getTargetFindTimer()->clear();
   }
   else
   {

@@ -14,7 +14,6 @@ void Lawman::fire()
 	if (getTarget()->isActive() == false)
 	{
 		setIsTargetValid(false);
-		getTargetFindTimer()->clear();
 	}
 	else
 	{

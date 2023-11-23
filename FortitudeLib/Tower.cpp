@@ -14,7 +14,6 @@ Tower::Tower(Attributes attr) : Unit(attr)
 	_drawRange = false;
 	_reloadAnim = Animation(30, 0, reloadTime);
 	_reloadAnim.setOnCompleteFunction([this]() {completeReload(); });
-	
 
 	_reloadBar.setPosition(getLocation());
 }
@@ -98,10 +97,8 @@ void Tower::update(double dtAsSeconds)
 		//		}
 		if (getIsTargetValid() == false)
 		{
-			if (getTargetingTimerStatus())
-			{
-				findTarget();
-			}
+			findTarget();
+
 			setGunRotation(getStaticGunRotation(), getAnimationValue());
 		}
 		else

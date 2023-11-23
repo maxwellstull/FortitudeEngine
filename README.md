@@ -11,8 +11,8 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
 ### Tasks
 - [ ] Create classes for each tower
   - [ ] Prospector needs damage falloff for range of explosion
-- [ ] Implement reload mechanics
-  - [ ] Remove targeting timer
+- [x] Implement reload mechanics
+  - [x] Remove targeting timer
   - [x] Add reload progress bar near health bar
 - [ ] Create classes for each enemy
   - [ ] Draw skin for enemies (bandana and eyecovers)
