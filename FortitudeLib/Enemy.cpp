@@ -150,13 +150,20 @@ void Enemy::splashDamageAssist(double rng, double dmg, sf::Vector2f origin, doub
 		behind = behind->getPrev();
 	}
 
-	
+	double appliedDmg;
 	for (Enemy* en : toCheck)
 	{
 		dist = sqrt(pow(en->getLocation().y - origin.y, 2) + pow(en->getLocation().x - origin.x, 2));
 		if (dist < rng)
 		{
-			double appliedDmg = dmg / pow(rng / (rng - dist), dropoffCoeff);
+			if (dist < 10)
+			{
+				appliedDmg = dmg;
+			}
+			else 
+			{
+				appliedDmg = dmg / pow(rng / (rng - dist), dropoffCoeff);
+			}
 			std::cout << "Applied damage: " << appliedDmg << " dist " << dist << std::endl;
 			en->takeDamage(appliedDmg);
 		}

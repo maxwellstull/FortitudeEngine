@@ -4,7 +4,7 @@
 Prospector::Prospector(Attributes attr) : Tower(attr)
 {
     _blastRadius = 50;
-    _damageDropoffMod = 5;
+    _damageDropoffMod = 2;
 }
 
 
