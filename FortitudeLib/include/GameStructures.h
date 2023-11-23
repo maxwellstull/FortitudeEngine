@@ -1,4 +1,9 @@
 #pragma once
+
+#include "Timer.h"
+#include "BlindTimer.h"
+#include "Animation.h"
+
 struct GameInfo {
 	int MaxWaves;
 	int Difficulty;

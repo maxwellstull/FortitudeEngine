@@ -158,6 +158,7 @@
     <ClInclude Include="FortitudeLib\include\Projectile.h" />
     <ClInclude Include="FortitudeLib\include\Prospector.h" />
     <ClInclude Include="FortitudeLib\include\SplashProjectile.h" />
+    <ClInclude Include="FortitudeLib\include\BlindTimer.h" />
     <ClInclude Include="FortitudeLib\include\Timer.h" />
     <ClInclude Include="FortitudeLib\include\Tower.h" />
     <ClInclude Include="FortitudeLib\include\TowerManager.h" />

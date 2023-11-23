@@ -1,6 +1,16 @@
 #pragma once
 #include <functional>
 
+
+/*
+ * Timer is a basic timer that allows for simple timing. The timer will
+ * continuously count down until it hits zero, and will then be "primed".
+ * Once primed, it will not count down anymore, and will return 'true' 
+ * the next time get() is called on it. After that, it will start over.
+ * 
+ * In essence, it's an egg timer. In order for it to count again,
+ * you have to wind it up. In this case, you wind it up by reading its state.
+*/
 class Timer {
 private:
   // Secs/cycle
@@ -9,10 +19,6 @@ private:
   double _timer;
   // If timer has hit 0 and is waiting for a reset
   bool _primed;
-
-  std::function<void()> _onComplete;
-  bool _doOnComplete;
-
 public:
   Timer() {};
   Timer(double period) : _period(period)
@@ -47,10 +53,5 @@ public:
     {
       return false;
     }
-  }
-  void setOnCompleteFunction(std::function<void()> func)
-  {
-      _onComplete = func;
-      _doOnComplete = true;
   }
 };

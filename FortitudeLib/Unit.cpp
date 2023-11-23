@@ -137,7 +137,7 @@ void Unit::addStatusEffect(StatusEffects eft, double duration)
         break;
     }
     }
-    Timer t1 = Timer(duration);
+    BlindTimer t1 = BlindTimer(duration);
     t1.setOnCompleteFunction([this]() {this->clearBlinded(); });
     _statusTimers.push_back(t1);
 }

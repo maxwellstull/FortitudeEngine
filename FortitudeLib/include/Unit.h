@@ -56,7 +56,7 @@ private:
 
 //Status effects
 private:
-    std::vector<Timer> _statusTimers;
+    std::vector<BlindTimer> _statusTimers;
     bool _blinded;
 
 
