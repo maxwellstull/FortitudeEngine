@@ -4,6 +4,7 @@
 #include "include/Prospector.h"
 #include "include/Lawman.h"
 #include "include/Marshall.h"
+#include "include/Repeater.h"
 
 
 void TowerManager::update(float dtAsSeconds)
@@ -39,6 +40,8 @@ void TowerManager::initialize()
   texture.loadFromFile("img/shotgun.png");
   textures.push_back(texture);
   texture.loadFromFile("img/bullet.png");
+  textures.push_back(texture);
+  texture.loadFromFile("img/pocketsand.png");
   textures.push_back(texture);
   isGrabbed = false;
   splashActive = false;
@@ -97,13 +100,15 @@ void TowerManager::spawnMarshall()
   isGrabbed = true;
 }
 
-void TowerManager::spawnPistol()
+void TowerManager::spawnRepeater()
 {
-  Unit::Attributes attr = { 50, 50, 15, 3, 350, 75 };
-  grabbed = std::make_shared<Tower>(attr);
+  Unit::Attributes attr = { 50, 50, 15, 3, 350, 75, 300 };
+  Tower::AmmoInfo ami = { 15, 15 };
+  grabbed = std::make_shared<Repeater>(attr, &textures[7], 0.25);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[3], 0.1, sf::Vector2f(-150, -200));
   grabbed->setProjTexture(&textures[6], 0.25);
+  grabbed->setAmmoInfo(ami);
   grabbed->setTowerManager(this);
   grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
   grabbed->initialize();

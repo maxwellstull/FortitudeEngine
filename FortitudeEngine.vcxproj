@@ -154,7 +154,7 @@
     <ClInclude Include="FortitudeLib\include\MenuShopItem.h" />
     <ClInclude Include="FortitudeLib\include\Path.h" />
     <ClInclude Include="FortitudeLib\include\PathSegment.h" />
-    <ClInclude Include="FortitudeLib\include\Pistol.h" />
+    <ClInclude Include="FortitudeLib\include\Repeater.h" />
     <ClInclude Include="FortitudeLib\include\Projectile.h" />
     <ClInclude Include="FortitudeLib\include\Prospector.h" />
     <ClInclude Include="FortitudeLib\include\SplashProjectile.h" />
@@ -188,7 +188,7 @@
     <ClCompile Include="FortitudeLib\MenuShopItem.cpp" />
     <ClCompile Include="FortitudeLib\Path.cpp" />
     <ClCompile Include="FortitudeLib\PathSegment.cpp" />
-    <ClCompile Include="FortitudeLib\Pistol.cpp" />
+    <ClCompile Include="FortitudeLib\Repeater.cpp" />
     <ClCompile Include="FortitudeLib\Projectile.cpp" />
     <ClCompile Include="FortitudeLib\Prospector.cpp" />
     <ClCompile Include="FortitudeLib\SplashProjectile.cpp" />

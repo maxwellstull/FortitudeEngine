@@ -21,3 +21,6 @@ enum TowerTargeting {
 	FIRST = 1,
 };
 
+enum StatusEffects {
+	BLINDED = 0,
+};

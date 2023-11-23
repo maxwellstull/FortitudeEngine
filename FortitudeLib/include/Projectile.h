@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
 #include <iostream>
+#include <functional>
 
 class Unit;
 
@@ -27,6 +28,8 @@ private:
   bool _active;
   bool _despawning;
 
+  std::function<void()> _onImpact;
+  bool _doOnImpact;
 
 
 public:
@@ -52,4 +55,9 @@ public:
   double getDamage() { return _damage; }
   virtual void computeSplash() { std::cout << "shit mfer" << std::endl; };
   void setDamage(double dmg) { _damage = dmg; }
+  void setOnImpactFunction(std::function<void()> func)
+  {
+	  _onImpact = func;
+	  _doOnImpact = true;
+  }
 };

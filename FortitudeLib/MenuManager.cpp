@@ -440,10 +440,10 @@ void MenuManager::TowerShop()
 	t2->setFillColor(sf::Color(107, 107, 107));
 	t2->setSpriteScale(0.12, 0.12);
 	t2->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t3 = std::make_shared<MenuShopItem>("Pistol", fonts[0], sf::IntRect(1645, 370, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(3), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t3 = std::make_shared<MenuShopItem>("Repeater", fonts[0], sf::IntRect(1645, 370, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(3), sf::Vector2f(50, 90));
 	t3->onSelect(sf::Color::Blue, 48, 0.25);
 	t3->setControlBind(1, 5, 4, 4);
-	t3->onEnter([this]() {this->GetEngine()->setMouseToDrag(); this->GetEngine()->getGame()->getTowerManager()->spawnPistol(); });
+	t3->onEnter([this]() {this->GetEngine()->setMouseToDrag(); this->GetEngine()->getGame()->getTowerManager()->spawnRepeater(); });
 	t3->setFillColor(sf::Color(107, 107, 107));
 	t3->setSpriteScale(0.15, 0.15);
 	t3->setSpriteRotation(-30);

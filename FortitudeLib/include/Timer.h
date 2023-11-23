@@ -1,5 +1,5 @@
 #pragma once
-
+#include <functional>
 
 class Timer {
 private:
@@ -9,6 +9,9 @@ private:
   double _timer;
   // If timer has hit 0 and is waiting for a reset
   bool _primed;
+
+  std::function<void()> _onComplete;
+  bool _doOnComplete;
 
 public:
   Timer() {};
@@ -44,5 +47,10 @@ public:
     {
       return false;
     }
+  }
+  void setOnCompleteFunction(std::function<void()> func)
+  {
+      _onComplete = func;
+      _doOnComplete = true;
   }
 };

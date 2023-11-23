@@ -15,6 +15,8 @@ Unit::Unit(Attributes attr)
   _fireTimer = Timer(1.f / attr.fireRate);
   gunLeft = false;
   _deltaPerSec = sf::Vector2f(0, 0);
+
+  _blinded = false;
 }
 
 void Unit::update(double dt)
@@ -27,6 +29,10 @@ void Unit::update(double dt)
     for (std::shared_ptr<Projectile> proj : shots)
     {
       proj->update(dt);
+    }
+    for (auto t : _statusTimers)
+    {
+        t.update(dt);
     }
   }
 }
@@ -119,6 +125,21 @@ void Unit::takeDamage(double damage)
   {
     deactivate();
   }
+}
+
+void Unit::addStatusEffect(StatusEffects eft, double duration)
+{
+    switch (eft)
+    {
+    case StatusEffects::BLINDED:
+    {
+        setBlinded();
+        break;
+    }
+    }
+    Timer t1 = Timer(duration);
+    t1.setOnCompleteFunction([this]() {this->clearBlinded(); });
+    _statusTimers.push_back(t1);
 }
 
 double Unit::getTargetTheta()

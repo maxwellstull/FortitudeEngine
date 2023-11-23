@@ -20,6 +20,7 @@ Projectile::Projectile(sf::Vector2f origin, double accuracy, double speed, doubl
   _damage = damage;
   _heading = 0;
   _despawning = false;
+  _doOnImpact = false;
   _fadeAway = Animation(100, 0, 0.2);
   _fadeAway.setOnCompleteFunction([this]() {this->deactivate(); });
 }
@@ -92,6 +93,10 @@ void Projectile::update(float dt)
       if (_miss == false)
       {
         _target->takeDamage(_damage);
+        if (_doOnImpact)
+        {
+            _onImpact();
+        }
         deactivate();
       }
       else

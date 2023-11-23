@@ -54,6 +54,12 @@ private:
   Timer _fireTimer;
   std::vector<std::shared_ptr<Projectile>> shots;
 
+//Status effects
+private:
+    std::vector<Timer> _statusTimers;
+    bool _blinded;
+
+
 public:
   Unit(Attributes attr);
   void update(double dt);
@@ -111,4 +117,11 @@ public:
   virtual void fire();
   void takeDamage(double damage);
   virtual void splashDamageAssist(double rng, double dmg, sf::Vector2f origin) { std::cout << "shit" << std::endl; }
+
+
+  void addStatusEffect(StatusEffects eft, double duration);
+  void setBlinded() { _blinded = true; }
+  bool getBlinded() { return _blinded; }
+  void clearBlinded() { _blinded = false; }
+
 };

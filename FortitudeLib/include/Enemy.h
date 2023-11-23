@@ -38,4 +38,5 @@ public:
 
 	void initialize(PathSegment * st);
 	void splashDamageAssist(double rng, double dmg, sf::Vector2f origin);
+	void fire();
 };

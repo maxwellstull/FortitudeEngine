@@ -163,3 +163,14 @@ void Enemy::splashDamageAssist(double rng, double dmg, sf::Vector2f origin)
 }
 
 
+void Enemy::fire()
+{
+	if (getBlinded() == false)
+	{
+		Unit::fire();
+	}
+	else
+	{
+		std::cout << " I CANT SEE" << std::endl;
+	}
+}

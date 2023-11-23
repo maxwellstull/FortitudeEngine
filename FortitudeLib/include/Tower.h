@@ -57,7 +57,7 @@ public:
 	void decrementBullet();
 	bool isAmmoEmpty();
 	bool isAmmoReloading();
-	void queueReload();
+	virtual void queueReload();
 	void drawReloadBar(sf::RenderWindow* context);
 	void completeReload();
 };

@@ -36,7 +36,7 @@ void EnemyManager::Draw(sf::RenderWindow* context)
 
 void EnemyManager::spawnBadGuy() 
 {
-	Unit::Attributes attr = { 100, 100, 10, 0.2, 300, 80 };
+	Unit::Attributes attr = { 100, 100, 2, 1, 300, 80 };
 	std::shared_ptr<Enemy> en = std::make_shared<Enemy>(attr);
 	en->setBodyTexture(&textures[0], 0.25);
 	en->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));

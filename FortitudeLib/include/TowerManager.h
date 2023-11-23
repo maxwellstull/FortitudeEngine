@@ -29,7 +29,7 @@ public:
   sf::Texture* getTowerTexture(int idx) { return &textures[idx]; }
   void spawnLawman();
   void spawnMarshall();
-  void spawnPistol();
+  void spawnRepeater();
   void spawnProspector();
   void spawnBlaster();
   void release() { isGrabbed = false; grabbed->unpause(); grabbed->clearDrawRange();  towers.push_back(grabbed); }
