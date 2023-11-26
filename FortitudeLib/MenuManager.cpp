@@ -468,10 +468,10 @@ void MenuManager::TowerShop()
 	t6->setFillColor(sf::Color(107, 107, 107));
 	t6->setSpriteScale(0.5, 0.5);
 	t6->setSpriteRotation(-30);
-	std::shared_ptr<MenuShopItem> t7 = std::make_shared<MenuShopItem>("Lawman", fonts[0], sf::IntRect(1645, 670, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(1), sf::Vector2f(50, 90));
+	std::shared_ptr<MenuShopItem> t7 = std::make_shared<MenuShopItem>("Doc", fonts[0], sf::IntRect(1645, 670, 100, 100), 32, GetEngine()->getGame()->getTowerTexture(9), sf::Vector2f(50, 90));
 	t7->onSelect(sf::Color::Blue, 48, 0.25);
 	t7->setControlBind(5, 1, 8, 8);
-	t7->onEnter([this]() {});
+	t7->onEnter([this]() {this->GetEngine()->setMouseToDrag(); this->GetEngine()->getGame()->getTowerManager()->spawnDoc(); });
 	t7->setFillColor(sf::Color(107, 107, 107));
 	t7->setSpriteScale(0.5, 0.5);
 	t7->setSpriteRotation(-30);

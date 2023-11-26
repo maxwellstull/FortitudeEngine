@@ -79,7 +79,9 @@ public:
   void setStaticGunRotation(double rot) { _staticGunRotation = rot; }
   double getStaticGunRotation() { return _staticGunRotation; }
   Animation* getRecoilAnimation() { return &_gunRecoilAnimation; }
+  void setRecoilAnimation(double start, double stop, double dur);
   Animation* getResetAnimation() { return &_gunResetAnimation; }
+  void setResetAnimation(double start, double stop, double dur);
   void setDeltaPerSec(sf::Vector2f d) { _deltaPerSec = d; }
   sf::Vector2f getDeltaPerSec() { return _deltaPerSec; }
   double getBulletScale() { return _bulletScale; }
@@ -118,6 +120,7 @@ public:
   void setLocation(sf::Vector2f loc);
   virtual void fire();
   void takeDamage(double damage);
+  void addHealth(double health);
   virtual void splashDamageAssist(double rng, double dmg, sf::Vector2f origin, double dropoffCoeff) { std::cout << "shit" << std::endl; }
 
 

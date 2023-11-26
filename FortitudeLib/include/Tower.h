@@ -33,7 +33,7 @@ public:
 	TowerManager* getTowerManager() { return twm; }
 
 
-	void findTarget();
+	virtual void findTarget();
 	bool hittest(sf::Vector2f cursorPos);
 	void setDrawRange() 
 	{ 

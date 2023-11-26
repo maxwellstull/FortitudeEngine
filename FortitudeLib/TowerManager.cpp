@@ -6,6 +6,7 @@
 #include "include/Marshall.h"
 #include "include/Repeater.h"
 #include "include/Brawler.h"
+#include "include/Doc.h"
 
 
 void TowerManager::update(float dtAsSeconds)
@@ -45,6 +46,8 @@ void TowerManager::initialize()
   texture.loadFromFile("img/pocketsand.png");
   textures.push_back(texture);
   texture.loadFromFile("img/brokenglass.png");
+  textures.push_back(texture);
+  texture.loadFromFile("img/needle.png");
   textures.push_back(texture);
   isGrabbed = false;
   splashActive = false;
@@ -170,6 +173,24 @@ void TowerManager::spawnBrawler()
     grabbed->setDrawRange();
     isGrabbed = true;
 }
+
+void TowerManager::spawnDoc()
+{
+    Unit::Attributes attr = { 600, 600, -5, 1, 100, 75, 300 };
+    Tower::AmmoInfo ami = { 1, 1 };
+    grabbed = std::make_shared<Doc>(attr);
+    grabbed->setBodyTexture(&textures[0], 0.25);
+    grabbed->setGunTexture(&textures[9], 0.25, sf::Vector2f(-150, 0));
+    grabbed->setProjTexture(&textures[9], 0.25);
+    grabbed->setAmmoInfo(ami);
+    grabbed->setTowerManager(this);
+    grabbed->setLocation(sf::Vector2f(sf::Mouse::getPosition()));
+    grabbed->initialize();
+    grabbed->pause();
+    grabbed->setDrawRange();
+    isGrabbed = true;
+}
+
 
 void TowerManager::hitvisit(sf::Vector2f cursorPos)
 {

@@ -109,8 +109,11 @@ void Brawler::update(double dtAsSeconds)
 		}
 		else
 		{
-			double theta = getTargetTheta();
-			setGunRotation(theta * 180 / M_PI, getMeleeAnimationValue());
+			if(getTarget())
+			{
+				double theta = getTargetTheta();
+				setGunRotation(theta * 180 / M_PI, getMeleeAnimationValue());
+			}
 		}
 	}
 }

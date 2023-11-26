@@ -128,6 +128,15 @@ void Unit::takeDamage(double damage)
   }
 }
 
+void Unit::addHealth(double health)
+{
+    _attributes.health += health;
+    if (getHealth() > getMaxHealth())
+    {
+        _attributes.health = getMaxHealth();
+    }
+}
+
 void Unit::addStatusEffect(StatusEffects eft, double duration)
 {
     BlindTimer t1 = BlindTimer(duration);
@@ -160,18 +169,11 @@ double Unit::getTargetDistance()
 
 void Unit::fire()
 {
-  if (getTarget()->isActive() == false)
-  {
-    setIsTargetValid(false);
-  }
-  else
-  {
     _gunRecoilAnimation.activateForward();
     std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), _attributes.accuracy, 1000, _attributes.damage);
     proj->setProjTexture(_projTexture, _bulletScale);
     proj->fire(getTarget());
     shots.push_back(proj);
-  }
 }
 
 void Unit::setLocation(sf::Vector2f loc)
@@ -203,4 +205,14 @@ void Unit::setGunRotation(double rot, double rotmod)
   }
   
   _gunSpr.setRotation(rot + (gunLeft ? 180 + rotmod : -rotmod));
+}
+
+void Unit::setRecoilAnimation(double start, double stop, double dur)
+{
+    _gunRecoilAnimation = Animation(start, stop, dur);
+}
+
+void Unit::setResetAnimation(double start, double stop, double dur)
+{
+    _gunResetAnimation = Animation(start, stop, dur);
 }
