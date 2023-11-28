@@ -50,7 +50,7 @@ public:
 	std::string getRangeString();
 	std::string getAccuracyString();
 	void findNearby();
-	void setLocation(sf::Vector2f loc);
+	virtual void setLocation(sf::Vector2f loc);
 
 	void setAmmoInfo(AmmoInfo ami) { _gunAmmo = ami; }
 	int getRemainingBullets() { return _gunAmmo.ammo; }
@@ -62,4 +62,5 @@ public:
 	void completeReload();
 	void updateReloadAnim(double dt) { _reloadAnim.update(dt); }
 	void updateReloadToAnim() { _reloadBar.setSize(sf::Vector2f(_reloadAnim.get(), 5)); }
+	Animation* getReloadAnim() { return &_reloadAnim; }
 };

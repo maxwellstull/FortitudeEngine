@@ -24,8 +24,13 @@ void Doc::fire()
 {
 	getRecoilAnimation()->activateForward();
 
-	getTarget()->takeDamage(getDamage());
+	getTarget()->addHealth(getDamage());
 	decrementBullet();
+
+	if (getTarget()->getHealth() >= getTarget()->getMaxHealth()-0.000001)
+	{
+		setIsTargetValid(false);
+	}
 }
 
 void Doc::findTarget()
@@ -41,7 +46,7 @@ void Doc::findTarget()
 		{
 			if(this != op.get())
 			{
-				if (op->getHealth() >= op->getMaxHealth())
+				if (op->getHealth() < op->getMaxHealth())
 				{
 					xd = op->getLocation().x - getLocation().x;
 					yd = op->getLocation().y - getLocation().y;

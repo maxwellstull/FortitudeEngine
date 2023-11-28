@@ -34,6 +34,7 @@ public:
   void spawnBlaster();
   void spawnBrawler();
   void spawnDoc();
+  void spawnSheriff();
   void release() { isGrabbed = false; grabbed->unpause(); grabbed->clearDrawRange();  towers.push_back(grabbed); }
   void hitvisit(sf::Vector2f cursorPos);
 }; 

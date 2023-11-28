@@ -64,16 +64,16 @@ private:
 public:
   Unit(Attributes attr);
   void update(double dt);
-  void draw(sf::RenderWindow* context);
+  virtual void draw(sf::RenderWindow* context);
   void initialize(bool showHealthBar);
 
   void setBodyTexture(sf::Texture* texture, double scale);
   sf::Sprite* getBodySprite() { return &_bodySpr; }
-  void setGunTexture(sf::Texture* texture, double scale, sf::Vector2f offset);
+  virtual void setGunTexture(sf::Texture* texture, double scale, sf::Vector2f offset);
   sf::Sprite* getGunSprite() { return &_gunSpr; }
   void setProjTexture(sf::Texture* texture, double scale);
   sf::Texture* getProjTexture() { return _projTexture; }
-  void setGunRotation(double rot, double rotmod);
+  virtual void setGunRotation(double rot, double rotmod);
   sf::FloatRect getBodyBounds() { return _bodySpr.getLocalBounds(); }
   double getGunRotation() { return _gunSpr.getRotation(); }
   void setStaticGunRotation(double rot) { _staticGunRotation = rot; }
@@ -131,5 +131,6 @@ public:
   void setBleeding() { _bleeding = true; }
   bool getBleeding() { return _bleeding; }
   void clearBleeding() { _blinded = false; }
-
+  bool getGunLeft() { return gunLeft; }
+  void setGunLeft(bool t) { gunLeft = t; }
 };
