@@ -14,18 +14,36 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
 - [x] Implement reload mechanics
   - [x] Remove targeting timer
   - [x] Add reload progress bar near health bar
+  - [ ] Remove reload mechanics from tower, add it to base, make enemies reload
+  - [ ] Add bullet count to tower stat splash
+- [ ] Give towers more realistic stats
+- [ ] Put common headers in GameStructures.h
+- [ ] Rework tower findTarget
+  - [ ] Identify what pathsegments are in range when the tower is placed, only every search in those segments for targets
+  - [ ] Create "observer" (or some way for the tower to be notified) for when a enemy enters a path segment
+  - [ ] Add findTarget timer such that it will wait a configurable amount of time before running findTarget repeatedly
 - [ ] Add armor for unit class
+- [ ] Create different paths offset from center with pathsegment to allow for enemies to be slightly offset from eachother occasionally
 - [ ] Create classes for each enemy
   - [ ] Draw skin for enemies (bandana and eyecovers)
-- [ ] Create wall (just make it placable, don't worry about blocking bullets)
-- [ ] Create damage type for melee (derive from projectile since this is anarchy)
+- [ ] Create wall that blocks projectiles
+  - [ ] Potentially: rework projectiles
+- [ ] Create economy
+  - [ ] Enemies drop dollars on demise
+  - [ ] each tower has a cost associated
 - [ ] Create "waves" and gameplay
   - [ ] Create 'start wave' button
   - [ ] Create way to auto-generate enemies
-- [ ] Make bullets use less cheese on hit detection (???)
 - [ ] Create pause menu with save & exit, options, etc
 - [ ] Implement save game
-- [ ] Implement "bank"
+- [ ] Implement "bank" and bank upgrades
+- [ ] Implement statistics tracking
+- [ ] Create higher quality assets
+   - [ ] Tower hat
+   - [ ] Enemy skin
+   - [ ] Weapons
+- [ ] Create map creation tool
+- [ ] Create achievements
 - [ ] Fix bug: if unit reaches end when projectile is en route to them, and unit despawns, the game crashes
 
 
@@ -111,8 +129,9 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
   - Open (any bank level)
   - Presets for bank 0, 10, 30, 50, with everyone having the same bank
 
-#### Procedural/random map generation
-- Create random map and place random houses, blocks, etc
+#### Map creation
+- Create place-able assets that can connect to each other to be placed on the grid
+- Assets should have points on them for generating the pathsegments
 
 #### Map of the Day
 - Using procedural maps, have map of the day with leaderboard that tracks highest wave
