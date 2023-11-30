@@ -11,6 +11,7 @@ private:
   std::shared_ptr<sf::Text> _damage;
   std::shared_ptr<sf::Text> _range;
   std::shared_ptr<sf::Text> _accuracy;
+  std::shared_ptr<sf::Text> _ammo;
 public:
   void TowerSplash(std::shared_ptr<Tower> theGuy);
   //void refresh();

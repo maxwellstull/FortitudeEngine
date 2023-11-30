@@ -42,6 +42,7 @@ public:
 	std::string getDamageString();
 	std::string getRangeString();
 	std::string getAccuracyString();
+	std::string getAmmoString();
 	void findNearby();
 	virtual void setLocation(sf::Vector2f loc);
 

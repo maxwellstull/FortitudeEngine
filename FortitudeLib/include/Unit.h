@@ -155,4 +155,5 @@ public:
   virtual void queueReload();
   void drawReloadBar(sf::RenderWindow* context);
   void completeReload();
+  int getMaxAmmo() { return _gunAmmo.maxClip; }
 };

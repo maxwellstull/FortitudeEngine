@@ -97,6 +97,13 @@ void TowerStatMenuManager::TowerSplash(std::shared_ptr<Tower> theGuy)
 	acc->setCharacterSize(20);
 	acc->setPosition(boardLocation.x - (paperSize.x / 2) + 5, boardLocation.y - (paperSize.y / 2) + 120);
 	_accuracy = acc;
+	//boolet 
+	std::shared_ptr<sf::Text> bullet = std::make_shared<sf::Text>();
+	bullet->setString(theGuy->getAmmoString());
+	bullet->setFont(fonty);
+	bullet->setCharacterSize(20);
+	bullet->setPosition(boardLocation.x - (paperSize.x / 2) + 5, boardLocation.y - (paperSize.y / 2) + 150);
+	_ammo = bullet;
 
 	getShapes()->push_back(woodenBoard);
 	getShapes()->push_back(paper);
@@ -104,6 +111,7 @@ void TowerStatMenuManager::TowerSplash(std::shared_ptr<Tower> theGuy)
 	getShapes()->push_back(dmg);
 	getShapes()->push_back(rng);
 	getShapes()->push_back(acc);
+	getShapes()->push_back(bullet);
 	activate();
 }
 /*

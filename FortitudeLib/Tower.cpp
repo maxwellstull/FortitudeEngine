@@ -52,6 +52,11 @@ std::string Tower::getAccuracyString()
 	return "Acc: " + trimDoubleToString(getAccuracy());
 }
 
+std::string Tower::getAmmoString()
+{
+	return std::to_string(getRemainingBullets()) + "/" + std::to_string(getMaxAmmo());
+}
+
 
 void Tower::update(double dtAsSeconds)
 {
