@@ -22,6 +22,11 @@ public:
     double accuracy; //between 0 and 100
     double projectileSpeed;
   };
+    struct AmmoInfo {
+        int ammo;
+        int maxClip;
+    };
+
 
 private:
   // Current location of unit
@@ -53,6 +58,10 @@ private:
   bool _validTarget;
   Timer _fireTimer;
   std::vector<std::shared_ptr<Projectile>> shots;
+
+  AmmoInfo _gunAmmo;
+  Animation _reloadAnim;
+  sf::RectangleShape _reloadBar;
 
 //Status effects
 private:
@@ -133,4 +142,17 @@ public:
   void clearBleeding() { _blinded = false; }
   bool getGunLeft() { return gunLeft; }
   void setGunLeft(bool t) { gunLeft = t; }
+
+
+  void updateReloadAnim(double dt) { _reloadAnim.update(dt); }
+  void updateReloadToAnim() { _reloadBar.setSize(sf::Vector2f(_reloadAnim.get(), 5)); }
+  Animation* getReloadAnim() { return &_reloadAnim; }
+  void setAmmoInfo(AmmoInfo ami) { _gunAmmo = ami; }
+  int getRemainingBullets() { return _gunAmmo.ammo; }
+  void decrementBullet();
+  bool isAmmoEmpty();
+  bool isAmmoReloading();
+  virtual void queueReload();
+  void drawReloadBar(sf::RenderWindow* context);
+  void completeReload();
 };

@@ -41,9 +41,17 @@ void Enemy::update(float dtAsSeconds)
 			if (distance < getRange())
 			{
 				setGunRotation((theta * 180 / M_PI), getAnimationValue());
-				if (getFireTimerStatus() == true)
+				if(isAmmoReloading() == false)
 				{
-					fire();
+					if (getFireTimerStatus() == true)
+					{
+						fire();
+						if (isAmmoEmpty())
+						{
+							std::cout << "queueing reload" << std::endl;
+							queueReload();
+						}
+					}
 				}
 			}
 			else
@@ -52,6 +60,7 @@ void Enemy::update(float dtAsSeconds)
 				setIsTargetValid(false); //out of range
 			}
 		}
+
 	}
 }
 
@@ -179,6 +188,7 @@ void Enemy::fire()
 	if (getBlinded() == false)
 	{
 		Unit::fire();
+		decrementBullet();
 	}
 	else
 	{

@@ -9,12 +9,12 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
 
 ## Todo
 ### Tasks
-- [ ] Create classes for each tower
+- [x] Create classes for each tower
   - [x] Prospector needs damage falloff for range of explosion
 - [x] Implement reload mechanics
   - [x] Remove targeting timer
   - [x] Add reload progress bar near health bar
-  - [ ] Remove reload mechanics from tower, add it to base, make enemies reload
+  - [x] Remove reload mechanics from tower, add it to base, make enemies reload
   - [ ] Add bullet count to tower stat splash
 - [ ] Give towers more realistic stats
 - [ ] Put common headers in GameStructures.h

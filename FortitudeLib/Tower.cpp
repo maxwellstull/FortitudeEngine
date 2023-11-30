@@ -9,13 +9,9 @@
 
 Tower::Tower(Attributes attr) : Unit(attr)
 {
-	double reloadTime = 5;
 
 	_drawRange = false;
-	_reloadAnim = Animation(30, 0, reloadTime);
-	_reloadAnim.setOnCompleteFunction([this]() {completeReload(); });
-
-	_reloadBar.setPosition(getLocation());
+	
 }
 
 void Tower::initialize()
@@ -28,11 +24,7 @@ void Tower::initialize()
 	_rangeCircle.setFillColor(sf::Color::Transparent);
 	_rangeCircle.setOutlineThickness(4);
 
-	_reloadBar = sf::RectangleShape(sf::Vector2f(30, 5));
-	bds = _reloadBar.getLocalBounds();
-	_reloadBar.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f) - 27);
-	_reloadBar.setFillColor(sf::Color::Yellow);
-	_reloadBar.setSize(sf::Vector2f(0, 5));
+	
 	Unit::initialize(true);
 }
 
@@ -60,34 +52,10 @@ std::string Tower::getAccuracyString()
 	return "Acc: " + trimDoubleToString(getAccuracy());
 }
 
-void Tower::decrementBullet()
-{
-	_gunAmmo.ammo -= 1;
-}
-
-bool Tower::isAmmoEmpty()
-{
-	if (_gunAmmo.ammo <= 0)
-	{
-		std::cout << " HEY WE OUT FAM" << std::endl;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool Tower::isAmmoReloading()
-{
-	return _reloadAnim.isActive();
-}
-
 
 void Tower::update(double dtAsSeconds)
 {
 	Unit::update(dtAsSeconds);
-	updateReloadAnim(dtAsSeconds);
 	if (isActive() && _paused == false)
 	{
 		if (getTarget())
@@ -142,10 +110,7 @@ void Tower::update(double dtAsSeconds)
 				}
 			}
 		}
-		if (isAmmoReloading())
-		{
-			_reloadBar.setSize(sf::Vector2f(_reloadAnim.get(), 5));
-		}
+
 	}
 }
 
@@ -193,10 +158,6 @@ void Tower::draw(sf::RenderWindow* context)
 		{
 			drawRangeCircle(context);
 		}
-		if (isAmmoReloading())
-		{
-			drawReloadBar(context);
-		}
 	}
 	Unit::draw(context);
 }
@@ -207,24 +168,10 @@ void Tower::drawRangeCircle(sf::RenderWindow* context)
 }
 
 
-void Tower::queueReload()
-{
-	_reloadAnim.activateForward();
-}
 
-void Tower::drawReloadBar(sf::RenderWindow* context)
-{
-	//std::cout << "draw reload bar" << std::endl;
-	context->draw(_reloadBar);
-}
 
 void Tower::setLocation(sf::Vector2f loc)
 {
-	_reloadBar.setPosition(loc);
 	Unit::setLocation(loc);
 }
 
-void Tower::completeReload()
-{
-	_gunAmmo.ammo = _gunAmmo.maxClip;
-}

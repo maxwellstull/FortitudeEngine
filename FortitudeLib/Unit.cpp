@@ -3,6 +3,7 @@
 
 Unit::Unit(Attributes attr)
 {
+    double reloadTime = 5;
   _location = sf::Vector2f(-100, -100);
   _rotation = 0;
   _attributes = attr;
@@ -18,6 +19,12 @@ Unit::Unit(Attributes attr)
   _deltaPerSec = sf::Vector2f(0, 0);
 
   _blinded = false;
+
+
+  _reloadAnim = Animation(30, 0, reloadTime);
+  _reloadAnim.setOnCompleteFunction([this]() {completeReload(); });
+
+  _reloadBar.setPosition(getLocation());
 }
 
 void Unit::update(double dt)
@@ -27,6 +34,7 @@ void Unit::update(double dt)
     _gunRecoilAnimation.update(dt);
     _gunResetAnimation.update(dt);
     _fireTimer.update(dt);
+    updateReloadAnim(dt);
     for (std::shared_ptr<Projectile> proj : shots)
     {
       proj->update(dt);
@@ -34,6 +42,10 @@ void Unit::update(double dt)
     for (auto t : _statusTimers)
     {
         t.update(dt);
+    }
+    if (isAmmoReloading())
+    {
+        updateReloadToAnim();
     }
   }
 }
@@ -52,6 +64,10 @@ void Unit::draw(sf::RenderWindow* context)
     for (auto proj : shots)
     {
       proj->draw(context);
+    }
+    if (isAmmoReloading())
+    {
+        drawReloadBar(context);
     }
   }
 }
@@ -92,6 +108,12 @@ void Unit::initialize(bool showHealthBar)
     _maxHealthBar.setPosition(getLocation());
     _curHealthBar.setPosition(getLocation());
   }
+
+  _reloadBar = sf::RectangleShape(sf::Vector2f(30, 5));
+  sf::FloatRect bds = _reloadBar.getLocalBounds();
+  _reloadBar.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f) - 27);
+  _reloadBar.setFillColor(sf::Color::Yellow);
+  _reloadBar.setSize(sf::Vector2f(0, 5));
 
   //_gunRecoilAnimation = Animation(0, 45, (1.f / _attributes.fireRate) / 3);
   //_gunResetAnimation = Animation(45, 0, (1.f / _attributes.fireRate) / 2);
@@ -183,6 +205,7 @@ void Unit::setLocation(sf::Vector2f loc)
   _gunSpr.setPosition(loc);
   _curHealthBar.setPosition(loc);
   _maxHealthBar.setPosition(loc);
+  _reloadBar.setPosition(loc);
 }
 
 void Unit::setProjTexture(sf::Texture* texture, double scale)
@@ -215,4 +238,43 @@ void Unit::setRecoilAnimation(double start, double stop, double dur)
 void Unit::setResetAnimation(double start, double stop, double dur)
 {
     _gunResetAnimation = Animation(start, stop, dur);
+}
+
+void Unit::decrementBullet()
+{
+    _gunAmmo.ammo -= 1;
+}
+
+bool Unit::isAmmoEmpty()
+{
+    if (_gunAmmo.ammo <= 0)
+    {
+        std::cout << " HEY WE OUT FAM" << std::endl;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Unit::isAmmoReloading()
+{
+    return _reloadAnim.isActive();
+}
+
+void Unit::completeReload()
+{
+    _gunAmmo.ammo = _gunAmmo.maxClip;
+}
+
+void Unit::drawReloadBar(sf::RenderWindow* context)
+{
+    //std::cout << "draw reload bar" << std::endl;
+    context->draw(_reloadBar);
+}
+
+void Unit::queueReload()
+{
+    _reloadAnim.activateForward();
 }
