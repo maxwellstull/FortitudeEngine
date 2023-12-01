@@ -76,7 +76,15 @@ void TowerManager::Draw(sf::RenderWindow* context)
 
 void TowerManager::spawnLawman()
 {
-  Unit::Attributes attr = { 100, 100, 10, 0.5, 500, 90, 300};
+  Unit::Attributes attr = { 
+    100,  //max health
+    100,  //current health
+    10,   //damage
+    0.75,  // fire rate
+    300,  // range (in pixels)
+    75,   //accuracy (0 to 100)
+    400   //projectile speed
+  };
   Tower::AmmoInfo ami = { 6, 6};
   grabbed = std::make_shared<Lawman>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
@@ -93,7 +101,15 @@ void TowerManager::spawnLawman()
 
 void TowerManager::spawnMarshall()
 {
-  Unit::Attributes attr = { 200, 200, 25, 0.5, 1000, 75 , 500};
+  Unit::Attributes attr = {
+    50,  //max health
+    50,  //current health
+    25,   //damage
+    0.5,  // fire rate
+    500,  // range (in pixels)
+    75,   //accuracy (0 to 100)
+    400   //projectile speed
+  };
   Tower::AmmoInfo ami = { 8, 8 };
   grabbed = std::make_shared<Marshall>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
@@ -110,7 +126,15 @@ void TowerManager::spawnMarshall()
 
 void TowerManager::spawnRepeater()
 {
-  Unit::Attributes attr = { 50, 50, 15, 3, 350, 75, 300 };
+  Unit::Attributes attr = {
+    50,  //max health
+    50,  //current health
+    8,   //damage
+    3,  // fire rate
+    350,  // range (in pixels)
+    75,   //accuracy (0 to 100)
+    400   //projectile speed
+  };
   Tower::AmmoInfo ami = { 15, 15 };
   grabbed = std::make_shared<Repeater>(attr, &textures[7], 0.25);
   grabbed->setBodyTexture(&textures[0], 0.25);
@@ -127,7 +151,15 @@ void TowerManager::spawnRepeater()
 
 void TowerManager::spawnProspector()
 {
-  Unit::Attributes attr = { 300, 300, 80, 1, 500, 100, 600 };
+  Unit::Attributes attr = {
+    200,  //max health
+    200,  //current health
+    80,   //damage
+    0.5,  // fire rate
+    400,  // range (in pixels)
+    75,   //accuracy (0 to 100)
+    400   //projectile speed
+  };
   Tower::AmmoInfo ami = { 2, 2 };
   grabbed = std::make_shared<Prospector>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
@@ -144,7 +176,15 @@ void TowerManager::spawnProspector()
 
 void TowerManager::spawnBlaster()
 {
-  Unit::Attributes attr = { 600, 600, 20, 1, 500, 75, 300 };
+  Unit::Attributes attr = {
+    300,  //max health
+    300,  //current health
+    20,   //damage
+    1,  // fire rate
+    100,  // range (in pixels)
+    75,   //accuracy (0 to 100)
+    400   //projectile speed
+  };
   Tower::AmmoInfo ami = { 4, 4 };
   grabbed = std::make_shared<Blaster>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
@@ -161,7 +201,15 @@ void TowerManager::spawnBlaster()
 
 void TowerManager::spawnBrawler()
 {
-    Unit::Attributes attr = { 600, 600, 20, 1, 500, 75, 300 };
+    Unit::Attributes attr = {
+    300,  //max health
+    300,  //current health
+    20,   //damage
+    1,  // fire rate
+    300,  // range (in pixels)
+    75,   //accuracy (0 to 100)
+    400   //projectile speed
+    };
     Tower::AmmoInfo ami = { 2, 2 };
     grabbed = std::make_shared<Brawler>(attr, &textures[8], 0.25);
     grabbed->setBodyTexture(&textures[0], 0.25);
@@ -178,7 +226,15 @@ void TowerManager::spawnBrawler()
 
 void TowerManager::spawnDoc()
 {
-    Unit::Attributes attr = { 600, 600, 5, 1, 100, 75, 300 };
+    Unit::Attributes attr = {
+    100,  //max health
+    100,  //current health
+    5,   //damage
+    0.5,  // fire rate
+    100,  // range (in pixels)
+    75,   //accuracy (0 to 100)
+    400   //projectile speed
+    };
     Tower::AmmoInfo ami = { 1, 1 };
     grabbed = std::make_shared<Doc>(attr);
     grabbed->setBodyTexture(&textures[0], 0.25);
@@ -195,7 +251,15 @@ void TowerManager::spawnDoc()
 
 void TowerManager::spawnSheriff()
 {
-  Unit::Attributes attr = { 600, 600, 5, 1, 500, 75, 300 };
+  Unit::Attributes attr = {
+    500,  //max health
+    500,  //current health
+    10,   //damage
+    0.75,  // fire rate
+    400,  // range (in pixels)
+    75,   //accuracy (0 to 100)
+    400   //projectile speed
+  };
   Tower::AmmoInfo ami = { 12, 12 };
   grabbed = std::make_shared<Sheriff>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);

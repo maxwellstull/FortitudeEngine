@@ -36,7 +36,15 @@ void EnemyManager::Draw(sf::RenderWindow* context)
 
 void EnemyManager::spawnBadGuy() 
 {
-	Unit::Attributes attr = { 100, 100, 2, 1, 300, 80 };
+	Unit::Attributes attr = { 
+    100,  //max health
+    100,  //current health
+    2,   //damage
+    1,  // fire rate
+    300,  // range (in pixels)
+    80,   //accuracy (0 to 100)
+    500   //projectile speed
+  };
 	Unit::AmmoInfo ami = { 6, 6 };
 	std::shared_ptr<Enemy> en = std::make_shared<Enemy>(attr);
 	en->setBodyTexture(&textures[0], 0.25);

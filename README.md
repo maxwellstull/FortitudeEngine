@@ -16,7 +16,7 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
   - [x] Add reload progress bar near health bar
   - [x] Remove reload mechanics from tower, add it to base, make enemies reload
   - [x] Add bullet count to tower stat splash
-- [ ] Give towers more realistic stats
+- [x] Give towers more realistic stats
 - [ ] Put common headers in GameStructures.h
 - [ ] Rework tower findTarget
   - [ ] Identify what pathsegments are in range when the tower is placed, only every search in those segments for targets
