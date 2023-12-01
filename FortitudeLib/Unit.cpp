@@ -15,10 +15,13 @@ Unit::Unit(Attributes attr)
   _validTarget = false;
   _fireTimer = Timer(1.f / attr.fireRate);
   _fireTimer.setReady();
+  _targetingTimer = Timer(0.15);
+  _targetingTimer.setReady();
   gunLeft = false;
   _deltaPerSec = sf::Vector2f(0, 0);
 
   _blinded = false;
+  
 
 
   _reloadAnim = Animation(30, 0, reloadTime);
@@ -34,6 +37,7 @@ void Unit::update(double dt)
     _gunRecoilAnimation.update(dt);
     _gunResetAnimation.update(dt);
     _fireTimer.update(dt);
+    _targetingTimer.update(dt);
     updateReloadAnim(dt);
     for (std::shared_ptr<Projectile> proj : shots)
     {

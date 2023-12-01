@@ -59,6 +59,8 @@ private:
   Timer _fireTimer;
   std::vector<std::shared_ptr<Projectile>> shots;
 
+  Timer _targetingTimer;
+
   AmmoInfo _gunAmmo;
   Animation _reloadAnim;
   sf::RectangleShape _reloadBar;
@@ -102,9 +104,13 @@ public:
   double getTargetTheta();
   double getTargetDistance();
 
+  virtual void findTarget() = 0;
+
   double getAnimationValue();
   bool getFireTimerStatus() { return _fireTimer.get(); }
   double DEBUGgetFireTimerStatus() { return _fireTimer.DEBUGget(); }
+  bool getTargetingTimerStatus() { return _targetingTimer.get(); }
+  void readyTargetingTimer() { _targetingTimer.setReady(); }
 
   void setAttributes(Attributes attr) { _attributes = attr; }
   Attributes getAttributes() { return _attributes; }

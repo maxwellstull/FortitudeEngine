@@ -72,7 +72,10 @@ void Tower::update(double dtAsSeconds)
 		}
 		if (getIsTargetValid() == false)
 		{
-			findTarget();
+			if(getTargetingTimerStatus() == true)
+			{
+				findTarget();
+			}
 
 			setGunRotation(getStaticGunRotation(), getAnimationValue());
 		}
@@ -142,7 +145,7 @@ void Tower::findTarget()
 					min_distance = distance;
 					setTarget(op);
 					setIsTargetValid(true);
-					break;
+					readyTargetingTimer();
 				}
 			}
 		}

@@ -21,7 +21,7 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
 - [ ] Rework tower findTarget
   - [ ] Identify what pathsegments are in range when the tower is placed, only every search in those segments for targets
   - [ ] Create "observer" (or some way for the tower to be notified) for when a enemy enters a path segment
-  - [ ] Add findTarget timer such that it will wait a configurable amount of time before running findTarget repeatedly
+  - [x] Add findTarget timer such that it will wait a configurable amount of time before running findTarget repeatedly
 - [ ] Add armor for unit class
 - [ ] Create different paths offset from center with pathsegment to allow for enemies to be slightly offset from eachother occasionally
 - [ ] Create classes for each enemy

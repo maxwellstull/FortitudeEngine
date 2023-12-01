@@ -32,7 +32,10 @@ void Enemy::update(float dtAsSeconds)
 
 		if (getIsTargetValid() == false)
 		{
-			findTarget();
+			if(getTargetingTimerStatus() == true)
+			{
+				findTarget();
+			}
 		}
 		else
 		{
@@ -86,6 +89,7 @@ void Enemy::findTarget()
 				min_distance = distance;
 				setTarget(op);
 				setIsTargetValid(true);
+				readyTargetingTimer();
 			}
 		}
 	}
