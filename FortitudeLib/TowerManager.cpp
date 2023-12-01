@@ -23,7 +23,8 @@ void TowerManager::update(float dtAsSeconds)
   }
   if (splashActive)
   {
-    selectedSplash.update(dtAsSeconds);
+    selectedSplash.refresh();
+//    selectedSplash.update(dtAsSeconds);
   }
 }
 

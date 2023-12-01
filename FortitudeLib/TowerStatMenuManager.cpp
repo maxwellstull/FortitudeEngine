@@ -112,13 +112,18 @@ void TowerStatMenuManager::TowerSplash(std::shared_ptr<Tower> theGuy)
 	getShapes()->push_back(rng);
 	getShapes()->push_back(acc);
 	getShapes()->push_back(bullet);
+	_splashed = theGuy;
 	activate();
 }
-/*
+
 void TowerStatMenuManager::refresh()
 {
-	health->setString(theGuy->getHealthString());
-	dmg->setString(theGuy->getDamageString());
-	rng->setString(theGuy->getRangeString());
-	acc->setString(theGuy->getAccuracyString());
-}*/
+	if(isActive())
+	{
+		_health->setString(_splashed->getHealthString());
+		_damage->setString(_splashed->getDamageString());
+		_range->setString(_splashed->getRangeString());
+		_accuracy->setString(_splashed->getAccuracyString());
+		_ammo->setString(_splashed->getAmmoString());
+	}
+}
