@@ -24,7 +24,7 @@ void Tower::initialize()
 	_rangeCircle.setFillColor(sf::Color::Transparent);
 	_rangeCircle.setOutlineThickness(4);
 
-	
+
 	Unit::initialize(true);
 }
 

@@ -21,10 +21,12 @@ public:
     double range;
     double accuracy; //between 0 and 100
     double projectileSpeed;
+    double armor;
   };
     struct AmmoInfo {
         int ammo;
         int maxClip;
+        double armorPierce;
     };
 
 
@@ -119,6 +121,8 @@ public:
   void setDamage(double dmg) { _attributes.damage = dmg; }
   void setFireRate(double rt) { _attributes.fireRate = rt; }
   void setRange(double rn) { _attributes.range = rn; }
+  void setArmor(double ar) { _attributes.armor = ar; }
+  double getArmor() { return _attributes.armor; }
   double getMaxHealth() { return _attributes.maxHealth; }
   double getHealth() { return _attributes.health; }
   double getDamage() { return _attributes.damage; }
@@ -126,6 +130,7 @@ public:
   double getRange() { return  _attributes.range; }
   double getAccuracy() { return _attributes.accuracy; }
   double getProjectileSpeed() { return _attributes.projectileSpeed; }
+  double getArmorPierce() { return _gunAmmo.armorPierce; }
 
   double computeDistance(double dx, double dy) { return sqrt(pow(dx, 2) + pow(dy, 2)); }
   bool isActive() { return _active; }

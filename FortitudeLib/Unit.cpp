@@ -142,7 +142,19 @@ double Unit::getAnimationValue()
 
 void Unit::takeDamage(double damage)
 {
-  _attributes.health -= damage;
+  double armor = getArmor();
+  double armorPierce = getArmorPierce();
+
+  double absorption = 1.0 - armorPierce;
+
+  
+  double armordmg = damage * absorption;
+  double healthdmg = damage * armorPierce;
+  _attributes.health -= healthdmg;
+  _attributes.armor -= armordmg;
+  
+
+ 
   if(getHealth() > 0)
   {
     double bar = (_maxHealthBar.getSize().x / getMaxHealth()) * getHealth();

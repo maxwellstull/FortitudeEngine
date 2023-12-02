@@ -43,7 +43,8 @@ void EnemyManager::spawnBadGuy()
     1,  // fire rate
     300,  // range (in pixels)
     80,   //accuracy (0 to 100)
-    500   //projectile speed
+    500,   //projectile speed
+		50,		//armor
   };
 	Unit::AmmoInfo ami = { 6, 6 };
 	std::shared_ptr<Enemy> en = std::make_shared<Enemy>(attr);

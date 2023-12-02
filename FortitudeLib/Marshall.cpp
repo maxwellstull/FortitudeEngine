@@ -3,7 +3,7 @@
 
 Marshall::Marshall(Attributes attr) : Tower(attr)
 {
-	_armorPiercing = 0.2;
+	_armorPiercing = 0.2; 
 }
 
 void Marshall::fire()
