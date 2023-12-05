@@ -23,7 +23,7 @@ void Tower::initialize()
 	_rangeCircle.setOutlineColor(sf::Color(50, 50, 50));
 	_rangeCircle.setFillColor(sf::Color::Transparent);
 	_rangeCircle.setOutlineThickness(4);
-
+	setArmor(0);
 
 	Unit::initialize(true);
 }

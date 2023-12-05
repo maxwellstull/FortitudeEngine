@@ -142,16 +142,40 @@ double Unit::getAnimationValue()
 
 void Unit::takeDamage(double damage)
 {
+    takeDamage(damage, 0);
+}
+
+void Unit::takeDamage(double damage, double armorPierce)
+{
   double armor = getArmor();
-  double armorPierce = getArmorPierce();
 
   double absorption = 1.0 - armorPierce;
 
-  
-  double armordmg = damage * absorption;
   double healthdmg = damage * armorPierce;
-  _attributes.health -= healthdmg;
-  _attributes.armor -= armordmg;
+  double armordmg = damage * absorption;
+  if(armor > 0)
+  {
+      if (armordmg > armor)
+      {
+          double leftover = (armordmg - armor);
+          leftover = leftover / absorption;
+
+          armordmg = armor;
+          healthdmg += leftover;
+
+          _attributes.armor = 0;
+          _attributes.health -= (healthdmg + leftover);
+      }
+      else
+      {
+          _attributes.health -= healthdmg;
+          _attributes.armor -= armordmg;
+      }
+  }
+  else
+  {
+      _attributes.health -= damage;
+  }
   
 
  

@@ -15,7 +15,7 @@ void Marshall::fire()
 
 	std::shared_ptr<Projectile> proj = std::make_shared<Projectile>(getLocation(), getAccuracy(), getProjectileSpeed(), damage);
 	proj->setProjTexture(getProjTexture(), getBulletScale());
-
+	proj->setArmorPierce(getArmorPierce());
 	// Todo: Implement armor piercing once armor is implemented :)
 
 	proj->fire(getTarget());

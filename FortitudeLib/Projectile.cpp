@@ -19,6 +19,7 @@ Projectile::Projectile(sf::Vector2f origin, double accuracy, double speed, doubl
   _active = false;
   _damage = damage;
   _heading = 0;
+  _armorPierce = 0;
   _despawning = false;
   _doOnImpact = false;
   _spin = false;
@@ -97,7 +98,7 @@ void Projectile::update(float dt)
     {
       if (_miss == false)
       {
-        _target->takeDamage(_damage);
+        _target->takeDamage(_damage, _armorPierce);
         if (_doOnImpact)
         {
             _onImpact();

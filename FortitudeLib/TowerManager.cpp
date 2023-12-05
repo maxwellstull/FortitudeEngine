@@ -110,7 +110,7 @@ void TowerManager::spawnMarshall()
     75,   //accuracy (0 to 100)
     400   //projectile speed
   };
-  Tower::AmmoInfo ami = { 8, 8 };
+  Tower::AmmoInfo ami = { 8, 8, 0.2 };
   grabbed = std::make_shared<Marshall>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[2], 0.15, sf::Vector2f(-150, -150));

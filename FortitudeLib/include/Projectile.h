@@ -21,6 +21,7 @@ private:
 
   double _speed;
   double _damage;
+  double _armorPierce;
   sf::Vector2f _deltaPerSec;
   double _heading;
 
@@ -42,6 +43,7 @@ public:
   void fire(std::shared_ptr<Unit> target, sf::Vector2f spread);
   void setProjTexture(sf::Texture* texture, double scale);
   void setSpriteColor(sf::Color c);
+  void setArmorPierce(double ap) { _armorPierce = ap; }
   sf::Vector2f getLocation() { return _location; }
   std::shared_ptr<Unit> getTarget() { return _target; }
   void setLocation(sf::Vector2f loc);

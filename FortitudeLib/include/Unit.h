@@ -140,6 +140,7 @@ public:
   void setLocation(sf::Vector2f loc);
   virtual void fire();
   void takeDamage(double damage);
+  void takeDamage(double damage, double armorPierce);
   void addHealth(double health);
   virtual void splashDamageAssist(double rng, double dmg, sf::Vector2f origin, double dropoffCoeff) { std::cout << "shit" << std::endl; }
 
