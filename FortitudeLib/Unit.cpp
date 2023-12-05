@@ -63,16 +63,17 @@ void Unit::draw(sf::RenderWindow* context)
       context->draw(_maxHealthBar);
       context->draw(_curHealthBar);
     }
+    if (isAmmoReloading())
+    {
+        drawReloadBar(context);
+    }
     context->draw(_bodySpr);
     context->draw(_gunSpr);
     for (auto proj : shots)
     {
       proj->draw(context);
     }
-    if (isAmmoReloading())
-    {
-        drawReloadBar(context);
-    }
+    
   }
 }
 
