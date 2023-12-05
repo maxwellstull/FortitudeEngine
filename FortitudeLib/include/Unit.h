@@ -137,7 +137,7 @@ public:
   void activate() { _active = true; }
   void deactivate() { _active = false; }
   sf::Vector2f getLocation() { return _location; }
-  void setLocation(sf::Vector2f loc);
+  virtual void setLocation(sf::Vector2f loc);
   virtual void fire();
   void takeDamage(double damage);
   void takeDamage(double damage, double armorPierce);

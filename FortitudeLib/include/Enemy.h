@@ -24,10 +24,10 @@ private:
 	double heading;
 public:
 	Enemy(Attributes attr);
-	void update(float dtAsSeconds);
+	virtual void update(float dtAsSeconds);
 	void draw(sf::RenderWindow* context);
 	void findTarget();
-
+	double getHeading() { return heading; }
 	void setSpeed(int sp) { speed = sp; }
 	void setEnemyManager(EnemyManager* e) { enm = e; }
 	EnemyManager* getEnemyManager() { return enm; }

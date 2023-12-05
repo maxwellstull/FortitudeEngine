@@ -9,7 +9,7 @@
 
 Enemy::Enemy(Attributes attr) : Unit(attr) 
 {
-
+	heading = 0;
 }
 
 

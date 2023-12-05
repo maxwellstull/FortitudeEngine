@@ -72,6 +72,11 @@ void Engine::input()
                       game.getEnemyManager()->spawnBadGuy();
                       break;
                     }
+                    case(sf::Keyboard::W):
+                    {
+                        game.getEnemyManager()->spawnTrainRobber();
+                        break;
+                    }
                 }
             }
         case sf::Event::MouseButtonPressed:

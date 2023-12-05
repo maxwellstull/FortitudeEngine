@@ -166,6 +166,7 @@
     <ClInclude Include="FortitudeLib\include\Tower.h" />
     <ClInclude Include="FortitudeLib\include\TowerManager.h" />
     <ClInclude Include="FortitudeLib\include\TowerStatMenuManager.h" />
+    <ClInclude Include="FortitudeLib\include\TrainRobber.h" />
     <ClInclude Include="FortitudeLib\include\Unit.h" />
     <ClInclude Include="FortitudeLib\include\WindowManager.h" />
     <ClInclude Include="main.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="FortitudeLib\Tower.cpp" />
     <ClCompile Include="FortitudeLib\TowerManager.cpp" />
     <ClCompile Include="FortitudeLib\TowerStatMenuManager.cpp" />
+    <ClCompile Include="FortitudeLib\TrainRobber.cpp" />
     <ClCompile Include="FortitudeLib\Unit.cpp" />
     <ClCompile Include="FortitudeLib\Update.cpp" />
     <ClCompile Include="FortitudeLib\WindowManager.cpp" />
