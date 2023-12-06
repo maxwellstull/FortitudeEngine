@@ -74,7 +74,7 @@ void EnemyManager::spawnTrainRobber()
 		100,		//armor
 	};
 	Unit::AmmoInfo ami = { 6, 6 };
-	std::shared_ptr<TrainRobber> en = std::make_shared<TrainRobber>(attr, &textures[3], 0.25);
+	std::shared_ptr<TrainRobber> en = std::make_shared<TrainRobber>(attr, &textures[3], 0.15);
 	en->setBodyTexture(&textures[0], 0.25);
 	en->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
 	en->setEnemyManager(this);

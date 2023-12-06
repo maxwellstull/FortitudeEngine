@@ -75,10 +75,6 @@ void Path::generatePath()
 			{
 				segment.setNodeType(PathNodeType::START);
 			}
-//			else if (i == (pts.size() - 1) && (j == segmentAmnt - 1))
-//			{
-//				segment.setNodeType(PathNodeType::END);
-//			}
 			else
 			{
 				segment.setNodeType(PathNodeType::MIDPOINT);
