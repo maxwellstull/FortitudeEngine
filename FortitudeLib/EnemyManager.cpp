@@ -1,6 +1,8 @@
 #include "include/EnemyManager.h"
 #include "include/Game.h"
 #include "include/TrainRobber.h"
+#include "include/Politician.h"
+#include "include/GoldRusher.h"
 
 void EnemyManager::update(float dtAsSeconds)
 {
@@ -22,6 +24,12 @@ void EnemyManager::initialize(GameInfo info)
 	texture.loadFromFile("img/bullet.png");
 	textures.push_back(texture);
 	texture.loadFromFile("img/badhorse.png");
+	textures.push_back(texture);
+	texture.loadFromFile("img/politician.png");
+	textures.push_back(texture);
+	texture.loadFromFile("img/mininghelmet.png");
+	textures.push_back(texture);
+	texture.loadFromFile("img/pickaxe.png");
 	textures.push_back(texture);
 	enemyIDCtr = 0;
 
@@ -86,4 +94,52 @@ void EnemyManager::spawnTrainRobber()
 	enemies.push_back(en);
 }
 
+void EnemyManager::spawnPolitician()
+{
+	Unit::Attributes attr = {
+	500,  //current health
+	0,   //damage
+	0,  // fire rate
+	0,  // range (in pixels)
+	0,   //accuracy (0 to 100)
+	0,   //projectile speed
+	500,		//armor
+	};
+	Unit::AmmoInfo ami = { 0, 0 };
+	std::shared_ptr<Politician> en = std::make_shared<Politician>(attr, &textures[4], 0.25);
+	en->setBodyTexture(&textures[0], 0.25);
+	en->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
+	en->setEnemyManager(this);
+	en->setAmmoInfo(ami);
+	en->setProjTexture(&textures[2], 0.25);
+	en->setSpeed(25);
+	en->enableArmor();
+	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
+	en->setID(enemyIDCtr++);
+	enemies.push_back(en);
+}
 
+
+void EnemyManager::spawnGoldRusher()
+{
+	Unit::Attributes attr = {
+	50,  //current health
+	10,   //damage
+	0.5,  // fire rate
+	250,  // range (in pixels)
+	90,   //accuracy (0 to 100)
+	500,   //projectile speed
+	100,		//armor
+	};
+	Unit::AmmoInfo ami = {1,1};
+	std::shared_ptr<GoldRusher> en = std::make_shared<GoldRusher>(attr);
+	en->setBodyTexture(&textures[5], 0.25);
+	en->setGunTexture(&textures[6], 0.25, sf::Vector2f(-100, 0));
+	en->setEnemyManager(this);
+	en->setAmmoInfo(ami);
+	en->setSpeed(80);
+	en->enableArmor();
+	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
+	en->setID(enemyIDCtr++);
+	enemies.push_back(en);
+}

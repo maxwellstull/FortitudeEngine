@@ -60,12 +60,11 @@ void Unit::draw(sf::RenderWindow* context)
   {
     if (_healthBar)
     {
-      context->draw(_maxHealthBar);
-      context->draw(_curHealthBar);
+      drawHealthBar(context);
     }
     if (_armorVisual)
     {
-        context->draw(_armorBar);
+        drawArmorBar(context);
     }
     if (isAmmoReloading())
     {

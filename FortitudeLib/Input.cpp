@@ -77,6 +77,16 @@ void Engine::input()
                         game.getEnemyManager()->spawnTrainRobber();
                         break;
                     }
+                    case(sf::Keyboard::E):
+                    {
+                        game.getEnemyManager()->spawnPolitician();
+                        break;
+                    }
+                    case(sf::Keyboard::R):
+                    {
+                        game.getEnemyManager()->spawnGoldRusher();
+                        break;
+                    }
                 }
             }
         case sf::Event::MouseButtonPressed:

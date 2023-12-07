@@ -19,14 +19,14 @@ private:
 	int destinationIdx = 0;
 	int uniqueID;
 
-	float speed;
+	int speed;
 	
 	double heading;
 public:
 	Enemy(Attributes attr);
 	virtual void update(float dtAsSeconds);
 	void draw(sf::RenderWindow* context);
-	void findTarget();
+	virtual void findTarget();
 	double getHeading() { return heading; }
 	void setSpeed(int sp) { speed = sp; }
 	void setEnemyManager(EnemyManager* e) { enm = e; }
@@ -36,7 +36,7 @@ public:
 	void setID(int uid) { uniqueID = uid; }
 	int getID() { return uniqueID; }
 
-	void initialize(PathSegment * st);
+	virtual void initialize(PathSegment * st);
 	void splashDamageAssist(double rng, double dmg, sf::Vector2f origin, double dropoffCoeff);
 	void fire();
 };

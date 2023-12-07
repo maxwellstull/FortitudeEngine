@@ -29,7 +29,7 @@ public:
     struct StatDefaults {
         double maxHealth;
         double maxArmor;
-        double maxClip;
+        int maxClip;
     };
 
 
@@ -82,9 +82,9 @@ private:
 
 public:
   Unit(Attributes attr);
-  void update(double dt);
+  virtual void update(double dt);
   virtual void draw(sf::RenderWindow* context);
-  void initialize(bool showHealthBar);
+  virtual void initialize(bool showHealthBar);
 
   void setBodyTexture(sf::Texture* texture, double scale);
   sf::Sprite* getBodySprite() { return &_bodySpr; }
@@ -114,7 +114,7 @@ public:
 
   virtual void findTarget() = 0;
 
-  double getAnimationValue();
+  virtual double getAnimationValue();
   bool getFireTimerStatus() { return _fireTimer.get(); }
   double DEBUGgetFireTimerStatus() { return _fireTimer.DEBUGget(); }
   bool getTargetingTimerStatus() { return _targetingTimer.get(); }
@@ -176,4 +176,6 @@ public:
   void completeReload();
   int getMaxAmmo() { return _defs.maxClip; }
   void enableArmor() { _armorVisual = true; }
+  void drawHealthBar(sf::RenderWindow* context) { context->draw(_maxHealthBar); context->draw(_curHealthBar); }
+  void drawArmorBar(sf::RenderWindow* context) { context->draw(_armorBar); }
 };

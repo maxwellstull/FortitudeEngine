@@ -25,4 +25,6 @@ public:
 	std::vector<std::shared_ptr<Enemy>> getEnemies() { return enemies; }
 	void spawnBadGuy();
 	void spawnTrainRobber();
+	void spawnPolitician();
+	void spawnGoldRusher();
 };
