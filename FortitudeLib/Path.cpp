@@ -1,12 +1,17 @@
 #include "include/Path.h"
 
 
+bool doubleEQ(double d1, double d2)
+{
+	return fabs(d1 - d2) < 0.001;
+}
+
 void Path::generatePath()
 {
 	
 	double scale = 2.7;
 	double pathWidth = 20;
-	double subSubmentSize = 20;
+	double subSubmentSize = 40;
 
 	std::vector<sf::Vector2f> pts = {
 		sf::Vector2f(0 * scale, 221 * scale),
@@ -25,6 +30,7 @@ void Path::generatePath()
 		sf::Vector2f(600 * scale, 180 * scale),
 		sf::Vector2f(620 * scale, 182 * scale) };
 
+	
 	//generate the segments
 	for (int i = 0; i < pts.size()-1; i++)
 	{
@@ -49,26 +55,33 @@ void Path::generatePath()
 			segment.setSegmentEnd(tmpEnd);
 			segment.setSize(sf::Vector2f(pathWidth * 2, eachSegmentLength));
 
-			if (tmpEnd.x > tmpStart.x && tmpEnd.y > tmpStart.y) //down-right
+			//check x behavior
+			if (doubleEQ(tmpStart.x, tmpEnd.x))
+			{
+				segment.ignoreX();
+			}
+			else if (tmpEnd.x > tmpStart.x)
 			{
 				segment.setXGreaterThan(true);
-				segment.setYGreaterThan(true);
 			}
-			else if (tmpEnd.x < tmpStart.x && tmpEnd.y > tmpStart.y) //down-left
+			else
 			{
 				segment.setXGreaterThan(false);
+			}
+
+			if (doubleEQ(tmpStart.y, tmpEnd.y))
+			{
+				segment.ignoreY();
+			}
+			else if (tmpEnd.y > tmpStart.y)
+			{
 				segment.setYGreaterThan(true);
 			}
-			else if (tmpEnd.x < tmpStart.x && tmpEnd.y < tmpStart.y) //up-left
+			else
 			{
-				segment.setXGreaterThan(false);
 				segment.setYGreaterThan(false);
 			}
-			else if (tmpEnd.x > tmpStart.x && tmpEnd.y < tmpStart.y) //up-right
-			{
-				segment.setXGreaterThan(true);
-				segment.setYGreaterThan(false);
-			}
+
 
 
 			if (i == 0 && j == 0)
@@ -94,4 +107,12 @@ void Path::generatePath()
 	segments[segments.size() - 1].setNodeType(PathNodeType::END);
 
 
+}
+
+void Path::Draw(sf::RenderWindow* context)
+{
+	for (auto seg : segments)
+	{
+		seg.draw(context);
+	}
 }

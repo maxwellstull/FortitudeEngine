@@ -15,6 +15,8 @@ private:
   
   bool _xGreaterThan;
   bool _yGreaterThan;
+  bool _ignoreX;
+  bool _ignoreY;
 
   PathNodeType _type;
   
@@ -30,7 +32,7 @@ private:
 //  std::vector<sf::Vector2f> _centerPath;
 
 public:
-  PathSegment() {};
+	PathSegment() { _ignoreX = false; _ignoreY = false; };
   void setSegmentStart(sf::Vector2f start) { _start = start; }
   sf::Vector2f getSegmentStart() { return _start; }
   void setSegmentEnd(sf::Vector2f end) { _end = end; }
@@ -50,7 +52,10 @@ public:
   void remove(int idx);
   void add(Enemy* en);
 
+  void draw(sf::RenderWindow* context);
 //  std::map<int, Enemy*>* getContained() { return &_contained; }
   std::vector<Enemy*> getContained();
 
+  void ignoreX() { _ignoreX = true; }
+  void ignoreY() { _ignoreY = true; }
 };

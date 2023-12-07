@@ -13,5 +13,5 @@ public:
 	PathSegment* getSegment(int idx) { return &segments[idx];}
 	void generatePath();
 	PathSegment* getStartSegment() { return getSegment(0); }
-
+	void Draw(sf::RenderWindow* context);
 };

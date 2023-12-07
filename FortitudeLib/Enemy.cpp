@@ -24,7 +24,6 @@ void Enemy::update(float dtAsSeconds)
 //		}
 
 		setLocation(getLocation() + dtAsSeconds * getDeltaPerSec());
-
 		if (destination->contains(getLocation())) //no longer in rectangle - meaning it met the waypoint
 		{
 			nextDestination();
