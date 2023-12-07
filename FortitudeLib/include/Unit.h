@@ -14,7 +14,6 @@ class Unit {
 public:
   // Common attributes of a unit
   struct Attributes {
-    double maxHealth;
     double health;
     double damage;
     double fireRate;
@@ -25,8 +24,12 @@ public:
   };
     struct AmmoInfo {
         int ammo;
-        int maxClip;
         double armorPierce;
+    };
+    struct StatDefaults {
+        double maxHealth;
+        double maxArmor;
+        double maxClip;
     };
 
 
@@ -37,6 +40,7 @@ private:
   double _rotation;
   // Attributes
   Attributes _attributes;
+  StatDefaults _defs;
   // If unit is active ("alive")
   bool _active;
   //Textures, sprites, gun animation info, and health bar
@@ -52,7 +56,9 @@ private:
   Animation _gunResetAnimation;
   sf::RectangleShape _curHealthBar;
   sf::RectangleShape _maxHealthBar;
+  sf::RectangleShape _armorBar;
   bool _healthBar;
+  bool _armorVisual;
   sf::Vector2f _deltaPerSec;
 
   //Generic target
@@ -116,14 +122,14 @@ public:
 
   void setAttributes(Attributes attr) { _attributes = attr; }
   Attributes getAttributes() { return _attributes; }
-  void setMaxHealth(double hp) { _attributes.maxHealth = hp; }
+  void setMaxHealth(double hp) { _defs.maxHealth = hp; }
   void setHealth(double hp) { _attributes.health = hp; }
   void setDamage(double dmg) { _attributes.damage = dmg; }
   void setFireRate(double rt) { _attributes.fireRate = rt; }
   void setRange(double rn) { _attributes.range = rn; }
   void setArmor(double ar) { _attributes.armor = ar; }
   double getArmor() { return _attributes.armor; }
-  double getMaxHealth() { return _attributes.maxHealth; }
+  double getMaxHealth() { return _defs.maxHealth; }
   double getHealth() { return _attributes.health; }
   double getDamage() { return _attributes.damage; }
   double getFireRate() { return _attributes.fireRate; }
@@ -131,6 +137,7 @@ public:
   double getAccuracy() { return _attributes.accuracy; }
   double getProjectileSpeed() { return _attributes.projectileSpeed; }
   double getArmorPierce() { return _gunAmmo.armorPierce; }
+  double getMaxArmor() { return _defs.maxArmor; }
 
   double computeDistance(double dx, double dy) { return sqrt(pow(dx, 2) + pow(dy, 2)); }
   bool isActive() { return _active; }
@@ -167,5 +174,6 @@ public:
   virtual void queueReload();
   void drawReloadBar(sf::RenderWindow* context);
   void completeReload();
-  int getMaxAmmo() { return _gunAmmo.maxClip; }
+  int getMaxAmmo() { return _defs.maxClip; }
+  void enableArmor() { _armorVisual = true; }
 };

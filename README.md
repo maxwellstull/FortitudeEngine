@@ -23,8 +23,8 @@ The goal of the engine is to provide an easy-to-use and uncumbersome library to 
   - [x] Add findTarget timer such that it will wait a configurable amount of time before running findTarget repeatedly
 - [x] Add armor for unit class
 - [x] Fix pathing bug where units cant really navigate in an axis-oriented line.
-- [ ] Move armor to unit instead of enemy
-- [ ] Add armor bar near health bar
+- [x] Move armor to unit instead of enemy
+- [x] Add armor bar near health bar
 - [ ] Create different paths offset from center with pathsegment to allow for enemies to be slightly offset from eachother occasionally
 - [ ] Create classes for each enemy
   - [ ] Draw skin for enemies (bandana and eyecovers)

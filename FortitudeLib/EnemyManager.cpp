@@ -39,7 +39,6 @@ void EnemyManager::Draw(sf::RenderWindow* context)
 void EnemyManager::spawnBadGuy() 
 {
 	Unit::Attributes attr = { 
-    100,  //max health
     100,  //current health
     2,   //damage
     1,  // fire rate
@@ -56,6 +55,7 @@ void EnemyManager::spawnBadGuy()
 	en->setAmmoInfo(ami);
 	en->setProjTexture(&textures[2], 0.25);
 	en->setSpeed(50);
+	en->enableArmor();
 	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
 	en->setID(enemyIDCtr++);
 	enemies.push_back(en);
@@ -64,7 +64,6 @@ void EnemyManager::spawnBadGuy()
 void EnemyManager::spawnTrainRobber()
 {
 	Unit::Attributes attr = {
-	200,  //max health
 	200,  //current health
 	4,   //damage
 	0.5,  // fire rate
@@ -81,6 +80,7 @@ void EnemyManager::spawnTrainRobber()
 	en->setAmmoInfo(ami);
 	en->setProjTexture(&textures[2], 0.25);
 	en->setSpeed(100);
+	en->enableArmor();
 	en->initialize(getGame()->getMap()->getPath()->getStartSegment());
 	en->setID(enemyIDCtr++);
 	enemies.push_back(en);

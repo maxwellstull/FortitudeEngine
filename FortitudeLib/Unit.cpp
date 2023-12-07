@@ -19,7 +19,7 @@ Unit::Unit(Attributes attr)
   _targetingTimer.setReady();
   gunLeft = false;
   _deltaPerSec = sf::Vector2f(0, 0);
-
+  _armorVisual = false;
   _blinded = false;
   
 
@@ -62,6 +62,10 @@ void Unit::draw(sf::RenderWindow* context)
     {
       context->draw(_maxHealthBar);
       context->draw(_curHealthBar);
+    }
+    if (_armorVisual)
+    {
+        context->draw(_armorBar);
     }
     if (isAmmoReloading())
     {
@@ -110,8 +114,14 @@ void Unit::initialize(bool showHealthBar)
     _curHealthBar.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f) - 22);
     _curHealthBar.setFillColor(sf::Color::Green);
 
+    _armorBar = sf::RectangleShape(sf::Vector2f(30, 2));
+    bds = _armorBar.getLocalBounds();
+    _armorBar.setOrigin(bds.left + (bds.width / 2.f), bds.top + (bds.height / 2.f) - 24);
+    _armorBar.setFillColor(sf::Color::Blue);
+
     _maxHealthBar.setPosition(getLocation());
     _curHealthBar.setPosition(getLocation());
+    _armorBar.setPosition(getLocation());
   }
 
   _reloadBar = sf::RectangleShape(sf::Vector2f(30, 5));
@@ -123,6 +133,11 @@ void Unit::initialize(bool showHealthBar)
   //_gunRecoilAnimation = Animation(0, 45, (1.f / _attributes.fireRate) / 3);
   //_gunResetAnimation = Animation(45, 0, (1.f / _attributes.fireRate) / 2);
   
+
+  _defs.maxHealth = _attributes.health;
+  _defs.maxArmor = _attributes.armor;
+  _defs.maxClip = _gunAmmo.ammo;
+
   _gunRecoilAnimation.setOnCompleteFunction([this]() {this->getResetAnimation()->activateForward(); });
   activate();
 }
@@ -165,6 +180,7 @@ void Unit::takeDamage(double damage, double armorPierce)
           healthdmg += leftover;
 
           _attributes.armor = 0;
+          _armorVisual = false;
           _attributes.health -= (healthdmg + leftover);
       }
       else
@@ -179,6 +195,14 @@ void Unit::takeDamage(double damage, double armorPierce)
   }
   
 
+  if(_armorVisual)
+  {
+      if (getArmor() > 0)
+      {
+          double bar = (_armorBar.getSize().x / getMaxArmor()) * getArmor();
+          _armorBar.setSize(sf::Vector2f(bar, 2));
+      }
+  }
  
   if(getHealth() > 0)
   {
@@ -246,6 +270,7 @@ void Unit::setLocation(sf::Vector2f loc)
   _gunSpr.setPosition(loc);
   _curHealthBar.setPosition(loc);
   _maxHealthBar.setPosition(loc);
+  _armorBar.setPosition(loc);
   _reloadBar.setPosition(loc);
 }
 
@@ -306,7 +331,7 @@ bool Unit::isAmmoReloading()
 
 void Unit::completeReload()
 {
-    _gunAmmo.ammo = _gunAmmo.maxClip;
+    _gunAmmo.ammo = getMaxAmmo();
 }
 
 void Unit::drawReloadBar(sf::RenderWindow* context)

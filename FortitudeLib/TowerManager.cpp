@@ -77,15 +77,15 @@ void TowerManager::Draw(sf::RenderWindow* context)
 void TowerManager::spawnLawman()
 {
   Unit::Attributes attr = { 
-    100,  //max health
     100,  //current health
     10,   //damage
     0.75,  // fire rate
     300,  // range (in pixels)
     75,   //accuracy (0 to 100)
-    400   //projectile speed
+    400,   //projectile speed
+    0, //armor
   };
-  Tower::AmmoInfo ami = { 6, 6};
+  Tower::AmmoInfo ami = { 6, 0};
   grabbed = std::make_shared<Lawman>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[1], 0.25, sf::Vector2f(-150, 0));
@@ -102,15 +102,15 @@ void TowerManager::spawnLawman()
 void TowerManager::spawnMarshall()
 {
   Unit::Attributes attr = {
-    50,  //max health
     50,  //current health
     25,   //damage
     0.5,  // fire rate
     500,  // range (in pixels)
     75,   //accuracy (0 to 100)
-    400   //projectile speed
+    400,   //projectile speed
+    0, //armor
   };
-  Tower::AmmoInfo ami = { 8, 8, 0.2 };
+  Tower::AmmoInfo ami = { 8, 0.2 };
   grabbed = std::make_shared<Marshall>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[2], 0.15, sf::Vector2f(-150, -150));
@@ -127,15 +127,15 @@ void TowerManager::spawnMarshall()
 void TowerManager::spawnRepeater()
 {
   Unit::Attributes attr = {
-    50,  //max health
     50,  //current health
     8,   //damage
     3,  // fire rate
     350,  // range (in pixels)
     75,   //accuracy (0 to 100)
-    400   //projectile speed
+    400,   //projectile speed
+    0, //armor
   };
-  Tower::AmmoInfo ami = { 15, 15 };
+  Tower::AmmoInfo ami = { 15, 0 };
   grabbed = std::make_shared<Repeater>(attr, &textures[7], 0.25);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[3], 0.1, sf::Vector2f(-150, -200));
@@ -152,15 +152,15 @@ void TowerManager::spawnRepeater()
 void TowerManager::spawnProspector()
 {
   Unit::Attributes attr = {
-    200,  //max health
     200,  //current health
     80,   //damage
     0.5,  // fire rate
     400,  // range (in pixels)
     75,   //accuracy (0 to 100)
-    400   //projectile speed
+    400,   //projectile speed
+    0, //armor
   };
-  Tower::AmmoInfo ami = { 2, 2 };
+  Tower::AmmoInfo ami = { 2, 0 };
   grabbed = std::make_shared<Prospector>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[4], 0.1, sf::Vector2f(-150, -200));
@@ -177,15 +177,15 @@ void TowerManager::spawnProspector()
 void TowerManager::spawnBlaster()
 {
   Unit::Attributes attr = {
-    300,  //max health
     300,  //current health
     20,   //damage
     1,  // fire rate
     100,  // range (in pixels)
     75,   //accuracy (0 to 100)
-    400   //projectile speed
+    400,   //projectile speed
+    0, //armor
   };
-  Tower::AmmoInfo ami = { 4, 4 };
+  Tower::AmmoInfo ami = { 4, 0 };
   grabbed = std::make_shared<Blaster>(attr);
   grabbed->setBodyTexture(&textures[0], 0.25);
   grabbed->setGunTexture(&textures[5], 0.1, sf::Vector2f(-150, -200));
@@ -202,15 +202,15 @@ void TowerManager::spawnBlaster()
 void TowerManager::spawnBrawler()
 {
     Unit::Attributes attr = {
-    300,  //max health
     300,  //current health
     20,   //damage
     1,  // fire rate
     300,  // range (in pixels)
     75,   //accuracy (0 to 100)
-    400   //projectile speed
+    400,   //projectile speed
+    0, //armor
     };
-    Tower::AmmoInfo ami = { 2, 2 };
+    Tower::AmmoInfo ami = { 2, 0 };
     grabbed = std::make_shared<Brawler>(attr, &textures[8], 0.25);
     grabbed->setBodyTexture(&textures[0], 0.25);
     grabbed->setGunTexture(&textures[8], 0.25, sf::Vector2f(-150, 0));
@@ -227,15 +227,15 @@ void TowerManager::spawnBrawler()
 void TowerManager::spawnDoc()
 {
     Unit::Attributes attr = {
-    100,  //max health
     100,  //current health
     5,   //damage
     0.5,  // fire rate
     100,  // range (in pixels)
     75,   //accuracy (0 to 100)
-    400   //projectile speed
+    400,   //projectile speed
+    0, //armor
     };
-    Tower::AmmoInfo ami = { 1, 1 };
+    Tower::AmmoInfo ami = { 1, 0 };
     grabbed = std::make_shared<Doc>(attr);
     grabbed->setBodyTexture(&textures[0], 0.25);
     grabbed->setGunTexture(&textures[9], 0.25, sf::Vector2f(-150, 0));
@@ -252,13 +252,13 @@ void TowerManager::spawnDoc()
 void TowerManager::spawnSheriff()
 {
   Unit::Attributes attr = {
-    500,  //max health
     500,  //current health
     10,   //damage
     0.75,  // fire rate
     400,  // range (in pixels)
     75,   //accuracy (0 to 100)
-    400   //projectile speed
+    400,   //projectile speed
+    0, //armor
   };
   Tower::AmmoInfo ami = { 12, 12 };
   grabbed = std::make_shared<Sheriff>(attr);
